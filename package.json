@@ -1,0 +1,42 @@
+{
+  "name": "next-amazona",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.11.4",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.60",
+    "@paypal/react-paypal-js": "^7.5.1",
+    "@react-google-maps/api": "^2.7.0",
+    "@types/node": "^17.0.18",
+    "@types/react": "^17.0.39",
+    "axios": "^0.21.1",
+    "bcryptjs": "^2.4.3",
+    "chart.js": "^3.7.0",
+    "cloudinary": "^1.28.1",
+    "js-cookie": "^2.2.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.1.8",
+    "multer": "^1.4.4",
+    "next": "^12.1.0",
+    "next-connect": "^0.11.0",
+    "notistack": "^1.0.9",
+    "react": "^17.0.2",
+    "react-chartjs-2": "^3.0.3",
+    "react-dom": "^17.0.2",
+    "react-hook-form": "^7.25.0",
+    "react-material-ui-carousel": "^2.2.7",
+    "streamifier": "^0.1.1",
+    "typescript": "^4.5.5"
+  },
+  "devDependencies": {
+    "eslint": "^7.23.0",
+    "eslint-config-next": "^12.0.8"
+  }
+}
