@@ -1,4 +1,5 @@
 import axios from 'axios';
+import logger from 'logger-for-use-reducer';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import NextLink from 'next/link';
@@ -61,7 +62,7 @@ function AdminProdcuts() {
   const [
     { loading, error, products, loadingCreate, successDelete, loadingDelete },
     dispatch,
-  ] = useReducer(reducer, {
+  ] = useReducer(logger(reducer), {
     loading: true,
     products: [],
     error: '',

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import logger from 'logger-for-use-reducer';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import NextLink from 'next/link';
@@ -56,7 +57,7 @@ function reducer(state, action) {
 function UserEdit({ params }) {
   const userId = params.id;
   const { state } = useContext(Store);
-  const [{ loading, error, loadingUpdate }, dispatch] = useReducer(reducer, {
+  const [{ loading, error, loadingUpdate }, dispatch] = useReducer(logger(reducer), {
     loading: true,
     error: '',
   });

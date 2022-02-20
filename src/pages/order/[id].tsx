@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useReducer } from 'react';
 import dynamic from 'next/dynamic';
+import logger from 'logger-for-use-reducer';
 import Layout from '../../components/Layout';
 import { Store } from '../../utils/Store';
 import NextLink from 'next/link';
@@ -72,7 +73,7 @@ function Order({ params }) {
   const [
     { loading, error, order, successPay, loadingDeliver, successDeliver },
     dispatch,
-  ] = useReducer(reducer, {
+  ] = useReducer(logger(reducer), {
     loading: true,
     order: {},
     error: '',

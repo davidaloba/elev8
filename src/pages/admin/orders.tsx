@@ -1,4 +1,5 @@
 import axios from 'axios';
+import logger from 'logger-for-use-reducer';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import NextLink from 'next/link';
@@ -43,7 +44,7 @@ function AdminOrders() {
   const classes = useStyles();
   const { userInfo } = state;
 
-  const [{ loading, error, orders }, dispatch] = useReducer(reducer, {
+  const [{ loading, error, orders }, dispatch] = useReducer(logger(reducer), {
     loading: true,
     orders: [],
     error: '',

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import logger from 'logger-for-use-reducer';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import NextLink from 'next/link';
@@ -54,7 +55,7 @@ function AdminUsers() {
   const { userInfo } = state;
 
   const [{ loading, error, users, successDelete, loadingDelete }, dispatch] =
-    useReducer(reducer, {
+    useReducer(logger(reducer), {
       loading: true,
       users: [],
       error: '',
