@@ -100,18 +100,6 @@ export default function Search (props) {
     filterSearch({ rating: e.target.value })
   }
 
-  const { state, dispatch } = useContext(Store)
-  const addToCartHandler = async (product) => {
-    const existItem = state.cart.cartItems.find((x) => x._id === product._id)
-    const quantity = existItem ? existItem.quantity + 1 : 1
-    const { data } = await axios.get(`/api/products/${product._id}`)
-    if (data.countInStock < quantity) {
-      window.alert('Sorry. Product is out of stock')
-      return
-    }
-    dispatch({ type: 'CART_ADD_ITEM', payload: { ...product, quantity } })
-    router.push('/cart')
-  }
   return (
     <Layout title="Search">
       <Grid className={classes.mt1} container spacing={1}>
@@ -213,7 +201,6 @@ export default function Search (props) {
               <Grid item md={4} key={product.name}>
                 <ProductItem
                   product={product}
-                  addToCartHandler={addToCartHandler}
                 />
               </Grid>
             ))}
