@@ -4,52 +4,52 @@ import {
   Typography,
   TextField,
   Button,
-  Link,
-} from '@material-ui/core';
-import axios from 'axios';
-import { useRouter } from 'next/router';
-import NextLink from 'next/link';
-import React, { useContext, useEffect } from 'react';
-import Layout from '../components/Layout';
-import { Store } from '../utils/Store';
-import useStyles from '../utils/styles';
-import Cookies from 'js-cookie';
-import { Controller, useForm } from 'react-hook-form';
-import { useSnackbar } from 'notistack';
-import { getError } from '../utils/error';
+  Link
+} from '@material-ui/core'
+import axios from 'axios'
+import { useRouter } from 'next/router'
+import NextLink from 'next/link'
+import React, { useContext, useEffect } from 'react'
+import Layout from '../components/Layout'
+import { Store } from '../utils/Store'
+import useStyles from '../utils/styles'
+import Cookies from 'js-cookie'
+import { Controller, useForm } from 'react-hook-form'
+import { useSnackbar } from 'notistack'
+import { getError } from '../utils/error'
 
-export default function Login() {
+export default function Login () {
   const {
     handleSubmit,
     control,
-    formState: { errors },
-  } = useForm();
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-  const router = useRouter();
-  const { redirect } = router.query; // login?redirect=/shipping
-  const { state, dispatch } = useContext(Store);
-  const { userInfo } = state;
+    formState: { errors }
+  } = useForm()
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar()
+  const router = useRouter()
+  const { redirect } = router.query // login?redirect=/shipping
+  const { state, dispatch } = useContext(Store)
+  const { userInfo } = state
   useEffect(() => {
     if (userInfo) {
-      router.push('/');
+      router.push('/')
     }
-  }, []);
+  }, [])
 
-  const classes = useStyles();
+  const classes = useStyles()
   const submitHandler = async ({ email, password }) => {
-    closeSnackbar();
+    closeSnackbar()
     try {
       const { data } = await axios.post('/api/users/login', {
         email,
-        password,
-      });
-      dispatch({ type: 'USER_LOGIN', payload: data });
-      Cookies.set('userInfo', data);
-      router.push(redirect || '/');
+        password
+      })
+      dispatch({ type: 'USER_LOGIN', payload: data })
+      Cookies.set('userInfo', data)
+      router.push(redirect || '/')
     } catch (err) {
-      enqueueSnackbar(getError(err), { variant: 'error' });
+      enqueueSnackbar(getError(err), { variant: 'error' })
     }
-  };
+  }
   return (
     <Layout title="Login">
       <form onSubmit={handleSubmit(submitHandler)} className={classes.form}>
@@ -64,7 +64,7 @@ export default function Login() {
               defaultValue=""
               rules={{
                 required: true,
-                pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+                pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/
               }}
               render={({ field }) => (
                 <TextField
@@ -93,7 +93,7 @@ export default function Login() {
               defaultValue=""
               rules={{
                 required: true,
-                minLength: 6,
+                minLength: 6
               }}
               render={({ field }) => (
                 <TextField
@@ -129,5 +129,5 @@ export default function Login() {
         </List>
       </form>
     </Layout>
-  );
+  )
 }

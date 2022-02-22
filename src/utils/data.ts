@@ -1,18 +1,18 @@
-import bcrypt from 'bcryptjs';
+import bcrypt from 'bcryptjs'
 const data = {
   users: [
     {
       name: 'John',
       email: 'admin@example.com',
       password: bcrypt.hashSync('654321'),
-      isAdmin: true,
+      isAdmin: true
     },
     {
       name: 'Jane',
       email: 'user@example.com',
       password: bcrypt.hashSync('654321'),
-      isAdmin: false,
-    },
+      isAdmin: false
+    }
   ],
   products: [
     {
@@ -27,7 +27,7 @@ const data = {
       rating: 4.5,
       numReviews: 10,
       countInStock: 20,
-      description: 'A popular shirt',
+      description: 'A popular shirt'
     },
     {
       name: 'Fit Shirt',
@@ -41,7 +41,7 @@ const data = {
       rating: 4.2,
       numReviews: 10,
       countInStock: 20,
-      description: 'A popular shirt',
+      description: 'A popular shirt'
     },
     {
       name: 'Slim Shirt',
@@ -53,7 +53,7 @@ const data = {
       rating: 4.5,
       numReviews: 10,
       countInStock: 20,
-      description: 'A popular shirt',
+      description: 'A popular shirt'
     },
     {
       name: 'Golf Pants',
@@ -65,7 +65,7 @@ const data = {
       rating: 4.5,
       numReviews: 10,
       countInStock: 20,
-      description: 'Smart looking pants',
+      description: 'Smart looking pants'
     },
     {
       name: 'Fit Pants',
@@ -77,7 +77,7 @@ const data = {
       rating: 4.5,
       numReviews: 10,
       countInStock: 20,
-      description: 'A popular pants',
+      description: 'A popular pants'
     },
     {
       name: 'Classic Pants',
@@ -89,8 +89,8 @@ const data = {
       rating: 4.5,
       numReviews: 10,
       countInStock: 20,
-      description: 'A popular pants',
-    },
-  ],
-};
-export default data;
+      description: 'A popular pants'
+    }
+  ]
+}
+export default data
