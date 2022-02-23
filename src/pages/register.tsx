@@ -11,12 +11,12 @@ import { useRouter } from 'next/router'
 import NextLink from 'next/link'
 import React, { useContext, useEffect } from 'react'
 import Layout from '../components/Layout'
-import { Store } from '../utils/Store'
-import useStyles from '../utils/styles'
+import { Store } from '../store'
+import useStyles from '../styles/styles'
 import Cookies from 'js-cookie'
 import { Controller, useForm } from 'react-hook-form'
 import { useSnackbar } from 'notistack'
-import { getError } from '../utils/error'
+import { getError } from '../db/error'
 export default function Register () {
   const {
     handleSubmit,

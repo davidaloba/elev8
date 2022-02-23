@@ -17,10 +17,10 @@ import {
   CardActions
 } from '@material-ui/core'
 import { Bar } from 'react-chartjs-2'
-import { getError } from '../../utils/error'
-import { Store } from '../../utils/Store'
+import { getError } from '../../db/error'
+import { Store } from '../../store'
 import Layout from '../../components/Layout'
-import useStyles from '../../utils/styles'
+import useStyles from '../../styles/styles'
 
 function reducer (state, action) {
   switch (action.type) {
