@@ -2,14 +2,19 @@ import { createContext, useReducer } from 'react'
 
 const Store = createContext()
 
-const initialState = {}
+interface ICounter {
+  count: number;
+}
+const initialState: ICounter = {
+  count: 20,
+};
 
 function reducer (state, action) {
   switch (action.type) {
-    case 'DARK_MODE_ON':
-      return { ...state, }
-    case 'DARK_MODE_OFF':
-      return { ...state, }
+    case 'increase':
+      return state.count++
+    case 'decrease':
+      return state.count--
     default:
       return state
   }

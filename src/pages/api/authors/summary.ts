@@ -8,7 +8,7 @@ import { onError } from '../../../db/error'
 const handler = nc({
   onError
 })
-handler.use(isAuth, isAdmin)
+handler.use(isAuth, isAdmin, isAuthor)
 
 handler.get(async (req, res) => {
   await db.connect()

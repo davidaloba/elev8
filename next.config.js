@@ -3,7 +3,7 @@ module.exports = {
   swcMinify: true,
    typescript: {
     // !! WARN !!
-    // Dangerously allow production builds to successfully complete even if
+    // Dangerously allow postion builds to successfully complete even if
     // your project has type errors.
     // !! WARN !!
     // ignoreBuildErrors: true,

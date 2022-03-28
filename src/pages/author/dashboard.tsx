@@ -35,7 +35,7 @@ function reducer (state, action) {
   }
 }
 
-function AdminDashboard () {
+function AuthorDashboard () {
   const { state } = useContext(Store)
   const router = useRouter()
   const classes = useStyles()
@@ -54,7 +54,7 @@ function AdminDashboard () {
     const fetchData = async () => {
       try {
         dispatch({ type: 'FETCH_REQUEST' })
-        const { data } = await axios.get('/api/admin/summary', {
+        const { data } = await axios.get('/api/author/summary', {
           headers: { authorization: `Bearer ${userInfo.token}` }
         })
         dispatch({ type: 'FETCH_SUCCESS', payload: data })
@@ -65,24 +65,19 @@ function AdminDashboard () {
     fetchData()
   }, [])
   return (
-    <Layout title="Admin Dashboard">
+    <Layout title="Author Dashboard">
       <Grid container spacing={1}>
         <Grid item md={3} xs={12}>
           <Card className={classes.section}>
             <List>
-              <NextLink href="/admin/dashboard" passHref>
+              <NextLink href="/author/dashboard" passHref>
                 <ListItem selected button component="a">
-                  <ListItemText primary="Admin Dashboard"></ListItemText>
+                  <ListItemText primary="Author Dashboard"></ListItemText>
                 </ListItem>
               </NextLink>
-              <NextLink href="/admin/posts" passHref>
+              <NextLink href="/author/posts" passHref>
                 <ListItem button component="a">
                   <ListItemText primary="Posts"></ListItemText>
-                </ListItem>
-              </NextLink>
-              <NextLink href="/admin/users" passHref>
-                <ListItem button component="a">
-                  <ListItemText primary="Users"></ListItemText>
                 </ListItem>
               </NextLink>
             </List>
@@ -111,26 +106,9 @@ function AdminDashboard () {
                           <Typography>Posts</Typography>
                         </CardContent>
                         <CardActions>
-                          <NextLink href="/admin/posts" passHref>
+                          <NextLink href="/author/posts" passHref>
                             <Button size="small" color="primary">
                               View posts
-                            </Button>
-                          </NextLink>
-                        </CardActions>
-                      </Card>
-                    </Grid>
-                    <Grid item md={3}>
-                      <Card raised>
-                        <CardContent>
-                          <Typography variant="h1">
-                            {summary.usersCount}
-                          </Typography>
-                          <Typography>Users</Typography>
-                        </CardContent>
-                        <CardActions>
-                          <NextLink href="/admin/users" passHref>
-                            <Button size="small" color="primary">
-                              View users
                             </Button>
                           </NextLink>
                         </CardActions>
@@ -147,4 +125,4 @@ function AdminDashboard () {
   )
 }
 
-export default dynamic(() => Promise.resolve(AdminDashboard), { ssr: false })
+export default dynamic(() => Promise.resolve(AuthorDashboard), { ssr: false })

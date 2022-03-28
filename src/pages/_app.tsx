@@ -3,7 +3,6 @@ import { AppProps } from "next/app";
 import "../styles/global.css";
 import { Provider } from "react-redux";
 import store from "../store";
-import { Store, StoreProvider } from "../store";
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (

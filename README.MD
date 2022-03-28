@@ -15,13 +15,13 @@ superplate is a Next.js all-in-one project generator. Create your project with t
     npm run dev
 ```
 
-### Building for production.
+### Building for postion.
 
 ```bash
     npm run build
 ```
 
-### Running the production server.
+### Running the postion server.
 
 ```bash
     npm run start

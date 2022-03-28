@@ -1,9 +1,12 @@
+import React, { useEffect, useContext, useReducer } from 'react'
 import axios from 'axios'
 import logger from 'logger-for-use-reducer'
 import dynamic from 'next/dynamic'
+import { getError } from '../../db/error'
+import { Store } from '../../store/store'
 import { useRouter } from 'next/router'
 import NextLink from 'next/link'
-import React, { useEffect, useContext, useReducer } from 'react'
+
 import {
   CircularProgress,
   Grid,
@@ -18,23 +21,24 @@ import {
   TableHead,
   TableRow,
   TableCell,
-  TableBody
-} from '@material-ui/core'
-import { getError } from '../../db/error'
-import { Store } from '../../store'
-import Layout from '../../components/Layout'
-import useStyles from '../../styles/styles'
-import { useSnackbar } from 'notistack'
+  TableBody,
+  Layout
+} from '../../components'
 
 function reducer (state, action) {
   switch (action.type) {
     case 'FETCH_REQUEST':
       return { ...state, loading: true, error: '' }
     case 'FETCH_SUCCESS':
-      return { ...state, loading: false, users: action.payload, error: '' }
+      return { ...state, loading: false, posts: action.payload, error: '' }
     case 'FETCH_FAIL':
       return { ...state, loading: false, error: action.payload }
-
+    case 'CREATE_REQUEST':
+      return { ...state, loadingCreate: true }
+    case 'CREATE_SUCCESS':
+      return { ...state, loadingCreate: false }
+    case 'CREATE_FAIL':
+      return { ...state, loadingCreate: false }
     case 'DELETE_REQUEST':
       return { ...state, loadingDelete: true }
     case 'DELETE_SUCCESS':
@@ -48,18 +52,20 @@ function reducer (state, action) {
   }
 }
 
-function AdminUsers () {
+function AdminProdcuts () {
   const { state } = useContext(Store)
   const router = useRouter()
   const classes = useStyles()
   const { userInfo } = state
 
-  const [{ loading, error, users, successDelete, loadingDelete }, dispatch] =
-    useReducer(logger(reducer), {
-      loading: true,
-      users: [],
-      error: ''
-    })
+  const [
+    { loading, error, posts, loadingCreate, successDelete, loadingDelete },
+    dispatch
+  ] = useReducer(logger(reducer), {
+    loading: true,
+    posts: [],
+    error: ''
+  })
 
   useEffect(() => {
     if (!userInfo) {
@@ -68,7 +74,7 @@ function AdminUsers () {
     const fetchData = async () => {
       try {
         dispatch({ type: 'FETCH_REQUEST' })
-        const { data } = await axios.get('/api/admin/users', {
+        const { data } = await axios.get('/api/author/posts', {
           headers: { authorization: `Bearer ${userInfo.token}` }
         })
         dispatch({ type: 'FETCH_SUCCESS', payload: data })
@@ -84,47 +90,57 @@ function AdminUsers () {
   }, [successDelete])
 
   const { enqueueSnackbar } = useSnackbar()
-
-  const deleteHandler = async (userId) => {
+  const createHandler = async () => {
+    if (!window.confirm('Are you sure?')) {
+      return
+    }
+    try {
+      dispatch({ type: 'CREATE_REQUEST' })
+      const { data } = await axios.post(
+        '/api/author/posts',
+        {},
+        {
+          headers: { authorization: `Bearer ${userInfo.token}` }
+        }
+      )
+      dispatch({ type: 'CREATE_SUCCESS' })
+      enqueueSnackbar('Post created successfully', { variant: 'success' })
+      router.push(`/author/post/${data.post._id}`)
+    } catch (err) {
+      dispatch({ type: 'CREATE_FAIL' })
+      enqueueSnackbar(getError(err), { variant: 'error' })
+    }
+  }
+  const deleteHandler = async (postId) => {
     if (!window.confirm('Are you sure?')) {
       return
     }
     try {
       dispatch({ type: 'DELETE_REQUEST' })
-      await axios.delete(`/api/admin/users/${userId}`, {
+      await axios.delete(`/api/author/posts/${postId}`, {
         headers: { authorization: `Bearer ${userInfo.token}` }
       })
       dispatch({ type: 'DELETE_SUCCESS' })
-      enqueueSnackbar('User deleted successfully', { variant: 'success' })
+      enqueueSnackbar('Post deleted successfully', { variant: 'success' })
     } catch (err) {
       dispatch({ type: 'DELETE_FAIL' })
       enqueueSnackbar(getError(err), { variant: 'error' })
     }
   }
   return (
-    <Layout title="Users" >
+    <Layout title="Posts">
       <Grid container spacing={1}>
         <Grid item md={3} xs={12}>
           <Card className={classes.section}>
             <List>
-              <NextLink href="/admin/dashboard" passHref>
+              <NextLink href="/author/dashboard" passHref>
                 <ListItem button component="a">
                   <ListItemText primary="Admin Dashboard"></ListItemText>
                 </ListItem>
               </NextLink>
-              <NextLink href="/admin/orders" passHref>
-                <ListItem button component="a">
-                  <ListItemText primary="Orders"></ListItemText>
-                </ListItem>
-              </NextLink>
-              <NextLink href="/admin/posts" passHref>
-                <ListItem button component="a">
-                  <ListItemText primary="Posts"></ListItemText>
-                </ListItem>
-              </NextLink>
-              <NextLink href="/admin/users" passHref>
+              <NextLink href="/author/posts" passHref>
                 <ListItem selected button component="a">
-                  <ListItemText primary="Users"></ListItemText>
+                  <ListItemText primary="Posts"></ListItemText>
                 </ListItem>
               </NextLink>
             </List>
@@ -134,10 +150,24 @@ function AdminUsers () {
           <Card className={classes.section}>
             <List>
               <ListItem>
-                <Typography component="h1" variant="h1">
-                  Users
-                </Typography>
-                {loadingDelete && <CircularProgress />}
+                <Grid container alignItems="center">
+                  <Grid item xs={6}>
+                    <Typography component="h1" variant="h1">
+                      Posts
+                    </Typography>
+                    {loadingDelete && <CircularProgress />}
+                  </Grid>
+                  <Grid align="right" item xs={6}>
+                    <Button
+                      onClick={createHandler}
+                      color="primary"
+                      variant="contained"
+                    >
+                      Create
+                    </Button>
+                    {loadingCreate && <CircularProgress />}
+                  </Grid>
+                </Grid>
               </ListItem>
 
               <ListItem>
@@ -156,21 +186,27 @@ function AdminUsers () {
                         <TableRow>
                           <TableCell>ID</TableCell>
                           <TableCell>NAME</TableCell>
-                          <TableCell>EMAIL</TableCell>
-                          <TableCell>ISADMIN</TableCell>
+                          <TableCell>PRICE</TableCell>
+                          <TableCell>CATEGORY</TableCell>
+                          <TableCell>COUNT</TableCell>
+                          <TableCell>LIKE</TableCell>
                           <TableCell>ACTIONS</TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {users.map((user) => (
-                          <TableRow key={user._id}>
-                            <TableCell>{user._id.substring(20, 24)}</TableCell>
-                            <TableCell>{user.name}</TableCell>
-                            <TableCell>{user.email}</TableCell>
-                            <TableCell>{user.isAdmin ? 'YES' : 'NO'}</TableCell>
+                        {posts.map((post) => (
+                          <TableRow key={post._id}>
+                            <TableCell>
+                              {post._id.substring(20, 24)}
+                            </TableCell>
+                            <TableCell>{post.name}</TableCell>
+                            <TableCell>${post.price}</TableCell>
+                            <TableCell>{post.category}</TableCell>
+                            <TableCell>{post.countInStock}</TableCell>
+                            <TableCell>{post.like}</TableCell>
                             <TableCell>
                               <NextLink
-                                href={`/admin/user/${user._id}`}
+                                href={`/author/post/${post._id}`}
                                 passHref
                               >
                                 <Button size="small" variant="contained">
@@ -178,7 +214,7 @@ function AdminUsers () {
                                 </Button>
                               </NextLink>{' '}
                               <Button
-                                onClick={() => deleteHandler(user._id)}
+                                onClick={() => deleteHandler(post._id)}
                                 size="small"
                                 variant="contained"
                               >
@@ -200,4 +236,4 @@ function AdminUsers () {
   )
 }
 
-export default dynamic(() => Promise.resolve(AdminUsers), { ssr: false })
+export default dynamic(() => Promise.resolve(AdminProdcuts), { ssr: false })
