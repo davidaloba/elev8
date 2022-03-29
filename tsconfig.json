@@ -37,10 +37,10 @@
       "@styles": [
         "../styles"
       ],
-      "@redux/*": [
+      "@store/*": [
         "../store/*"
       ],
-      "@redux": [
+      "@store": [
         "../store"
       ],
       "@test/*": [

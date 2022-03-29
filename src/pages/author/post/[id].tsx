@@ -11,7 +11,7 @@ import {
   Grid,
   List,
   ListItem,
-  Typography,s
+  Typography,
   Card,
   Button,
   ListItemText,

@@ -18,10 +18,9 @@ import {
   Button,
   TextField,
   CircularProgress,
-  Like,
+  Likes,
   Layout
 } from '../../components'
-
 
 export default function PostScreen (props) {
   const router = useRouter()
@@ -32,7 +31,7 @@ export default function PostScreen (props) {
   const { enqueueSnackbar } = useSnackbar()
 
   const [comments, setComments] = useState([])
-  const [like, setLike] = useState(0)
+  const [likes, setLike] = useState(0)
   const [comment, setComment] = useState('')
   const [loading, setLoading] = useState(false)
 
@@ -43,7 +42,7 @@ export default function PostScreen (props) {
       await axios.post(
         `/api/posts/${post._id}/comments`,
         {
-          like,
+          likes,
           comment
         },
         {
@@ -119,7 +118,7 @@ export default function PostScreen (props) {
               <Typography>Author: {post.author}</Typography>
             </ListItem>
             <ListItem>
-              <Like value={post.like} readOnly></Like>
+              <Likes value={post.likes} readOnly></Likes>
               <Link href="#comments">
                 <Typography>({post.numComments} comments)</Typography>
               </Link>
@@ -185,7 +184,7 @@ export default function PostScreen (props) {
                 <Typography>{comment.createdAt.substring(0, 10)}</Typography>
               </Grid>
               <Grid item>
-                <Like value={comment.like} readOnly></Like>
+                <Likes value={comment.likes} readOnly></Likes>
                 <Typography>{comment.comment}</Typography>
               </Grid>
             </Grid>
@@ -211,9 +210,9 @@ export default function PostScreen (props) {
                   />
                 </ListItem>
                 <ListItem>
-                  <Like
+                  <Likes
                     name="simple-controlled"
-                    value={like}
+                    value={likes}
                     onChange={(e) => setLike(e.target.value)}
                   />
                 </ListItem>

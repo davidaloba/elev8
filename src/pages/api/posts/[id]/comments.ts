@@ -6,9 +6,7 @@ import db from '../../../../db'
 import Post from '../../../../db/models/Post'
 import { isAuth } from '../../../../utils/auth'
 
-const handler = nextConnect({s
-  onError
-})
+const handler = nextConnect({ onError })
 
 handler.get(async (req, res) => {
   db.connect()
@@ -25,22 +23,22 @@ handler.use(isAuth).post(async (req, res) => {
   await db.connect()
   const post = await Post.findById(req.query.id)
   if (post) {
-    const existComment = post.comments.find((x) => x.user == req.user._id)
+    const existComment = post.comments.find((x) => x.user === req.user._id)
     if (existComment) {
       await Post.updateOne(
         { _id: req.query.id, 'comments._id': existComment._id },
         {
           $set: {
             'comments.$.comment': req.body.comment,
-            'comments.$.like': Number(req.body.like)
+            'comments.$.likes': Number(req.body.likes)
           }
         }
       )
 
       const updatedPost = await Post.findById(req.query.id)
       updatedPost.numComments = updatedPost.comments.length
-      updatedPost.like =
-        updatedPost.comments.reduce((a, c) => c.like + a, 0) /
+      updatedPost.likes =
+        updatedPost.comments.reduce((a, c) => c.likes + a, 0) /
         updatedPost.comments.length
       await updatedPost.save()
 
@@ -50,13 +48,13 @@ handler.use(isAuth).post(async (req, res) => {
       const comment = {
         user: mongoose.Types.ObjectId(req.user._id),
         name: req.user.name,
-        like: Number(req.body.like),
+        likes: Number(req.body.likes),
         comment: req.body.comment
       }
       post.comments.push(comment)
       post.numComments = post.comments.length
-      post.like =
-        post.comments.reduce((a, c) => c.like + a, 0) /
+      post.likes =
+        post.comments.reduce((a, c) => c.likes + a, 0) /
         post.comments.length
       await post.save()
       await db.disconnect()

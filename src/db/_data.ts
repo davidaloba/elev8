@@ -24,7 +24,7 @@ const data = {
       featuredImage: '/images/banner1.jpg',
       price: 70,
       author: 'Nike',
-      like: 4.5,
+      likes: 4.5,
       numComments: 10,
       countInStock: 20,
       description: 'A popular shirt'
@@ -38,7 +38,7 @@ const data = {
       featuredImage: '/images/banner2.jpg',
       price: 80,
       author: 'Adidas',
-      like: 4.2,
+      likes: 4.2,
       numComments: 10,
       countInStock: 20,
       description: 'A popular shirt'
@@ -50,7 +50,7 @@ const data = {
       image: '/images/shirt3.jpg',
       price: 90,
       author: 'Raymond',
-      like: 4.5,
+      likes: 4.5,
       numComments: 10,
       countInStock: 20,
       description: 'A popular shirt'
@@ -62,7 +62,7 @@ const data = {
       image: '/images/pants1.jpg',
       price: 90,
       author: 'Oliver',
-      like: 4.5,
+      likes: 4.5,
       numComments: 10,
       countInStock: 20,
       description: 'Smart looking pants'
@@ -74,7 +74,7 @@ const data = {
       image: '/images/pants2.jpg',
       price: 95,
       author: 'Zara',
-      like: 4.5,
+      likes: 4.5,
       numComments: 10,
       countInStock: 20,
       description: 'A popular pants'
@@ -86,7 +86,7 @@ const data = {
       image: '/images/pants3.jpg',
       price: 75,
       author: 'Casely',
-      like: 4.5,
+      likes: 4.5,
       numComments: 10,
       countInStock: 20,
       description: 'A popular pants'

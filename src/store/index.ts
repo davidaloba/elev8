@@ -21,11 +21,7 @@ import {
 } from './reducers'
 
 const initialState = {
-  userSignin: {
-    userInfo: localStorage.getItem('userInfo')
-      ? JSON.parse(localStorage.getItem('userInfo'))
-      : null
-  }
+
 }
 
 const reducer = combineReducers({
@@ -47,12 +43,12 @@ const reducer = combineReducers({
   userAddressMap: userAddressMapReducer
 })
 
-const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+// const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 const store = createStore(
   reducer,
-  initialState,
-  composeEnhancer(applyMiddleware(thunk))
+  initialState
+  // composeEnhancer(applyMiddleware(thunk))
 )
 
 export default store

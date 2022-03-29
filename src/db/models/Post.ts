@@ -24,9 +24,9 @@ const postSchema = new mongoose.Schema({
   featuredImage: { type: String },
   isFeatured: { type: Boolean, required: true, default: false }
 },
-  {
-    timestamps: true
-  }
+{
+  timestamps: true
+}
 )
 
 const Post = mongoose.models.Post || mongoose.model('Post', postSchema)

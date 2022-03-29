@@ -1,5 +1,5 @@
-import React from "react";
-import useSWR, { mutate } from "swr";
+import React from 'react'
+import useSWR, { mutate } from 'swr'
 
 /**
  * This component is generated as an example for useSWR hook
@@ -9,14 +9,14 @@ import useSWR, { mutate } from "swr";
  */
 
 const API_URL =
-  "https://official-joke-api.appspot.com/jokes/programming/random";
+  'https://official-joke-api.appspot.com/jokes/programming/random'
 
 export const SWRExample = () => {
-  const { data } = useSWR(API_URL);
+  const { data } = useSWR(API_URL)
 
   const refetch = () => {
-    mutate(API_URL);
-  };
+    mutate(API_URL)
+  }
 
   if (data) {
     return (
@@ -42,7 +42,7 @@ export const SWRExample = () => {
           </a>
         </footer>
       </div>
-    );
+    )
   }
-  return null;
-};
+  return null
+}

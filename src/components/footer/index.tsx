@@ -1,5 +1,5 @@
-import React from "react";
-import Image from "next/image";
+import React from 'react'
+import Image from 'next/image'
 
 export const Footer: React.FC = () => {
   return (
@@ -8,7 +8,7 @@ export const Footer: React.FC = () => {
         href="https://github.com/pankod"
         target="_blank"
         className="block mb-3"
-        data-testid="pankod-logo"
+        data-testid="pankod-logo" rel="noreferrer"
       >
         <Image
           src="/icons/pankod-icon.svg"
@@ -56,5 +56,5 @@ export const Footer: React.FC = () => {
         </li>
       </ul>
     </div>
-  );
-};
+  )
+}

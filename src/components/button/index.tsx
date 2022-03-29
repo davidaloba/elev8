@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 export type IButton = React.DetailedHTMLProps<
   React.ButtonHTMLAttributes<HTMLButtonElement>,
@@ -6,7 +6,7 @@ export type IButton = React.DetailedHTMLProps<
 >;
 
 export const Button: React.FC<IButton> = ({
-  className = "",
+  className = '',
   children,
   ...rest
 }) => {
@@ -18,5 +18,5 @@ export const Button: React.FC<IButton> = ({
     >
       {children}
     </button>
-  );
-};
+  )
+}

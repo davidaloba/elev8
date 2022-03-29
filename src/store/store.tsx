@@ -6,8 +6,8 @@ interface ICounter {
   count: number;
 }
 const initialState: ICounter = {
-  count: 20,
-};
+  count: 20
+}
 
 function reducer (state, action) {
   switch (action.type) {

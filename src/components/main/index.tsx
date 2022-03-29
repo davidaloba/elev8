@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react'
 
-import { Button } from "../";
+import { Button } from '../'
 
 export const Main: React.FC = () => {
   return (
@@ -11,11 +11,11 @@ export const Main: React.FC = () => {
           The frontend boilerplate with superpowers!
         </p>
         <Button type="button">
-          <a href="https://pankod.github.io/superplate/" target="_blank">
+          <a href="https://pankod.github.io/superplate/" target="_blank" rel="noreferrer">
             Docs
           </a>
         </Button>
       </div>
     </div>
-  );
-};
+  )
+}

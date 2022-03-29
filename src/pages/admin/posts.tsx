@@ -167,7 +167,7 @@ function AdminProdcuts () {
                           <TableCell>PRICE</TableCell>
                           <TableCell>CATEGORY</TableCell>
                           <TableCell>COUNT</TableCell>
-                          <TableCell>LIKE</TableCell>
+                          <TableCell>LIKES</TableCell>
                           <TableCell>ACTIONS</TableCell>
                         </TableRow>
                       </TableHead>
@@ -181,7 +181,7 @@ function AdminProdcuts () {
                             <TableCell>${post.price}</TableCell>
                             <TableCell>{post.category}</TableCell>
                             <TableCell>{post.countInStock}</TableCell>
-                            <TableCell>{post.like}</TableCell>
+                            <TableCell>{post.likes}</TableCell>
                             <TableCell>
                               <NextLink
                                 href={`/admin/post/${post._id}`}

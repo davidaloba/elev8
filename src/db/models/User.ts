@@ -4,15 +4,14 @@ const authorSchema = new mongoose.Schema(
   {
     name: String,
     avatar: String,
-    biography: String,
+    biography: String
   },
   {
-    timestamps: true,
+    timestamps: true
   }
-);
+)
 
-const Author = mongoose.models.Author || mongoose.model('Author', authorSchema)
-export Author
+export const Author = mongoose.models.Author || mongoose.model('Author', authorSchema)
 
 const userSchema = new mongoose.Schema(
   {
@@ -21,7 +20,7 @@ const userSchema = new mongoose.Schema(
     password: { type: String, required: true },
     isAdmin: { type: Boolean, required: true, default: false },
     isAuthor: { type: Boolean, default: false, required: true },
-    author: [authorSchema],
+    author: [authorSchema]
   },
   {
     timestamps: true
