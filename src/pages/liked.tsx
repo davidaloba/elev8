@@ -32,9 +32,9 @@ function CartScreen () {
     cart: { cartItems }
   } = state
   const updateCartHandler = async (item, quantity) => {
-    const { data } = await axios.get(`/api/products/${item._id}`)
+    const { data } = await axios.get(`/api/posts/${item._id}`)
     if (data.countInStock < quantity) {
-      window.alert('Sorry. Product is out of stock')
+      window.alert('Sorry. Post is out of stock')
       return
     }
     dispatch({ type: 'CART_ADD_ITEM', payload: { ...item, quantity } })
@@ -77,7 +77,7 @@ function CartScreen () {
                   {cartItems.map((item) => (
                     <TableRow key={item._id}>
                       <TableCell>
-                        <NextLink href={`/product/${item.slug}`} passHref>
+                        <NextLink href={`/post/${item.slug}`} passHref>
                           <Link>
                             <Image
                               src={item.image}
@@ -90,7 +90,7 @@ function CartScreen () {
                       </TableCell>
 
                       <TableCell>
-                        <NextLink href={`/product/${item.slug}`} passHref>
+                        <NextLink href={`/post/${item.slug}`} passHref>
                           <Link>
                             <Typography>{item.name}</Typography>
                           </Link>

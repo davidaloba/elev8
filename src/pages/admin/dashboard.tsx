@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useReducer } from 'react'
 import { getError } from '../../db/error'
-import { Store } from '../../store'
+import { Store } from '../../store/Store'
 import axios from 'axios'
 import logger from 'logger-for-use-reducer'
 

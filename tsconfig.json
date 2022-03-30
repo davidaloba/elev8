@@ -43,6 +43,12 @@
       "@store": [
         "src/store"
       ],
+      "@db/*": [
+        "src/db/*"
+      ],
+      "@db": [
+        "src/db"
+      ],
       "@test/*": [
         "test/*"
       ],

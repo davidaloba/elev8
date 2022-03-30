@@ -15,7 +15,7 @@ import {
   TextField
 } from '../components'
 import { getError } from '../db/error'
-import { Store } from '../store'
+import { Store } from '../store/Store'
 import useStyles from '../styles/styles'
 import { Controller, useForm } from 'react-hook-form'
 import { useSnackbar } from 'notistack'
