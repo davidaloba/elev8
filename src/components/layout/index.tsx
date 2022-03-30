@@ -1,5 +1,5 @@
 import React from 'react'
-import { Alert, Meta, Footer } from '../'
+import { Alert, Meta, Footer } from '@components'
 
 export const Layout: React.FC = ({ preview, children }) => {
   return (

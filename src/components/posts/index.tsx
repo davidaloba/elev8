@@ -1,5 +1,5 @@
 import React from 'react'
-import { PostSummary, Grid } from '../'
+import { PostSummary, Grid } from '@components'
 
 export const Posts: React.FC = ({ popularPosts }) => {
   const posts = popularPosts

@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '@store/reducers'
 import { useAppDispatch } from '@store/store'
-import { increase, decrease } from '@store/actions'
+import { FETCH_POSTS, FETCH_USERS } from '@store/actions'
 
 import {
   Layout,
@@ -10,7 +10,7 @@ import {
   Intro,
   Posts,
   Container
-} from '../components'
+} from '@components'
 
 export default function Home (props) {
   const dispatch = useAppDispatch()

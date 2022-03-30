@@ -3,8 +3,8 @@ import axios from 'axios'
 import logger from 'logger-for-use-reducer'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
-import { getError } from '../../../db/error'
-import { Store } from '../../../store/Store'
+import { getError } from '@db/error'
+import { Store } from '@store/Store'
 
 import NextLink from 'next/link'
 import {
@@ -20,7 +20,7 @@ import {
   FormControlLabel,
   Checkbox,
   Layout
-} from '../../../components'
+} from '@components'
 import { Controller, useForm } from 'react-hook-form'
 import { useSnackbar } from 'notistack'
 

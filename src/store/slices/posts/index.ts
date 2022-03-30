@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import data from '@store/_data'
+import data from '@db/data'
 import db from '@db'
 
 interface IPosts {

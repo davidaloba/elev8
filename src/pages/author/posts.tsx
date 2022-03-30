@@ -2,8 +2,8 @@ import React, { useEffect, useContext, useReducer } from 'react'
 import axios from 'axios'
 import logger from 'logger-for-use-reducer'
 import dynamic from 'next/dynamic'
-import { getError } from '../../db/error'
-import { Store } from '../../store'
+import { getError } from '@db/error'
+import { Store } from '@store'
 import { useRouter } from 'next/router'
 import NextLink from 'next/link'
 
@@ -23,7 +23,7 @@ import {
   TableCell,
   TableBody,
   Layout
-} from '../../components'
+} from '@components'
 
 function reducer (state, action) {
   switch (action.type) {

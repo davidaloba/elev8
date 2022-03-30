@@ -19,11 +19,11 @@ import {
   TableRow,
   TableCell,
   TableBody
-} from '../../components'
-import { getError } from '../../db/error'
-import { Store } from '../../store/Store'
-import Layout from '../../components/layout'
-import useStyles from '../../styles/styles'
+} from '@components'
+import { getError } from '@db/error'
+import { Store } from '@store/Store'
+import Layout from '@components/layout'
+import useStyles from '@styles/styles'
 import { useSnackbar } from 'notistack'
 
 function reducer (state, action) {

@@ -1,8 +1,8 @@
 import React, { useEffect, useContext, useReducer } from 'react'
 import dynamic from 'next/dynamic'
 
-import { getError } from '../../db/error'
-import { Store } from '../../store/Store'
+import { getError } from '@db/error'
+import { Store } from '@store/Store'
 
 import axios from 'axios'
 import logger from 'logger-for-use-reducer'
@@ -22,7 +22,7 @@ import {
   ListItemText,
   CardContent,
   CardActions
-} from '../../components'
+} from '@components'
 
 function reducer (state, action) {
   switch (action.type) {

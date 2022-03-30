@@ -1,10 +1,10 @@
 // /api/posts/:id/comments
 import mongoose from 'mongoose'
 import nextConnect from 'next-connect'
-import { onError } from '../../../../db/error'
-import db from '../../../../db'
-import Post from '../../../../db/models/Post'
-import { isAuth } from '../../../../utils/auth'
+import { onError } from '@db/error'
+import db from '@db'
+import Post from '@db/models/Post'
+import { isAuth } from '@utils/auth'
 
 const handler = nextConnect({ onError })
 

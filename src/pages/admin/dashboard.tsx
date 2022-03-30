@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useReducer } from 'react'
-import { getError } from '../../db/error'
-import { Store } from '../../store/Store'
+import { getError } from '@db/error'
+import { Store } from '@store/Store'
 import axios from 'axios'
 import logger from 'logger-for-use-reducer'
 
@@ -20,7 +20,7 @@ import {
   CardContent,
   CardActions,
   Bar
-} from '../../components'
+} from '@components'
 
 function reducer (state, action) {
   switch (action.type) {

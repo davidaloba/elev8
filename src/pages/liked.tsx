@@ -23,7 +23,7 @@ import {
   Card,
   List,
   ListItem
-} from '../components'
+} from '@components'
 
 function CartScreen () {
   const router = useRouter()

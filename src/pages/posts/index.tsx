@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Layout, Container, Header, Main, Footer, Cards } from '../../components'
+import { Layout, Container, Header, Main, Footer, Cards } from '@components'
 
 const TestPage: React.FC = () => {
   return (

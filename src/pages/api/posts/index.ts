@@ -1,6 +1,6 @@
 import nc from 'next-connect'
-import Post from '../../../db/models/Post'
-import db from '../../../db'
+import Post from '@db/models/Post'
+import db from '@db'
 
 const handler = nc()
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container } from '../'
+import { Container } from '@components'
 
 export const Alert: React.FC = ({ preview, children }) => {
   return (

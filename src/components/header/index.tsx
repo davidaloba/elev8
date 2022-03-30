@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Logo } from '../'
+import { Logo } from '@components'
 
 export const Header: React.FC = () => {
   return (

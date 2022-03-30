@@ -1,6 +1,6 @@
 import nextConnect from 'next-connect'
-import { isAuth, isAdmin, isAuthor } from '../../../utils/auth'
-import { onError } from '../../../db/error'
+import { isAuth, isAdmin, isAuthor } from '@utils/auth'
+import { onError } from '@db/error'
 import multer from 'multer'
 import { v2 as cloudinary } from 'cloudinary'
 import streamifier from 'streamifier'

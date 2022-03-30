@@ -6,17 +6,17 @@ import {
   TextField,
   Button,
   Link
-} from '../components'
+} from '@components'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import NextLink from 'next/link'
 import React, { useContext, useEffect } from 'react'
-import { Store } from '../store/Store'
-import useStyles from '../styles/styles'
+import { Store } from '@store/Store'
+import useStyles from '@styles/styles'
 import Cookies from 'js-cookie'
 import { Controller, useForm } from 'react-hook-form'
 import { useSnackbar } from 'notistack'
-import { getError } from '../db/error'
+import { getError } from '@db/error'
 
 export default function Register () {
   const {
