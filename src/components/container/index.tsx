@@ -1,3 +1,5 @@
-export const Container = ({ children }) => {
-  return <div className="min-h-screen flex flex-col">{children}</div>
+import React from 'react'
+
+export const Container: React.FC = ({ children }) => {
+  return <div className="container mx-auto px-5 flex flex-col">{children}</div>
 }

@@ -2,94 +2,152 @@ import bcrypt from 'bcryptjs'
 const data = {
   users: [
     {
-      name: 'John',
-      email: 'admin@example.com',
-      password: bcrypt.hashSync('654321'),
-      isAdmin: true
-    },
-    {
       name: 'Jane',
       email: 'user@example.com',
       password: bcrypt.hashSync('654321'),
-      isAdmin: false
+      isAdmin: false,
+      isAuthor: false
+    },
+    {
+      name: 'John',
+      email: 'author@example.com',
+      password: bcrypt.hashSync('654321'),
+      isAdmin: false,
+      isAuthor: true,
+      author: {
+        name: 'author',
+        avatar: '/icons/nextjs-icon.svg',
+        biography: 'String'
+      }
+    },
+    {
+      name: 'Jane',
+      email: 'admin@example.com',
+      password: bcrypt.hashSync('654321'),
+      isAdmin: true,
+      isAuthor: false
+    },
+    {
+      name: 'John',
+      email: 'author@example.com',
+      password: bcrypt.hashSync('654321'),
+      isAdmin: true,
+      isAuthor: true,
+      author: {
+        name: 'author',
+        avatar: '/icons/nextjs-icon.svg',
+        biography: 'String'
+      }
     }
   ],
   posts: [
     {
-      name: 'Free Shirt',
-      slug: 'free-shirt',
-      category: 'Shirts',
-      image: '/images/shirt1.jpg',
+      title: 'title',
+      author: {
+        name: 'author',
+        avatar: '/icons/nextjs-icon.svg',
+        biography: 'String'
+      },
+      slug: 'slug',
+      body: 'body',
+      excerpt: 'excerpt',
+      category: 'category',
+      likes: 1,
+      comments: ['comments', 'comments', 'comments'],
+      description: 'description',
+      featuredImage: '/icons/nextjs-icon.svg',
       isFeatured: true,
-      featuredImage: '/images/banner1.jpg',
-      price: 70,
-      author: 'Nike',
-      likes: 4.5,
-      numComments: 10,
-      countInStock: 20,
-      description: 'A popular shirt'
+      date: 'date'
     },
     {
-      name: 'Fit Shirt',
-      slug: 'fit-shirt',
-      category: 'Shirts',
-      image: '/images/shirt2.jpg',
+      title: 'title',
+      author: {
+        name: 'author',
+        avatar: '/icons/nextjs-icon.svg',
+        biography: 'String'
+      },
+      slug: 'slug',
+      body: 'body',
+      excerpt: 'excerpt',
+      category: 'category',
+      likes: 1,
+      comments: ['comments', 'comments', 'comments'],
+      description: 'description',
+      featuredImage: '/icons/nextjs-icon.svg',
       isFeatured: true,
-      featuredImage: '/images/banner2.jpg',
-      price: 80,
-      author: 'Adidas',
-      likes: 4.2,
-      numComments: 10,
-      countInStock: 20,
-      description: 'A popular shirt'
+      date: 'date'
     },
     {
-      name: 'Slim Shirt',
-      slug: 'slim-shirt',
-      category: 'Shirts',
-      image: '/images/shirt3.jpg',
-      price: 90,
-      author: 'Raymond',
-      likes: 4.5,
-      numComments: 10,
-      countInStock: 20,
-      description: 'A popular shirt'
+      title: 'title',
+      author: {
+        name: 'author',
+        avatar: '/icons/nextjs-icon.svg',
+        biography: 'String'
+      },
+      slug: 'slug',
+      body: 'body',
+      excerpt: 'excerpt',
+      category: 'category',
+      likes: 1,
+      comments: ['comments', 'comments', 'comments'],
+      description: 'description',
+      featuredImage: '/icons/nextjs-icon.svg',
+      isFeatured: true,
+      date: 'date'
     },
     {
-      name: 'Golf Pants',
-      slug: 'golf-pants',
-      category: 'Pants',
-      image: '/images/pants1.jpg',
-      price: 90,
-      author: 'Oliver',
-      likes: 4.5,
-      numComments: 10,
-      countInStock: 20,
-      description: 'Smart looking pants'
+      title: 'title',
+      author: {
+        name: 'author',
+        avatar: '/icons/nextjs-icon.svg',
+        biography: 'String'
+      },
+      slug: 'slug',
+      body: 'body',
+      excerpt: 'excerpt',
+      category: 'category',
+      likes: 1,
+      comments: ['comments', 'comments', 'comments'],
+      description: 'description',
+      featuredImage: '/icons/nextjs-icon.svg',
+      isFeatured: true,
+      date: 'date'
     },
     {
-      name: 'Fit Pants',
-      slug: 'fit-pants',
-      category: 'Pants',
-      image: '/images/pants2.jpg',
-      price: 95,
-      author: 'Zara',
-      likes: 4.5,
-      numComments: 10,
-      countInStock: 20,
-      description: 'A popular pants'
+      title: 'title',
+      author: {
+        name: 'author',
+        avatar: '/icons/nextjs-icon.svg',
+        biography: 'String'
+      },
+      slug: 'slug',
+      body: 'body',
+      excerpt: 'excerpt',
+      category: 'category',
+      likes: 1,
+      comments: ['comments', 'comments', 'comments'],
+      description: 'description',
+      featuredImage: '/icons/nextjs-icon.svg',
+      isFeatured: true,
+      date: 'date'
     },
     {
-      name: 'Classic Pants',
-      slug: 'classic-pants',
-      category: 'Pants',
-      image: '/images/pants3.jpg',
-      price: 75,
-      author: 'Casely',
-      likes: 4.5,
-      numComments: 10,
-      countInStock: 20,
-      description: 'A popular pants'
+      title: 'title',
+      author: {
+        name: 'author',
+        avatar: '/icons/nextjs-icon.svg',
+        biography: 'String'
+      },
+      slug: 'slug',
+      body: 'body',
+      excerpt: 'excerpt',
+      category: 'category',
+      likes: 1,
+      comments: ['comments', 'comments', 'comments'],
+      description: 'description',
+      featuredImage: '/icons/nextjs-icon.svg',
+      isFeatured: true,
+      date: 'date'
     }
   ]
 }

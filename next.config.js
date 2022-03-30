@@ -9,6 +9,6 @@ module.exports = {
     // ignoreBuildErrors: true,
   },
   eslint: {
-    dirs: ['./src'],
-  },
-};
+    dirs: ['./src', './test']
+  }
+}

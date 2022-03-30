@@ -16,10 +16,10 @@ import {
   CircularProgress,
   Checkbox,
   FormControlLabel
-} from '@material-ui/core'
+} from '../../components'
 import { getError } from '../../../db/error'
 import { Store } from '../../../store'
-import Layout from '../../../components/Layout'
+import Layout from '../../../components/layout'
 import useStyles from '../../../styles/styles'
 import { Controller, useForm } from 'react-hook-form'
 import { useSnackbar } from 'notistack'

@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import NextLink from 'next/link'
 import React, { useEffect, useContext } from 'react'
 import {
+  Layout,
   Grid,
   List,
   ListItem,
@@ -12,10 +13,9 @@ import {
   Button,
   ListItemText,
   TextField
-} from '@material-ui/core'
+} from '../components'
 import { getError } from '../db/error'
 import { Store } from '../store'
-import Layout from '../components/Layout'
 import useStyles from '../styles/styles'
 import { Controller, useForm } from 'react-hook-form'
 import { useSnackbar } from 'notistack'
@@ -44,7 +44,7 @@ function Profile () {
   const submitHandler = async ({ name, email, password, confirmPassword }) => {
     closeSnackbar()
     if (password !== confirmPassword) {
-      enqueueSnackbar("Passwords don't match", { variant: 'error' })
+      enqueueSnackbar('Passwords don\'t match', { variant: 'error' })
       return
     }
     try {

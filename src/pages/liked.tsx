@@ -1,10 +1,13 @@
 import React, { useContext } from 'react'
 import dynamic from 'next/dynamic'
-import Layout from '../components/Layout'
-import { Store } from '../store'
+
+import axios from 'axios'
+
+import { useRouter } from 'next/router'
 import NextLink from 'next/link'
 import Image from 'next/image'
 import {
+  Layout,
   Grid,
   TableContainer,
   Table,
@@ -20,13 +23,11 @@ import {
   Card,
   List,
   ListItem
-} from '@material-ui/core'
-import axios from 'axios'
-import { useRouter } from 'next/router'
+} from '../components'
 
 function CartScreen () {
   const router = useRouter()
-  const { state, dispatch } = useContext(Store)
+  const { state, dispatch } = useContext(store)
   const {
     cart: { cartItems }
   } = state

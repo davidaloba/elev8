@@ -20,10 +20,10 @@
     "baseUrl": ".",
     "paths": {
       "@components/*": [
-        "../components/*"
+        "src/components/*"
       ],
       "@components": [
-        "../components"
+        "src/components"
       ],
       "@public/*": [
         "public/*"
@@ -32,16 +32,16 @@
         "public"
       ],
       "@styles/*": [
-        "../styles/*"
+        "src/styles/*"
       ],
       "@styles": [
-        "../styles"
+        "src/styles"
       ],
       "@store/*": [
-        "../store/*"
+        "src/store/*"
       ],
       "@store": [
-        "../store"
+        "src/store"
       ],
       "@test/*": [
         "test/*"

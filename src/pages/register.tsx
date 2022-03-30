@@ -1,16 +1,16 @@
 import {
+  Layout,
   List,
   ListItem,
   Typography,
   TextField,
   Button,
   Link
-} from '@material-ui/core'
+} from '../components'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import NextLink from 'next/link'
 import React, { useContext, useEffect } from 'react'
-import Layout from '../components/Layout'
 import { Store } from '../store'
 import useStyles from '../styles/styles'
 import Cookies from 'js-cookie'
@@ -39,7 +39,7 @@ export default function Register () {
   const submitHandler = async ({ name, email, password, confirmPassword }) => {
     closeSnackbar()
     if (password !== confirmPassword) {
-      enqueueSnackbar("Passwords don't match", { variant: 'error' })
+      enqueueSnackbar('Passwords don\'t match', { variant: 'error' })
       return
     }
     try {

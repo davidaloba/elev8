@@ -1,16 +1,17 @@
 import React from 'react'
 
-import { Container, Header, Main, Footer, Cards } from '../../components'
+import { Layout, Container, Header, Main, Footer, Cards } from '../../components'
 
-const Home: React.FC = () => {
+const TestPage: React.FC = () => {
   return (
+    <Layout>
     <Container>
       <Header />
       <Main />
       <Cards />
-      <Footer />
     </Container>
+    </Layout>
   )
 }
 
-export default Home
+export default TestPage

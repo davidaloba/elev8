@@ -1,10 +1,14 @@
+import React, { useEffect, useContext, useReducer } from 'react'
+import { getError } from '../../db/error'
+import { Store } from '../../store'
 import axios from 'axios'
 import logger from 'logger-for-use-reducer'
+
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import NextLink from 'next/link'
-import React, { useEffect, useContext, useReducer } from 'react'
 import {
+  Layout,
   CircularProgress,
   Grid,
   List,
@@ -14,13 +18,9 @@ import {
   Button,
   ListItemText,
   CardContent,
-  CardActions
-} from '@material-ui/core'
-import { Bar } from 'react-chartjs-2'
-import { getError } from '../../db/error'
-import { Store } from '../../store'
-import Layout from '../../components/Layout'
-import useStyles from '../../styles/styles'
+  CardActions,
+  Bar
+} from '../../components'
 
 function reducer (state, action) {
   switch (action.type) {

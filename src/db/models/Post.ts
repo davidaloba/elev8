@@ -14,14 +14,13 @@ const postSchema = new mongoose.Schema({
   author: { type: mongoose.Schema.Types.ObjectId, ref: 'Author', required: true },
   title: { type: String, required: true },
   slug: { type: String, required: true, unique: true },
-  body: String,
-  image: { type: String, required: true },
+  body: { type: String, required: true },
   excerpt: { type: String, required: true },
   category: { type: String, required: false },
   likes: { type: Number, default: 0 },
   comments: [commentSchema],
   description: { type: String, required: true },
-  featuredImage: { type: String },
+  featuredImage: { type: String, required: true },
   isFeatured: { type: Boolean, required: true, default: false }
 },
 {
