@@ -1,11 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import Post from '@db/models/Post'
-import db from '@db'
-import axios from 'axios'
-import { Store } from '@store/Store'
-import { getError } from '@db/error'
 import { useRouter } from 'next/router'
-
 import NextLink from 'next/link'
 import Image from 'next/image'
 import {

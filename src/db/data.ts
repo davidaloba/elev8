@@ -16,8 +16,8 @@ const data = {
       isAuthor: true,
       author: {
         name: 'author',
-        avatar: '/icons/nextjs-icon.svg',
-        biography: 'String'
+        avatar: '/avatar.png',
+        biography: 'At imperdiet dui accumsan sit amet nulla facilisi morbi tempus.'
       }
     },
     {
@@ -35,119 +35,79 @@ const data = {
       isAuthor: true,
       author: {
         name: 'author',
-        avatar: '/icons/nextjs-icon.svg',
-        biography: 'String'
+        avatar: '/avatar.png',
+        biography: 'At imperdiet dui accumsan sit amet nulla facilisi morbi tempus.'
       }
     }
   ],
   posts: [
     {
-      title: 'title',
+      title: 'From Server-side Rendering to Static Generation',
       author: {
-        name: 'author',
-        avatar: '/icons/nextjs-icon.svg',
-        biography: 'String'
+        name: 'mistertaavetti',
+        avatar: '/avatar.png',
+        biography: 'We are a goo'
       },
-      slug: 'slug',
+      slug: 'from-server-side-rendering-to-static-generation',
       body: 'body',
-      excerpt: 'excerpt',
+      excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilisi morbi tempus.',
       category: 'category',
       likes: 1,
-      comments: ['comments', 'comments', 'comments'],
-      description: 'description',
-      featuredImage: '/icons/nextjs-icon.svg',
+      comments: ['Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'],
+      featuredImage: '/bg.jpg',
       isFeatured: true,
-      date: 'date'
+      date: '22nd March 2022'
     },
     {
-      title: 'title',
+      title: 'Lorem ipsum dolor sit amet',
       author: {
         name: 'author',
-        avatar: '/icons/nextjs-icon.svg',
-        biography: 'String'
+        avatar: '/avatar.png',
+        biography: 'At imperdiet dui accumsan sit amet nulla facilisi morbi tempus.'
       },
-      slug: 'slug',
+      slug: 'lorem-ipsum-dolor-sit-amet',
       body: 'body',
-      excerpt: 'excerpt',
+      excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilisi morbi tempus.',
       category: 'category',
       likes: 1,
-      comments: ['comments', 'comments', 'comments'],
-      description: 'description',
-      featuredImage: '/icons/nextjs-icon.svg',
+      comments: ['Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'],
+      featuredImage: '/bg.jpg',
       isFeatured: true,
-      date: 'date'
+      date: '22nd March 2022'
     },
     {
-      title: 'title',
+      title: 'consectetur adipiscing elit',
       author: {
         name: 'author',
-        avatar: '/icons/nextjs-icon.svg',
-        biography: 'String'
+        avatar: '/avatar.png',
+        biography: 'At imperdiet dui accumsan sit amet nulla facilisi morbi tempus.'
       },
-      slug: 'slug',
+      slug: 'consectetur-adipiscing-elit',
       body: 'body',
-      excerpt: 'excerpt',
+      excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilisi morbi tempus.',
       category: 'category',
       likes: 1,
-      comments: ['comments', 'comments', 'comments'],
-      description: 'description',
-      featuredImage: '/icons/nextjs-icon.svg',
+      comments: ['Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'],
+      featuredImage: '/bg.jpg',
       isFeatured: true,
-      date: 'date'
+      date: '22nd March 2022'
     },
     {
-      title: 'title',
+      title: 'sed do eiusmod tempor incididunt ut labore',
       author: {
         name: 'author',
-        avatar: '/icons/nextjs-icon.svg',
-        biography: 'String'
+        avatar: '/avatar.png',
+        biography: 'At imperdiet dui accumsan sit amet nulla facilisi morbi tempus.'
       },
-      slug: 'slug',
+      slug: 'sed-do-eiusmod-tempor-incididunt-ut-labore ',
       body: 'body',
-      excerpt: 'excerpt',
+      excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilisi morbi tempus.',
       category: 'category',
       likes: 1,
-      comments: ['comments', 'comments', 'comments'],
-      description: 'description',
-      featuredImage: '/icons/nextjs-icon.svg',
+      comments: ['Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'],
+      featuredImage: '/bg.jpg',
       isFeatured: true,
-      date: 'date'
-    },
-    {
-      title: 'title',
-      author: {
-        name: 'author',
-        avatar: '/icons/nextjs-icon.svg',
-        biography: 'String'
-      },
-      slug: 'slug',
-      body: 'body',
-      excerpt: 'excerpt',
-      category: 'category',
-      likes: 1,
-      comments: ['comments', 'comments', 'comments'],
-      description: 'description',
-      featuredImage: '/icons/nextjs-icon.svg',
-      isFeatured: true,
-      date: 'date'
-    },
-    {
-      title: 'title',
-      author: {
-        name: 'author',
-        avatar: '/icons/nextjs-icon.svg',
-        biography: 'String'
-      },
-      slug: 'slug',
-      body: 'body',
-      excerpt: 'excerpt',
-      category: 'category',
-      likes: 1,
-      comments: ['comments', 'comments', 'comments'],
-      description: 'description',
-      featuredImage: '/icons/nextjs-icon.svg',
-      isFeatured: true,
-      date: 'date'
+      date: '22nd March 2022'
     }
   ]
 }

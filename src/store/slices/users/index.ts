@@ -3,43 +3,36 @@ import data from '@db/data'
 import db from '@db'
 
 interface IUsers {
-  users: ({} | string | boolean | number)[]
+  users: ({} | string | boolean | number)[];
 }
 
 const initialState: IUsers = {
   users: data.users
 }
 
-const counterSlice = createSlice({
+const usersSlice: any = createSlice({
   name: 'users',
+
   initialState,
+
   reducers: {
-    FETCH_USERS: (state) => {
-      // await db.connect()
-      // const featuredProductsDocs = await Product.find(
-      //   { isFeatured: true },
-      //   '-reviews'
-      // )
-      //   .lean()
-      //   .limit(3)
-      // const topRatedProductsDocs = await Product.find({}, '-reviews')
-      //   .lean()
-      //   .sort({
-      //     rating: -1
-      //   })
-      //   .limit(6)
-      // await db.disconnect()
-      // return {
-      //   props: {
-      //     featuredProducts: featuredProductsDocs.map(db.convertDocToObj),
-      //     topRatedProducts: topRatedProductsDocs.map(db.convertDocToObj)
-      //   }
-      // }
-      state.users
+    FETCH_USERS: (state, action) => {
+      return { ...state, users: action.payload }
+    }
+  },
+
+  extraReducers: {
+    HYDRATE: (state, action) => {
+      console.log('HYDRATE', action.payload)
+      return {
+        ...state,
+        ...action.payload.subject
+      }
     }
   }
+
 })
 
-export const { FETCH_USERS } = counterSlice.actions
+export const { FETCH_USERS } = usersSlice.actions
 
-export default counterSlice.reducer
+export default usersSlice.reducer

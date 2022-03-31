@@ -1,15 +1,8 @@
 import React from 'react'
 import { AppProps } from 'next/app'
+import { wrapper } from '@store'
 import '@styles/global.css'
-import { Provider } from 'react-redux'
-import store from '@store/store'
 
-function MyApp ({ Component, pageProps }: AppProps): JSX.Element {
-  return (
-    <Provider store={store}>
-      <Component {...pageProps} />
-    </Provider>
-  )
-}
+const MyApp = ({ Component, pageProps }: AppProps) => <Component {...pageProps} />
 
-export default MyApp
+export default wrapper.withRedux(MyApp)

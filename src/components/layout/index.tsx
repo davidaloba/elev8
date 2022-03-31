@@ -11,7 +11,7 @@ export const Layout: React.FC = ({ preview, children }) => {
         </div>
       </div>
       <div className="min-h-screen">
-        <Alert preview={preview} />
+        {/* <Alert preview={preview} /> */}
         <main>{children}</main>
       </div>
       <Footer />

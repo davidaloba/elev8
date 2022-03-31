@@ -26,7 +26,7 @@ export const PostSummary: React.FC = ({ post }) => {
     <div>
       <div className="mb-5">
         {featuredImage && (
-          <Image src={featuredImage} alt={title} title={title} width="96" height="58"/>
+          <Image src={featuredImage} alt={title} title={title} layout="responsive" sizes="100%" width='100%' height='60%'/>
         )}
       </div>
       <h3 className="text-3xl mb-3 leading-snug">
@@ -37,6 +37,7 @@ export const PostSummary: React.FC = ({ post }) => {
           ></a>
         </Link>
       </h3>
+      <Avatar avatar={author.avatar} />
       <div className="text-lg mb-4">
         {date}
       </div>
@@ -44,10 +45,7 @@ export const PostSummary: React.FC = ({ post }) => {
         className="text-lg leading-relaxed mb-4"
         dangerouslySetInnerHTML={{ __html: excerpt }}
       />
-      <Avatar avatar={author.avatar} />
-      <Button onClick={likeHandler}>
-        {/* <CancelIcon /> */}
-      </Button>
+      <Button onClick={likeHandler} > Like {likes} </Button>
     </div>
   )
 }

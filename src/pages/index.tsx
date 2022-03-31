@@ -1,8 +1,6 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
-import { RootState } from '@store/reducers'
-import { useAppDispatch } from '@store/store'
-import { FETCH_POSTS, FETCH_USERS } from '@store/actions'
+import { connect } from 'react-redux'
+import { IState, wrapper } from '@store/redux'
 
 import {
   Layout,
@@ -12,11 +10,19 @@ import {
   Container
 } from '@components'
 
-export default function Home (props) {
-  const dispatch = useAppDispatch()
+export const getServerSideProps = wrapper.getServerSideProps(store => async ({ params }) => {
+  // await store.dispatch({ type: 'TICK', payload: 'was set in other page' })
+  console.log('2. Page.getServerSideProps uses the store to dispatch things')
 
-  const posts = useSelector((state: RootState) => state.posts.posts)
+  return {
+    props: {}
+  }
+})
 
+const Home = (state:any, props:{}) => {
+  console.log(state.tick)
+
+  const posts = state.posts
   const featuredPost = posts[0]
   const popularPosts = posts
 
@@ -39,11 +45,4 @@ export default function Home (props) {
   )
 }
 
-export async function getServerSideProps () {
-  return {
-    props: {
-      // featuredPost,
-      // popularPosts
-    }
-  }
-}
+export default connect((state: IState) => state.posts)(Home)

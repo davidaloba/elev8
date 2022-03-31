@@ -19,7 +19,6 @@ const postSchema = new mongoose.Schema({
   category: { type: String, required: false },
   likes: { type: Number, default: 0 },
   comments: [commentSchema],
-  description: { type: String, required: true },
   featuredImage: { type: String, required: true },
   isFeatured: { type: Boolean, required: true, default: false }
 },

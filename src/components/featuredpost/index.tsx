@@ -20,7 +20,7 @@ export const FeaturedPost: React.FC = ({ featuredPost }) => {
     <section>
       <div className="mb-8 md:mb-16">
         {featuredImage && (
-          <Image src={featuredImage} alt="" title={title} width="96" height="58"/>
+          <Image src={featuredImage} alt="" title={title} layout="responsive" sizes="100%" width= '100%' height= '50%' />
         )}
       </div>
       <div className="md:grid md:grid-cols-2 md:gap-x-16 lg:gap-x-8 mb-20 md:mb-28">
@@ -33,6 +33,7 @@ export const FeaturedPost: React.FC = ({ featuredPost }) => {
               />
             </Link>
           </h3>
+          <Avatar avatar={author.avatar} />
           <div className="mb-4 md:mb-0 text-lg">
             <p>{date}</p>
           </div>
@@ -42,7 +43,6 @@ export const FeaturedPost: React.FC = ({ featuredPost }) => {
             className="text-lg leading-relaxed mb-4"
             dangerouslySetInnerHTML={{ __html: excerpt }}
           />
-          <Avatar avatar={author.avatar} />
         </div>
       </div>
     </section>
