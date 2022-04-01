@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
-import db from '@db'
+import { HYDRATE } from 'next-redux-wrapper'
 
-const initialState: {} = { tick: 'init' }
+const initialState: {} = { tick: 'tick' }
 
 const tickSlice: any = createSlice({
   name: 'tick',
@@ -9,17 +9,17 @@ const tickSlice: any = createSlice({
   initialState,
 
   reducers: {
-    TICK: (state, action) => {
+    TICK (state, action) {
       return { ...state, tick: action.payload }
     }
   },
 
   extraReducers: {
-    HYDRATE: (state, action) => {
-      console.log('HYDRATE', action.payload)
+    [HYDRATE]: (state, action) => {
+      // console.log('HYDRATE', action.payload.tick)
       return {
         ...state,
-        ...action.payload.subject
+        ...action.payload.tick
       }
     }
   }

@@ -18,7 +18,7 @@ import {
   FormControlLabel
 } from '@components'
 import { getError } from '@db/error'
-import { Store } from '@store/Store'
+import { Store } from '@store'
 import Layout from '@components/layout'
 import useStyles from '@styles/styles'
 import { Controller, useForm } from 'react-hook-form'

@@ -6,7 +6,7 @@ import {
 } from '@testing-library/react'
 
 import { Provider } from 'react-redux'
-import store from '@store/redux'
+import store from '@store'
 
 /**
  * Custom renderer example with @testing-library/react

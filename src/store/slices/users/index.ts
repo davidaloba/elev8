@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import data from '@db/data'
-import db from '@db'
+import { HYDRATE } from 'next-redux-wrapper'
 
 interface IUsers {
   users: ({} | string | boolean | number)[];
@@ -16,17 +16,17 @@ const usersSlice: any = createSlice({
   initialState,
 
   reducers: {
-    FETCH_USERS: (state, action) => {
+    FETCH_USERS (state, action) {
       return { ...state, users: action.payload }
     }
   },
 
   extraReducers: {
-    HYDRATE: (state, action) => {
-      console.log('HYDRATE', action.payload)
+    [HYDRATE]: (state, action) => {
+      // console.log('HYDRATE', action.payload.users)
       return {
         ...state,
-        ...action.payload.subject
+        ...action.payload.users
       }
     }
   }

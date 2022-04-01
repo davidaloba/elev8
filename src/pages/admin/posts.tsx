@@ -3,7 +3,7 @@ import axios from 'axios'
 import logger from 'logger-for-use-reducer'
 import dynamic from 'next/dynamic'
 import { getError } from '@db/error'
-import { Store } from '@store/redux'
+import { Store } from '@store'
 import { useRouter } from 'next/router'
 import NextLink from 'next/link'
 

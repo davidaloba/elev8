@@ -1,7 +1,6 @@
-import React from 'react'
 import { connect } from 'react-redux'
-import { IState, wrapper } from '@store/redux'
-
+import { AppState, wrapper } from '@store'
+import { TICK, FETCH_POSTS } from '@store/actions'
 import {
   Layout,
   FeaturedPost,
@@ -11,7 +10,8 @@ import {
 } from '@components'
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async ({ params }) => {
-  // await store.dispatch({ type: 'TICK', payload: 'was set in other page' })
+  store.dispatch(TICK('was dispatched'))
+  // store.dispatch(FETCH_POSTS('/api/seed'))
   console.log('2. Page.getServerSideProps uses the store to dispatch things')
 
   return {
@@ -20,9 +20,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async ({ p
 })
 
 const Home = (state:any, props:{}) => {
-  console.log(state.tick)
-
-  const posts = state.posts
+  const posts = state.posts.posts
   const featuredPost = posts[0]
   const popularPosts = posts
 
@@ -45,4 +43,4 @@ const Home = (state:any, props:{}) => {
   )
 }
 
-export default connect((state: IState) => state.posts)(Home)
+export default connect((state: AppState) => state)(Home)

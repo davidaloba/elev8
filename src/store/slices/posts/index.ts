@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import data from '@db/data'
-import db from '@db'
+import { HYDRATE } from 'next-redux-wrapper'
+import axios from 'axios'
 
 interface IPosts {
   posts: ({} | string | boolean | number)[];
@@ -16,17 +17,18 @@ const postsSlice: any = createSlice({
   initialState,
 
   reducers: {
-    FETCH_POSTS: (state, action) => {
-      return { ...state, posts: action.payload }
+    FETCH_POSTS (state, action) {
+      const { data } = axios.get(action.payload)
+      return { ...state, posts: data }
     }
   },
 
   extraReducers: {
-    HYDRATE: (state, action) => {
-      console.log('HYDRATE', action.payload)
+    [HYDRATE]: (state, action) => {
+      // console.log('HYDRATE', action.payload.posts)
       return {
         ...state,
-        ...action.payload.subject
+        ...action.payload.posts
       }
     }
   }
