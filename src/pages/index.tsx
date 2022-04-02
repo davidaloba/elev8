@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
-import { AppState, wrapper } from '@store'
-import { TICK, FETCH_POSTS } from '@store/actions'
+import { wrapper, AppState } from '@store'
+import { _tick, getPosts, getUsers } from '@store/actions'
+import axios from 'axios'
 import {
   Layout,
   FeaturedPost,
@@ -10,17 +11,17 @@ import {
 } from '@components'
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async ({ params }) => {
-  store.dispatch(TICK('was dispatched'))
-  // store.dispatch(FETCH_POSTS('/api/seed'))
-  console.log('2. Page.getServerSideProps uses the store to dispatch things')
+  store.dispatch(_tick('was dispatched'))
+  console.log('2. Page.getServerSideProps dispatched actions using store.dispatch')
+  store.dispatch(getPosts('http://localhost:3000/api/posts'))
 
   return {
     props: {}
   }
 })
 
-const Home = (state:any, props:{}) => {
-  const posts = state.posts.posts
+const Home = (store: AppState, props:{}) => {
+  const posts = store.posts.data
   const featuredPost = posts[0]
   const popularPosts = posts
 
@@ -43,4 +44,4 @@ const Home = (state:any, props:{}) => {
   )
 }
 
-export default connect((state: AppState) => state)(Home)
+export default connect((store: AppState) => store)(Home)

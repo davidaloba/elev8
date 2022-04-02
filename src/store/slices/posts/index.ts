@@ -1,14 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
-import data from '@db/data'
 import { HYDRATE } from 'next-redux-wrapper'
-import axios from 'axios'
+import data from '@db/data'
+import { getPosts } from './thunk'
 
 interface IPosts {
-  posts: ({} | string | boolean | number)[];
+  data: ({} | string | boolean | number)[], loading: boolean
 }
 
 const initialState: IPosts = {
-  posts: data.posts
+  data: data.posts, loading: false
 }
 
 const postsSlice: any = createSlice({
@@ -17,24 +17,36 @@ const postsSlice: any = createSlice({
   initialState,
 
   reducers: {
-    FETCH_POSTS (state, action) {
-      const { data } = axios.get(action.payload)
-      return { ...state, posts: data }
+    _posts: (_tick, action) => {
+      _posts.data = action.payload
     }
   },
 
-  extraReducers: {
-    [HYDRATE]: (state, action) => {
-      // console.log('HYDRATE', action.payload.posts)
+  extraReducers: (builder) => {
+    builder.addCase(HYDRATE, (state, action) => {
+      console.log('hydrate persited posts state')
       return {
         ...state,
         ...action.payload.posts
       }
-    }
+    })
+    builder.addCase(getPosts.pending, (posts: IPosts) => {
+      posts.loading = true
+      console.log(`is fetching posts ${posts.loading}, fetching... `)
+    })
+    builder.addCase(getPosts.fulfilled, (posts: IPosts, action) => {
+      posts.loading = false
+      posts.data = action.payload
+      console.log(`is fetching posts ${posts.loading}, fetching success`)
+    })
+    builder.addCase(getPosts.rejected, (posts: IPosts, action) => {
+      posts.loading = false
+      console.log(`is fetching posts ${posts.loading}, ${action.payload}`)
+    })
   }
 
 })
 
-export const { FETCH_POSTS } = postsSlice.actions
+export const { _posts } = postsSlice.actions
 
 export default postsSlice.reducer

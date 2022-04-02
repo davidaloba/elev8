@@ -1,0 +1,6 @@
+export { _tick } from '@store/slices/_tick'
+export { fetchTick } from '@store/slices/_tick/thunk'
+export { _posts } from '@store/slices/posts'
+export { getPosts } from '@store/slices/posts/thunk'
+export { _users } from '@store/slices/users'
+export { getUsers } from '@store/slices/users/thunk'
