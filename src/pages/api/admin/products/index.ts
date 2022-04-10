@@ -20,7 +20,7 @@ handler.post(async (req, res) => {
     slug: 'sample-slug-' + Math.random(),
     image: '/images/shirt1.jpg',
     price: 0,
-    category: 'sample category',
+    categories: 'sample categories',
     brand: 'sample brand',
     countInStock: 0,
     description: 'sample description',

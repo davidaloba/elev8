@@ -30,15 +30,15 @@ handler.use(isAuth).post(async (req, res) => {
         {
           $set: {
             'comments.$.comment': req.body.comment,
-            'comments.$.likes': Number(req.body.likes)
+            'comments.$.saves': Number(req.body.saves)
           }
         }
       )
 
       const updatedPost = await Post.findById(req.query.id)
       updatedPost.numComments = updatedPost.comments.length
-      updatedPost.likes =
-        updatedPost.comments.reduce((a, c) => c.likes + a, 0) /
+      updatedPost.saves =
+        updatedPost.comments.reduce((a, c) => c.saves + a, 0) /
         updatedPost.comments.length
       await updatedPost.save()
 
@@ -48,13 +48,13 @@ handler.use(isAuth).post(async (req, res) => {
       const comment = {
         user: mongoose.Types.ObjectId(req.user._id),
         name: req.user.name,
-        likes: Number(req.body.likes),
+        saves: Number(req.body.saves),
         comment: req.body.comment
       }
       post.comments.push(comment)
       post.numComments = post.comments.length
-      post.likes =
-        post.comments.reduce((a, c) => c.likes + a, 0) /
+      post.saves =
+        post.comments.reduce((a, c) => c.saves + a, 0) /
         post.comments.length
       await post.save()
       await db.disconnect()

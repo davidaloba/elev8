@@ -1,255 +1,110 @@
-import React, { useContext, useEffect, useState } from 'react'
+import { useAppSelector, useAppDispatch, AppState } from '@store'
+import { } from '@store/actions'
+import { fetchData } from '@utils/functions'
+
 import { useRouter } from 'next/router'
-import NextLink from 'next/link'
+import Head from 'next/head'
 import Image from 'next/image'
-import {
-  Grid,
-  Link,
-  List,
-  ListItem,
-  Typography,
-  Card,
-  Button,
-  TextField,
-  CircularProgress,
-  Likes,
-  Layout
-} from '@components'
+import Link from 'next/link'
+import { Layout, Container, Header, Posts, Avatar } from '@components'
 
-export default function PostScreen (props) {
-  const router = useRouter()
-  const { state, dispatch } = useContext(Store)
-  const { userInfo } = state
-  const { post } = props
-  const classes = useStyles()
-  const { enqueueSnackbar } = useSnackbar()
+export const getServerSideProps = async ({ params }) => {
+  const postApi = `http://localhost:3000/api/posts/${params.slug}`
+  const post = await fetchData(postApi)
 
-  const [comments, setComments] = useState([])
-  const [likes, setLike] = useState(0)
-  const [comment, setComment] = useState('')
-  const [loading, setLoading] = useState(false)
-
-  const submitHandler = async (e) => {
-    e.preventDefault()
-    setLoading(true)
-    try {
-      await axios.post(
-        `/api/posts/${post._id}/comments`,
-        {
-          likes,
-          comment
-        },
-        {
-          headers: { authorization: `Bearer ${userInfo.token}` }
-        }
-      )
-      setLoading(false)
-      enqueueSnackbar('Comment submitted successfully', { variant: 'success' })
-      fetchComments()
-    } catch (err) {
-      setLoading(false)
-      enqueueSnackbar(getError(err), { variant: 'error' })
-    }
-  }
-
-  const fetchComments = async () => {
-    try {
-      const { data } = await axios.get(`/api/posts/${post._id}/comments`)
-      setComments(data)
-    } catch (err) {
-      enqueueSnackbar(getError(err), { variant: 'error' })
-    }
-  }
-  useEffect(() => {
-    fetchComments()
-  }, [])
+  const postsApi = 'http://localhost:3000/api/posts/'
+  const posts = await fetchData(postsApi)
 
   if (!post) {
-    return <div>Post Not Found</div>
-  }
-  const addToCartHandler = async () => {
-    const existItem = state.cart.cartItems.find((x) => x._id === post._id)
-    const quantity = existItem ? existItem.quantity + 1 : 1
-    const { data } = await axios.get(`/api/posts/${post._id}`)
-    if (data.countInStock < quantity) {
-      window.alert('Sorry. Post is out of stock')
-      return
+    return {
+      notFound: true
     }
-    dispatch({ type: 'CART_ADD_ITEM', payload: { ...post, quantity } })
-    router.push('/cart')
+  }
+  return {
+    props: { post, posts }
+  }
+}
+
+const Post = ({ post, posts }) => {
+  const router = useRouter()
+
+  const author = post.authorProfile[0].authorProfile
+  const morePosts = posts.slice(0, 2)
+
+  const saveHandler = async () => {
   }
 
+  if (!post) {
+    return <Container>
+      <div>Post Not Found</div>
+    </Container>
+  }
   return (
-    <Layout title={post.name} description={post.description}>
-      <div className={classes.section}>
-        <NextLink href="/" passHref>
-          <Link>
-            <Typography>back to posts</Typography>
-          </Link>
-        </NextLink>
-      </div>
-      <Grid container spacing={1}>
-        <Grid item md={6} xs={12}>
-          <Image
-            src={post.image}
-            alt={post.name}
-            width={640}
-            height={640}
-            Layout="responsive"
-          ></Image>
-        </Grid>
-        <Grid item md={3} xs={12}>
-          <List>
-            <ListItem>
-              <Typography component="h1" variant="h1">
-                {post.name}
-              </Typography>
-            </ListItem>
-            <ListItem>
-              <Typography>Category: {post.category}</Typography>
-            </ListItem>
-            <ListItem>
-              <Typography>Author: {post.author}</Typography>
-            </ListItem>
-            <ListItem>
-              <Likes value={post.likes} readOnly></Likes>
-              <Link href="#comments">
-                <Typography>({post.numComments} comments)</Typography>
-              </Link>
-            </ListItem>
-            <ListItem>
-              <Typography> Description: {post.description}</Typography>
-            </ListItem>
-          </List>
-        </Grid>
-        <Grid item md={3} xs={12}>
-          <Card>
-            <List>
-              <ListItem>
-                <Grid container>
-                  <Grid item xs={6}>
-                    <Typography>Price</Typography>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Typography>${post.price}</Typography>
-                  </Grid>
-                </Grid>
-              </ListItem>
-              <ListItem>
-                <Grid container>
-                  <Grid item xs={6}>
-                    <Typography>Status</Typography>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Typography>
-                      {post.countInStock > 0 ? 'In stock' : 'Unavailable'}
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </ListItem>
-              <ListItem>
-                <Button
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  onClick={addToCartHandler}
-                >
-                  Add to cart
-                </Button>
-              </ListItem>
-            </List>
-          </Card>
-        </Grid>
-      </Grid>
-      <List>
-        <ListItem>
-          <Typography name="comments" id="comments" variant="h2">
-            Customer Comments
-          </Typography>
-        </ListItem>
-        {comments.length === 0 && <ListItem>No comment</ListItem>}
-        {comments.map((comment) => (
-          <ListItem key={comment._id}>
-            <Grid container>
-              <Grid item className={classes.commentItem}>
-                <Typography>
-                  <strong>{comment.name}</strong>
-                </Typography>
-                <Typography>{comment.createdAt.substring(0, 10)}</Typography>
-              </Grid>
-              <Grid item>
-                <Likes value={comment.likes} readOnly></Likes>
-                <Typography>{comment.comment}</Typography>
-              </Grid>
-            </Grid>
-          </ListItem>
-        ))}
-        <ListItem>
-          {userInfo
-            ? (
-            <form onSubmit={submitHandler} className={classes.commentForm}>
-              <List>
-                <ListItem>
-                  <Typography variant="h2">Leave your comment</Typography>
-                </ListItem>
-                <ListItem>
-                  <TextField
-                    multiline
-                    variant="outlined"
-                    fullWidth
-                    name="comment"
-                    label="Enter comment"
-                    value={comment}
-                    onChange={(e) => setComment(e.target.value)}
+    <Layout>
+      <Container>
+        <Header header='Blog' url='/' />
+        {router.isFallback
+          ? (
+            <div>Loading…</div>
+            )
+          : (
+            <>
+              <article>
+                <Head>
+                  <title>
+                    {post.title}
+                  </title>
+                  <meta
+                    property="og:image"
+                    content={post.featuredImage?.sourceUrl}
                   />
-                </ListItem>
-                <ListItem>
-                  <Likes
-                    name="simple-controlled"
-                    value={likes}
-                    onChange={(e) => setLike(e.target.value)}
-                  />
-                </ListItem>
-                <ListItem>
-                  <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                  >
-                    Submit
-                  </Button>
+                </Head>
 
-                  {loading && <CircularProgress></CircularProgress>}
-                </ListItem>
-              </List>
-            </form>
-              )
-            : (
-            <Typography variant="h2">
-              Please{' '}
-              <Link href={`/login?redirect=/post/${post.slug}`}>
-                login
-              </Link>{' '}
-              to write a comment
-            </Typography>
-              )}
-        </ListItem>
-      </List>
+                <section>
+                  <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-tight md:leading-none mb-12 text-center md:text-left">{post.title}</h1>
+                  <div className="hidden md:block md:mb-12">
+                    <Avatar author={author} />
+                  </div>
+                  <div className="mb-8 md:mb-16 sm:mx-0">
+                    <Image src={post.featuredImage} alt="" title={post.title} layout="responsive" sizes="100%" width='100%' height='50%' />
+                  </div>
+                  <div className="max-w-2xl mx-auto">
+                    <div className="block md:hidden mb-6">
+                      <Avatar author={author} />
+                    </div>
+                    <div className="mb-6 text-lg">Posted  {post.createdAt} Under {post.categories} </div>
+                  </div>
+                </section>
+
+                <section className="max-w-2xl mx-auto">
+                  <div
+                    dangerouslySetInnerHTML={{ __html: post.body }}
+                  />
+                </section>
+
+                {/* <footer>
+                {post.tags.edges.length > 0 && <Tags tags={post.tags} />}
+              </footer> */}
+              </article>
+
+              <hr className="border-accent-2 mt-28 mb-24" />
+              {morePosts.length > 0 && <Posts posts={morePosts} title='Similar Posts' />}
+            </>
+            )}
+      </Container>
     </Layout>
   )
 }
+export default Post
+// export default connect((store: AppState) => store)(Post)
 
-export async function getServerSideProps (context) {
-  const { params } = context
-  const { slug } = params
+// export const getStaticPaths = async () => {
+//   const posts = await fetch('http://localhost:3000/api/posts')
+//     .then((data) => data.json())
+//   const postsSlugs: [] = [] // an array of the slugs of all posts
 
-  await db.connect()
-  const post = await Post.findOne({ slug }, '-comments').lean()
-  await db.disconnect()
-  return {
-    props: {
-      post: db.convertDocToObj(post)
-    }
-  }
-}
+//   return {
+//     paths: postsSlugs.map(({ slug }) => `/posts/${slug}`) || [],
+//     fallback: true
+//   }
+// }

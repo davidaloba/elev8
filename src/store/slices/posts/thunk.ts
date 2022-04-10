@@ -1,10 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
-export const getPosts: Promise<any> = createAsyncThunk(
-  'posts/getPosts',
-  async (thunkAPI, { rejectWithValue }) => {
+export const fetchPosts: Promise<any> = createAsyncThunk(
+  'posts/fetchPosts',
+
+  async (url, thunkAPI) => {
+    const { rejectWithValue } = thunkAPI
     try {
-      const res = await fetch('http://localhost:3000/api/posts').then(
+      const res = await fetch(url).then(
         (data) => data.json()
       )
       return res

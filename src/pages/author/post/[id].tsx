@@ -90,7 +90,7 @@ function PostEdit ({ params }) {
           setValue('image', data.image)
           setValue('featuredImage', data.featuredImage)
           setIsFeatured(data.isFeatured)
-          setValue('category', data.category)
+          setValue('categories', data.categories)
           setValue('author', data.author)
           setValue('countInStock', data.countInStock)
           setValue('description', data.description)
@@ -126,7 +126,7 @@ function PostEdit ({ params }) {
     name,
     slug,
     price,
-    category,
+    categories,
     image,
     featuredImage,
     author,
@@ -142,7 +142,7 @@ function PostEdit ({ params }) {
           name,
           slug,
           price,
-          category,
+          categories,
           image,
           isFeatured,
           featuredImage,
@@ -351,7 +351,7 @@ function PostEdit ({ params }) {
                     </ListItem>
                     <ListItem>
                       <Controller
-                        name="category"
+                        name="categories"
                         control={control}
                         defaultValue=""
                         rules={{
@@ -361,11 +361,11 @@ function PostEdit ({ params }) {
                           <TextField
                             variant="outlined"
                             fullWidth
-                            id="category"
-                            label="Category"
-                            error={Boolean(errors.category)}
+                            id="categories"
+                            label="Categories"
+                            error={Boolean(errors.categories)}
                             helperText={
-                              errors.category ? 'Category is required' : ''
+                              errors.categories ? 'Categories is required' : ''
                             }
                             {...field}
                           ></TextField>

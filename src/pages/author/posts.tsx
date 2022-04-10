@@ -25,7 +25,7 @@ import {
   Layout
 } from '@components'
 
-function reducer (state, action) {
+function reducer(state, action) {
   switch (action.type) {
     case 'FETCH_REQUEST':
       return { ...state, loading: true, error: '' }
@@ -52,7 +52,7 @@ function reducer (state, action) {
   }
 }
 
-function AdminProdcuts () {
+function AdminProdcuts() {
   const { state } = useContext(Store)
   const router = useRouter()
   const classes = useStyles()
@@ -173,60 +173,60 @@ function AdminProdcuts () {
               <ListItem>
                 {loading
                   ? (
-                  <CircularProgress />
-                    )
+                    <CircularProgress />
+                  )
                   : error
                     ? (
-                  <Typography className={classes.error}>{error}</Typography>
-                      )
+                      <Typography className={classes.error}>{error}</Typography>
+                    )
                     : (
-                  <TableContainer>
-                    <Table>
-                      <TableHead>
-                        <TableRow>
-                          <TableCell>ID</TableCell>
-                          <TableCell>NAME</TableCell>
-                          <TableCell>PRICE</TableCell>
-                          <TableCell>CATEGORY</TableCell>
-                          <TableCell>COUNT</TableCell>
-                          <TableCell>LIKES</TableCell>
-                          <TableCell>ACTIONS</TableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {posts.map((post) => (
-                          <TableRow key={post._id}>
-                            <TableCell>
-                              {post._id.substring(20, 24)}
-                            </TableCell>
-                            <TableCell>{post.name}</TableCell>
-                            <TableCell>${post.price}</TableCell>
-                            <TableCell>{post.category}</TableCell>
-                            <TableCell>{post.countInStock}</TableCell>
-                            <TableCell>{post.likes}</TableCell>
-                            <TableCell>
-                              <NextLink
-                                href={`/author/post/${post._id}`}
-                                passHref
-                              >
-                                <Button size="small" variant="contained">
-                                  Edit
-                                </Button>
-                              </NextLink>{' '}
-                              <Button
-                                onClick={() => deleteHandler(post._id)}
-                                size="small"
-                                variant="contained"
-                              >
-                                Delete
-                              </Button>
-                            </TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                      )}
+                      <TableContainer>
+                        <Table>
+                          <TableHead>
+                            <TableRow>
+                              <TableCell>ID</TableCell>
+                              <TableCell>NAME</TableCell>
+                              <TableCell>PRICE</TableCell>
+                              <TableCell>CATEGORIES</TableCell>
+                              <TableCell>COUNT</TableCell>
+                              <TableCell>SAVES</TableCell>
+                              <TableCell>ACTIONS</TableCell>
+                            </TableRow>
+                          </TableHead>
+                          <TableBody>
+                            {posts.map((post) => (
+                              <TableRow key={post._id}>
+                                <TableCell>
+                                  {post._id.substring(20, 24)}
+                                </TableCell>
+                                <TableCell>{post.name}</TableCell>
+                                <TableCell>${post.price}</TableCell>
+                                <TableCell>{post.categories}</TableCell>
+                                <TableCell>{post.countInStock}</TableCell>
+                                <TableCell>{post.saves}</TableCell>
+                                <TableCell>
+                                  <NextLink
+                                    href={`/author/post/${post._id}`}
+                                    passHref
+                                  >
+                                    <Button size="small" variant="contained">
+                                      Edit
+                                    </Button>
+                                  </NextLink>{' '}
+                                  <Button
+                                    onClick={() => deleteHandler(post._id)}
+                                    size="small"
+                                    variant="contained"
+                                  >
+                                    Delete
+                                  </Button>
+                                </TableCell>
+                              </TableRow>
+                            ))}
+                          </TableBody>
+                        </Table>
+                      </TableContainer>
+                    )}
               </ListItem>
             </List>
           </Card>

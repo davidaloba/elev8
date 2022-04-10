@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const authorSchema = new mongoose.Schema(
+const profileSchema = new mongoose.Schema(
   {
     name: String,
     avatar: String,
@@ -11,19 +11,20 @@ const authorSchema = new mongoose.Schema(
   }
 )
 
-export const Author = mongoose.models.Author || mongoose.model('Author', authorSchema)
-
 const userSchema = new mongoose.Schema(
   {
-    name: { type: String, required: true },
+    userName: { type: String, required: true, unique: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     isAdmin: { type: Boolean, required: true, default: false },
     isAuthor: { type: Boolean, default: false, required: true },
-    author: [authorSchema]
+    authorProfile: profileSchema,
+    saves: { type: Array, required: false }
   },
   {
-    timestamps: true
+    timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
   }
 )
 

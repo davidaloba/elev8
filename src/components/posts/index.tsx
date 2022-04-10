@@ -1,13 +1,11 @@
 import React from 'react'
 import { PostSummary, Grid } from '@components'
 
-export const Posts: React.FC = ({ popularPosts }) => {
-  const posts = popularPosts
-
+export const Posts: React.FC = ({ posts, title }) => {
   return (
     <section>
       <h2 className="mb-8 text-6xl md:text-7xl font-bold tracking-tighter leading-tight">
-        More Stories
+        {title}
       </h2>
       <Grid>
         {posts.map((post) => (

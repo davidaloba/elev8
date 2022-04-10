@@ -10,18 +10,20 @@ export const FeaturedPost: React.FC = ({ featuredPost }) => {
     featuredImage,
     date,
     excerpt,
-    author,
     slug,
-    category,
-    likes
+    categories,
+    saves,
+    authorProfile
   } = featuredPost
-
+  const author = authorProfile[0].authorProfile
   return (
     <section>
-      <div className="mb-8 md:mb-16">
-        {featuredImage && (
-          <Image src={featuredImage} alt="" title={title} layout="responsive" sizes="100%" width= '100%' height= '50%' />
-        )}
+      <div className="mb-8 md:mb-16 cursor-pointer">
+        <Link href={`/posts/${slug}`}>
+          {featuredImage && (
+            <Image src={featuredImage} alt="" title={title} layout="responsive" sizes="100%" width='100%' height='50%' />
+          )}
+        </Link>
       </div>
       <div className="md:grid md:grid-cols-2 md:gap-x-16 lg:gap-x-8 mb-20 md:mb-28">
         <div>
@@ -33,7 +35,7 @@ export const FeaturedPost: React.FC = ({ featuredPost }) => {
               />
             </Link>
           </h3>
-          <Avatar avatar={author.avatar} />
+          <Avatar author={author} />
           <div className="mb-4 md:mb-0 text-lg">
             <p>{date}</p>
           </div>

@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 
 const commentSchema = new mongoose.Schema(
   {
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    userName: String,
     comment: { type: String, required: true }
   },
   {
@@ -11,21 +11,29 @@ const commentSchema = new mongoose.Schema(
 )
 
 const postSchema = new mongoose.Schema({
-  author: { type: mongoose.Schema.Types.ObjectId, ref: 'Author', required: true },
-  title: { type: String, required: true },
   slug: { type: String, required: true, unique: true },
+  title: { type: String, required: true },
+  author: { type: String, required: true },
   body: { type: String, required: true },
   excerpt: { type: String, required: true },
-  category: { type: String, required: false },
-  likes: { type: Number, default: 0 },
-  comments: [commentSchema],
   featuredImage: { type: String, required: true },
-  isFeatured: { type: Boolean, required: true, default: false }
+  categories: { type: String, default: 'uncategorized', required: true },
+  isFeatured: { type: Boolean, required: true, default: false },
+  saves: { type: Number, default: 0 },
+  comments: [commentSchema]
 },
-{
-  timestamps: true
-}
+  {
+    timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
+  }
 )
+
+postSchema.virtual('authorProfile', {
+  ref: 'User', // in database Model `ref`
+  localField: 'author', // Find doc(s) where `localField`
+  foreignField: 'userName' // is equal to `foreignField`
+})
 
 const Post = mongoose.models.Post || mongoose.model('Post', postSchema)
 export default Post

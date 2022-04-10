@@ -1,10 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
-export const fetchTick: Promise<any> = createAsyncThunk(
-  '_tick/fetch_tick',
-  async (thunkAPI, { rejectWithValue }) => {
+export const login: Promise<any> = createAsyncThunk(
+  'user/login',
+
+  async (url, thunkAPI) => {
+    const { rejectWithValue } = thunkAPI
     try {
-      const res = await fetch('http://localhost:3000/api/_tick').then(
+      const res = await fetch(url).then(
         (data) => data.json()
       )
       return res

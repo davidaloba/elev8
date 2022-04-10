@@ -1,7 +1,7 @@
-import { connect } from 'react-redux'
-import { wrapper, AppState } from '@store'
-import { _tick, getPosts, getUsers } from '@store/actions'
-import axios from 'axios'
+import { useAppSelector, useAppDispatch, AppState } from '@store'
+import { } from '@store/actions'
+import { fetchData } from '@utils/functions'
+
 import {
   Layout,
   FeaturedPost,
@@ -10,18 +10,24 @@ import {
   Container
 } from '@components'
 
-export const getServerSideProps = wrapper.getServerSideProps(store => async ({ params }) => {
-  store.dispatch(_tick('was dispatched'))
-  console.log('2. Page.getServerSideProps dispatched actions using store.dispatch')
-  store.dispatch(getPosts('http://localhost:3000/api/posts'))
+export const getServerSideProps = async ({ params }) => {
+  const fetchData = async (url) => {
+    const res = await fetch(url).then(
+      (data) => data.json()
+    )
+    return res
+  }
+
+  const postsApi = 'http://localhost:3000/api/posts/'
+  const posts = await fetchData(postsApi)
 
   return {
-    props: {}
+    props: { posts }
   }
-})
+}
 
-const Home = (store: AppState, props:{}) => {
-  const posts = store.posts.data
+const Home = ({ posts }) => {
+  console.log(posts)
   const featuredPost = posts[0]
   const popularPosts = posts
 
@@ -30,18 +36,16 @@ const Home = (store: AppState, props:{}) => {
         <Container >
           <Intro />
         <FeaturedPost featuredPost={featuredPost}/>
-        {popularPosts.length > 0 && <Posts popularPosts={popularPosts} />}
-
+        {popularPosts.length > 0 && <Posts posts={popularPosts} title='All Posts'/>}
         {/* <Pagination
           className={''}
           defaultPage={parseInt(query.page || '1')}
           count={pages}
           onChange={pageHandler}
         ></Pagination> */}
-
         </Container>
       </Layout>
   )
 }
 
-export default connect((store: AppState) => store)(Home)
+export default Home
