@@ -11,10 +11,6 @@ const handler = nc()
 handler.get(async (req, res) => {
   await db.connect()
   const posts = await Post.find({})
-    .populate({
-      path: 'authorProfile',
-      select: 'authorProfile'
-    })
   await db.disconnect()
   res.send(posts)
 })

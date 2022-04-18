@@ -4,7 +4,11 @@ const profileSchema = new mongoose.Schema(
   {
     name: String,
     avatar: String,
-    biography: String
+    phone: { type: String, required: true },
+    dob: String,
+    facebook: String,
+    instagram: String,
+    twitter: String
   },
   {
     timestamps: true
@@ -17,14 +21,12 @@ const userSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     isAdmin: { type: Boolean, required: true, default: false },
-    isAuthor: { type: Boolean, default: false, required: true },
-    authorProfile: profileSchema,
-    saves: { type: Array, required: false }
+    points: { type: Number, required: false },
+    saves: { type: Array, required: false },
+    profile: profileSchema
   },
   {
-    timestamps: true,
-    toJSON: { virtuals: true },
-    toObject: { virtuals: true }
+    timestamps: true
   }
 )
 

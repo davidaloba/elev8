@@ -1,48 +1,40 @@
-import { useAppSelector, useAppDispatch, AppState } from '@store'
-import { } from '@store/actions'
-import { fetchData } from '@utils/functions'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
+import { useAppSelector } from '@store'
+import { fetchPosts } from '@store/actions'
 
 import {
   Layout,
-  FeaturedPost,
+  Header,
   Intro,
   Posts,
   Container
 } from '@components'
 
-export const getServerSideProps = async ({ params }) => {
-  const fetchData = async (url) => {
-    const res = await fetch(url).then(
-      (data) => data.json()
-    )
-    return res
-  }
+const Home = (props) => {
+  const router = useRouter()
+  const { user, posts } = useAppSelector((state) => state)
 
-  const postsApi = 'http://localhost:3000/api/posts/'
-  const posts = await fetchData(postsApi)
+  useEffect(() => {
+    if (!user.userInfo) {
+      return router.push('/login')
+    }
+    const postsApi = 'http://localhost:3000/api/posts/'
+    fetchPosts(postsApi)
+  }, [])
 
-  return {
-    props: { posts }
-  }
-}
-
-const Home = ({ posts }) => {
   console.log(posts)
-  const featuredPost = posts[0]
-  const popularPosts = posts
+  console.log(user)
 
+  if (posts.loading) {
+    return <div className='loading'></div>
+  }
   return (
       <Layout>
         <Container >
-          <Intro />
-        <FeaturedPost featuredPost={featuredPost}/>
-        {popularPosts.length > 0 && <Posts posts={popularPosts} title='All Posts'/>}
-        {/* <Pagination
-          className={''}
-          defaultPage={parseInt(query.page || '1')}
-          count={pages}
-          onChange={pageHandler}
-        ></Pagination> */}
+        <Intro />
+        <Header header='Blog' url='/' />
+        {posts.length > 0 && <Posts posts={posts} title='All Posts'/>}
         </Container>
       </Layout>
   )

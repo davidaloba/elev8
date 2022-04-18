@@ -1,16 +1,15 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { HYDRATE } from 'next-redux-wrapper'
-import data from '@db/data'
-import { fetchPosts, save } from './thunk'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import type { RootState } from '@store'
+// import posts from './thunk'
 
 interface IPosts {
-  loading: boolean,
-  all: ({} | string | boolean | number)[]
+  loading: Boolean,
+  data: (String | Number | Boolean)[]
 }
 
 const initialState: IPosts = {
-  loading: false,
-  all: data.posts
+  loading: true,
+  data: []
 }
 
 const postsSlice: any = createSlice({
@@ -19,36 +18,31 @@ const postsSlice: any = createSlice({
   initialState,
 
   reducers: {
-    _posts: (_posts, action) => {
-      _posts.all = action.payload
+    setLoading: (posts, action) => {
+      posts.loading = action.payload
+      console.log(`is loading posts is ${posts.loading}`)
+    },
+    setPosts: (posts, action) => {
+      posts.data = action.payload
+      console.log('Stored posts successfully')
     }
-  },
-
-  extraReducers: (builder) => {
-    builder.addCase(HYDRATE, (state, action) => {
-      console.log('hydrate persited posts state')
-      return {
-        ...state,
-        ...action.payload.posts
-      }
-    })
-    builder.addCase(fetchPosts.pending, (posts: IPosts) => {
-      posts.loading = true
-      console.log(`is fetching posts ${posts.loading}, fetching... `)
-    })
-    builder.addCase(fetchPosts.fulfilled, (posts: IPosts, action) => {
-      posts.loading = false
-      posts.all = action.payload
-      console.log(`is fetching posts ${posts.loading}, fetching success`)
-    })
-    builder.addCase(fetchPosts.rejected, (posts: IPosts, action) => {
-      posts.loading = false
-      console.log(`is fetching posts ${posts.loading}, ${action.payload}`)
-    })
   }
+
+  // extraReducers: (builder) => {
+  //   builder.addCase(posts, (state, action) => {
+  //     console.log('hydrate persited posts state')
+  //     return {
+  //       ...state,
+  //       ...action.payload.posts
+  //     }
+  //   })
+  // }
 
 })
 
-export const { _posts } = postsSlice.actions
+export const { setLoading, setPosts } = postsSlice.actions
+
+// Other code such as selectors can use the imported `RootState` type
+export const selectCount = (state: RootState) => state.posts
 
 export default postsSlice.reducer

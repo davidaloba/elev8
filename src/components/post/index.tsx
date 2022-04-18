@@ -8,7 +8,7 @@ import axios from 'axios'
 
 import { Avatar, Button, CancelIcon } from '..'
 
-export const PostSummary = ({ post }) => {
+export const Post = ({ post }) => {
   const {
     title,
     featuredImage,

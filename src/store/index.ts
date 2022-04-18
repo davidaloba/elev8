@@ -1,9 +1,10 @@
 import { configureStore, ThunkAction } from '@reduxjs/toolkit'
 import { Action, combineReducers } from 'redux'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-import posts from '@store/slices/posts'
+
 import user from '@store/slices/user'
-const rootReducer = combineReducers({ posts, user })
+import posts from '@store/slices/posts'
+const rootReducer = combineReducers({ user, posts })
 
 export const store = configureStore({
   reducer: rootReducer,

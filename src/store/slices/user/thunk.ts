@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
-export const login: Promise<any> = createAsyncThunk(
-  'user/login',
+export const user: Promise<any> = createAsyncThunk(
+  'user/user',
 
   async (url, thunkAPI) => {
     const { rejectWithValue } = thunkAPI

@@ -2,148 +2,158 @@ import bcrypt from 'bcryptjs'
 const data = {
   users: [
     {
-      userName: 'user',
-      email: 'user@example.com',
-      password: bcrypt.hashSync('654321'),
-      saves: ['from-server-side-rendering', 'lorem-ipsum-dolor-sit-amet', 'consectetur-adipiscing-elit', 'sed-do-eiusmod-tempor'],
-      isAdmin: false,
-      isAuthor: false
-    },
-    {
-      userName: 'author',
-      email: 'author@example.com',
-      password: bcrypt.hashSync('654321'),
-      saves: ['from-server-side-rendering', 'lorem-ipsum-dolor-sit-amet', 'consectetur-adipiscing-elit', 'sed-do-eiusmod-tempor'],
-      isAdmin: false,
-      isAuthor: true,
-      authorProfile: {
-        name: 'John Doe',
-        avatar: '/avatar.png',
-        biography: 'At imperdiet dui accumsan sit amet nulla facilisi morbi tempus.'
-      }
-    },
-    {
-      userName: 'adminAuthor',
-      email: 'author@example.com',
-      password: bcrypt.hashSync('654321'),
-      saves: ['from-server-side-rendering', 'lorem-ipsum-dolor-sit-amet', 'consectetur-adipiscing-elit', 'sed-do-eiusmod-tempor'],
-      isAdmin: true,
-      isAuthor: true,
-      authorProfile: {
-        name: 'Admin Author',
-        avatar: '/avatar.png',
-        biography: 'At imperdiet dui accumsan sit amet nulla facilisi morbi tempus.'
-      }
-    },
-    {
       userName: 'admin',
       email: 'admin@example.com',
       password: bcrypt.hashSync('654321'),
-      saves: ['from-server-side-rendering', 'lorem-ipsum-dolor-sit-amet', 'consectetur-adipiscing-elit', 'sed-do-eiusmod-tempor'],
-      isAdmin: true,
-      isAuthor: false
+      isAdmin: true
+    },
+    {
+      userName: 'user',
+      email: 'user@example.com',
+      password: bcrypt.hashSync('654321'),
+      isAdmin: false,
+      points: 150,
+      saves: ['task', 'freebie', 'premium,'],
+      profile: {
+        name: 'John Doe',
+        avatar: '/bg.jpg',
+        phone: '08104157669',
+        dob: '24th April 1997',
+        facebook: 'johny555',
+        instagram: 'johny555',
+        twitter: 'johny555'
+      }
+
     }
   ],
   posts: [
     {
-      slug: 'from-server-side-rendering',
-      title: 'From Server-side Rendering to Static Generation',
-      author: 'adminAuthor',
-      body: 'body',
-      excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilisi morbi tempus.',
-      featuredImage: '/bg.jpg',
-      categories: 'categories',
-      isFeatured: true,
-      saves: 1,
-      comments: [
+      type: 'task',
+      slug: 'task',
+      title: 'Perform tasks to earn points',
+      body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilisi morbi tempus.',
+      replies: [
         {
           userName: 'jane',
           comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
         },
         {
-          userName: 'jane',
+          userName: 'john',
           comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
         },
         {
-          userName: 'jane',
+          userName: 'jude',
           comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
         }
       ]
 
     },
     {
-      slug: 'lorem-ipsum-dolor-sit-amet',
-      title: 'Lorem ipsum dolor sit amet',
-      author: 'adminAuthor',
-      body: 'body',
-      excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilisi morbi tempus.',
-      featuredImage: '/bg.jpg',
-      categories: 'categories',
-      isFeatured: true,
-      saves: 1,
-      comments: [
+      type: 'freebie',
+      slug: 'freebie',
+      title: 'This content is accessible for to all users',
+      body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilisi morbi tempus.',
+      image: '/bg.jpg',
+      replies: [
         {
           userName: 'jane',
           comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
         },
         {
-          userName: 'jane',
+          userName: 'john',
           comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
         },
         {
-          userName: 'jane',
+          userName: 'jude',
           comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
         }
       ]
 
     },
     {
-      slug: 'consectetur-adipiscing-elit',
-      title: 'consectetur adipiscing elit',
-      author: 'adminAuthor',
-      body: 'body',
-      excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilisi morbi tempus.',
-      featuredImage: '/bg.jpg',
-      categories: 'categories',
-      isFeatured: true,
-      saves: 1,
-      comments: [
+      type: 'premium',
+      slug: 'premium',
+      title: 'This is a premium content',
+      body: 'You spend points to view premium content. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilisi morbi tempus.',
+      image: '/bg.jpg',
+      points: 5,
+      replies: [
         {
           userName: 'jane',
           comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
         },
         {
-          userName: 'jane',
+          userName: 'john',
           comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
         },
         {
-          userName: 'jane',
+          userName: 'jude',
           comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
         }
       ]
 
     },
     {
-      slug: 'sed-do-eiusmod-tempor',
-      title: 'sed do eiusmod tempor incididunt ut labore',
-      author: 'adminAuthor',
-      body: 'body',
-      excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilisi morbi tempus.',
-      featuredImage: '/bg.jpg',
-      categories: 'categories',
-      isFeatured: true,
-      saves: 1,
-      comments: [
+      type: 'task',
+      slug: 'task-2',
+      title: 'Another task to earn points from',
+      body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilisi morbi tempus.',
+      replies: [
         {
           userName: 'jane',
           comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
         },
         {
+          userName: 'john',
+          comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+        },
+        {
+          userName: 'jude',
+          comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+        }
+      ]
+
+    },
+    {
+      type: 'freebie',
+      slug: 'freebie-2',
+      title: 'Another content free for all users',
+      body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilisi morbi tempus.',
+      image: '/bg.jpg',
+      replies: [
+        {
           userName: 'jane',
           comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
         },
         {
+          userName: 'john',
+          comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+        },
+        {
+          userName: 'jude',
+          comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+        }
+      ]
+
+    },
+    {
+      type: 'premium',
+      slug: 'premium-2',
+      title: 'This is another premium content',
+      body: 'You spend points to view premium content. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilisi morbi tempus.',
+      image: '/bg.jpg',
+      points: 5,
+      replies: [
+        {
           userName: 'jane',
+          comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+        },
+        {
+          userName: 'john',
+          comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+        },
+        {
+          userName: 'jude',
           comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
         }
       ]

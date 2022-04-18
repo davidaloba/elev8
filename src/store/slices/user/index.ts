@@ -1,14 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '@store'
+import Cookies from 'js-cookie'
+// import user from './thunk'
 
-interface IUser {
-  data: {},
-  saved: {}
-}
+// interface IUser {
+//   loading: Boolean,
+//   userInfo: {}
+// }
 
-const initialState: IUser = {
-  data: {},
-  saved: {}
+const initialState = {
+  userInfo: Cookies.get('userInfo')
+    ? JSON.parse(Cookies.get('userInfo'))
+    : null
 }
 
 const userSlice: any = createSlice({
@@ -18,8 +21,8 @@ const userSlice: any = createSlice({
 
   reducers: {
     login: (user, action) => {
-      console.log('stored user data ==>', user.data)
-      return { ...user, ...action.payload }
+      user.userInfo = { ...user.userInfo, ...action.payload }
+      console.log('user logged in', user.userInfo)
     },
     fetchSaved: (user, action) => {
       const saves = action.payload.saves
@@ -28,17 +31,17 @@ const userSlice: any = createSlice({
       user.saved = saved
       console.log('Hey! I fetched saved posts ==>', saved)
     }
-  },
-
-  extraReducers: (builder) => {
-    // builder.addCase(THUNK, (state, action) => {
-    //   console.log('hydrate persited user state')
-    //   return {
-    //     ...state,
-    //     ...action.payload.user
-    //   }
-    // })
   }
+
+  // extraReducers: (builder) => {
+  //   builder.addCase(user, (state, action) => {
+  //     console.log('hydrate persited user state')
+  //     return {
+  //       ...state,
+  //       ...action.payload.user
+  //     }
+  //   })
+  // }
 
 })
 

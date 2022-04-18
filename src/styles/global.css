@@ -4,14 +4,106 @@
 
 
 @layer base {
-html,
-body {
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+  #root { @apply h-full }
+  html { @apply text-[65%] box-border }
+  body { @apply text-2xl m-0 h-[100vh] font-sans antialiased }
+  main { @apply p-6     }
+
+  /* Header */
+  header a { @apply text-white p-4 }
+
+  h1 { @apply text-3xl py-4 px-0}
+  h2 {@apply text-2xl py-4 px-0} 
+  a { @apply no-underline hover:text-gray-300}
+  ul { @apply p-0 m-0  list-none  }
+  li { @apply mt-4 }
+
+  input,
+  select,
+  textarea,
+  button { @apply p-4 rounded-lg border-2 border-gray-700 border-solid text-2xl font-sans antialiased bg-gray-100 cursor-pointer}
+  
+  input,
+  select,
+  textarea,
+  button { @apply hover:border-2 hover:border-zinc-700 hover:border-solid }
+
+  button.primary { @apply bg-emerald-700 }
+  button.block {@apply w-full }
+  button.small { @apply text-xl }
+  button.close-sidebar { @apply py-1 px-3  }
+
+  aside { @apply fixed w-[30rem] h-full bg-gray-100 z-50 -translate-x-[30rem] transition-all duration-500  }
+  aside.open { @apply translate-x-0  }
+  aside ul {  @apply p-0 list-none   }
+  aside li {  @apply flex justify-between p-4  }
+
+  img { @apply rounded-xl}
+  img.small { @apply max-w-3xl w-full }
+  img.medium { @apply max-w-xl w-full }
+  img.large {@apply w-full}
 }
+
+@layer components {
+
+  /* Card */
+  .card { @apply  border-[1px] border-gray-500 border-solid bg-slate-100 rounded-lg m-4}
+  .card-body { @apply p-4 }
+  .card-body > * { @apply mb-2 }
+
+
+  .search input { @apply rounded-l-lg border-r-0 ml-2 }
+  .active { @apply font-bold }
+
+
+  /* Pagination */
+  .pagination a { @apply p-4 m-2 rounded-lg  border-[1px] border-gray-500 border-solid text-2xl font-sans }
+  .pagination a.active {
+    font-weight: bold;
+  }
+
+  /* Rating */
+  .rating span { @apply placeholder-slate-200 m-1 }
+  .rating span:last-child { @apply placeholder-slate-600 }
+
+  /* Alert */
+  .loading { @apply !block}
+  .success { @apply placeholder-emerald-800}
+  .danger { @apply placeholder-red-800 }
+  .alert { @apply p-4  border-2 border-transparent border-solid }
+  .alert-info { @apply placeholder-zinc-900 bg-slate-300 }
+  .alert-danger { @apply placeholder-zinc-100 bg-red-800 }
+  .alert-success { @apply placeholder-zinc-100 bg-emerald-800 }
+
+  /* Form */
+  .form { @apply max-w-4xl my-0 mx-auto }
+  .form > div { @apply flex-col m-4 }
+  .form label { @apply my-0 mx-auto }
+
+
+  /* Dropdown */
+  .dropdown { @apply inline-block relative}
+  .dropdown-content { @apply absolute hidden right-0 min-w-[12rem] p-4 z-10 bg-blue-900  m-0 mt-2 rounded-lg }
+
+  /* Table */
+  .table { @apply w-full border-collapse }
+  .table tbody tr:nth-of-type(odd) { @apply bg-gray-200 }
+  .table td,
+  .table th { @apply text-left border-[1px] border-gray-200 border-solid p-2 }
+  .table button { @apply my-0 mx-1 }
+
+
+  /* Dashboard */
+  .summary > li { @apply border-[1px] border-gray-300 border-solid m-2 rounded-lg flex-[1_1_20rem] }
+  .summary-title { @apply text-4xl p-4 }
+  .summary-body { @apply text-6xl p-4 text-center }
+  .summary-title.color1 { @apply bg-slate-200 }
+  .summary-title.color2 { @apply bg-slate-100 }
+  .summary-title.color3 { @apply bg-slate-100 }
 
 }
 
+@layer utilities {
+
+}

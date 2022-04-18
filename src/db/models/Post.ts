@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const commentSchema = new mongoose.Schema(
+const repliesSchema = new mongoose.Schema(
   {
     userName: String,
     comment: { type: String, required: true }
@@ -11,29 +11,18 @@ const commentSchema = new mongoose.Schema(
 )
 
 const postSchema = new mongoose.Schema({
+  type: { type: String, required: true },
   slug: { type: String, required: true, unique: true },
   title: { type: String, required: true },
-  author: { type: String, required: true },
   body: { type: String, required: true },
-  excerpt: { type: String, required: true },
-  featuredImage: { type: String, required: true },
-  categories: { type: String, default: 'uncategorized', required: true },
-  isFeatured: { type: Boolean, required: true, default: false },
-  saves: { type: Number, default: 0 },
-  comments: [commentSchema]
+  image: { type: String },
+  points: { type: Number },
+  replies: [repliesSchema]
 },
-  {
-    timestamps: true,
-    toJSON: { virtuals: true },
-    toObject: { virtuals: true }
-  }
+{
+  timestamps: true
+}
 )
-
-postSchema.virtual('authorProfile', {
-  ref: 'User', // in database Model `ref`
-  localField: 'author', // Find doc(s) where `localField`
-  foreignField: 'userName' // is equal to `foreignField`
-})
 
 const Post = mongoose.models.Post || mongoose.model('Post', postSchema)
 export default Post

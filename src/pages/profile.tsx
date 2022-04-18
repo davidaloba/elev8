@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
-import { connect, useDispatch } from 'react-redux'
-import { AppState } from '@store'
+import { useAppSelector, useAppDispatch, AppState } from '@store'
 import { fetchPosts, fetchSaved, _user } from '@store/actions'
 import axios from 'axios'
 
@@ -14,8 +13,9 @@ import {
   Posts
 } from '@components'
 
-const Profile = (state: AppState, props) => {
-  const dispatch = useDispatch()
+const Profile = () => {
+  const state = useAppSelector((state) => state)
+  const dispatch = useAppDispatch()
   const router = useRouter()
   const {
     handleSubmit,
@@ -25,13 +25,31 @@ const Profile = (state: AppState, props) => {
   } = useForm()
 
   const userInfo = state.user.data
-  console.log(userInfo)
-  console.log(!userInfo)
-  // if (!userInfo) {
-  //   return router.push('/login')
-  // }
 
-  // const saved = state.user.saved
+  useEffect(() => {
+    if (!userInfo) {
+      return router.push('/login')
+    }
+    console.log(userInfo)
+    setValue('userName', userInfo.userName)
+    setValue('email', userInfo.email)
+
+    async function fetchPosts () {
+      // You can await here
+      const postsApi = 'http://localhost:3000/api/posts/'
+      const posts = await fetch(postsApi).then(
+        (data) => data.json()
+      )
+      dispatch(setPosts(posts))
+      // ...
+    }
+    fetchPosts()
+
+    const saves = userInfo.saves
+    const posts = state.posts.all
+    dispatch(fetchSaved({ saves, posts }))
+  },
+  [dispatch, router, setValue, userInfo])
 
   const submitHandler = async ({ name, email, password, confirmPassword }) => {
     // closeSnackbar()
@@ -58,22 +76,6 @@ const Profile = (state: AppState, props) => {
     }
   }
 
-  useEffect(() => {
-    if (!userInfo) {
-      return router.push('/login')
-    }
-    console.log(!userInfo)
-
-    setValue('userName', userInfo.userName)
-    setValue('email', userInfo.email)
-
-    // const posts = state.posts.all
-    // const saves = state.user.data.saves
-    // dispatch(fetchSaved({ posts: posts, saves: saves }))
-    // console.log('2. Page.getServerSideProps dispatched actions')
-  },
-  [])
-
   // if (error) return <div>Failed to load</div>
   // if (!user) return <div>Loading...</div>
   return (
@@ -87,12 +89,12 @@ const Profile = (state: AppState, props) => {
         </div>
 
         <div>
-          <h1>userName: {userInfo.userName}</h1>
-          <h1>email: {userInfo.email}</h1>
+          <h1>userName:</h1>
+          <h1>email:</h1>
         </div>
         </>
 
-        <Container>
+        <>
           {/* <form
             onSubmit={handleSubmit(submitHandler)}
           >
@@ -213,7 +215,7 @@ const Profile = (state: AppState, props) => {
                   Update
                 </Button>
           </form> */}
-        </Container>
+        </>
 
         <hr className="border-accent-2 mt-28 mb-24" />
 
@@ -223,4 +225,4 @@ const Profile = (state: AppState, props) => {
   )
 }
 
-export default connect((store: AppState) => store)(Profile)
+export default Profile
