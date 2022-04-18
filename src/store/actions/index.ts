@@ -1,5 +1,5 @@
 import { store } from '@store'
-import { login, fetchSaved } from '@store/slices/user'
+import { login, signout, fetchSaved } from '@store/slices/user'
 import { } from '@store/slices/user/thunk'
 import { setLoading, setPosts } from '@store/slices/posts'
 import { } from '@store/slices/posts/thunk'
@@ -19,5 +19,5 @@ const fetchPosts = async (url) => {
   }
 }
 
-export { login, fetchSaved, setLoading, setPosts }
+export { login, signout, fetchSaved, setLoading, setPosts }
 export { fetchPosts }

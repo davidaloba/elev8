@@ -32,8 +32,8 @@ const Home = (props) => {
   return (
       <Layout>
         <Container >
-        <Intro />
-        <Header header='Blog' url='/' />
+        <Header />
+        <Intro header='Blog' url='/' />
         {posts.length > 0 && <Posts posts={posts} title='All Posts'/>}
         </Container>
       </Layout>

@@ -24,6 +24,10 @@ const userSlice: any = createSlice({
       user.userInfo = { ...user.userInfo, ...action.payload }
       console.log('user logged in', user.userInfo)
     },
+    signout: (user, action) => {
+      user.userInfo = null
+      console.log('user logged in', user.userInfo)
+    },
     fetchSaved: (user, action) => {
       const saves = action.payload.saves
       const posts = action.payload.posts
@@ -45,7 +49,7 @@ const userSlice: any = createSlice({
 
 })
 
-export const { login, fetchSaved } = userSlice.actions
+export const { login, signout, fetchSaved } = userSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectCount = (state: RootState) => state.user

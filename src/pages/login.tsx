@@ -12,7 +12,8 @@ import {
   Layout,
   Container,
   Header,
-  Button
+  Button,
+  Intro
 } from '@components'
 
 const Login = () => {
@@ -42,7 +43,6 @@ const Login = () => {
       })
       dispatch(login(data))
       Cookies.set('userInfo', data)
-      console.log(data)
       router.push('/')
     } catch (err) {
       alert(getError(err))
@@ -73,14 +73,11 @@ const Login = () => {
   return (
     <Layout title="Login">
       <Container>
-        <Header header='Blog' url='/' />
-        <div>
-          <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-tight md:leading-none mb-12 text-center md:text-left">Login</h1>
-        </div>
-      </Container>
+        <Header />
+        <Intro header='Blog' url='/' />
       {
       isLogin
-        ? <Container>
+        ? <>
         <hr className="border-accent-2 mt-28 mb-24" />
         <h1>Login</h1>
         <form className=''>
@@ -136,8 +133,8 @@ const Login = () => {
         </form>
         <p>Don't have an account?</p>
         <button onClick={(e) => setIsLogin(!isLogin)}>Register</button>
-      </Container>
-        : <Container>
+      </>
+        : <>
         <hr className="border-accent-2 mt-28 mb-24" />
             <h1>Register</h1>
         <form className=''>
@@ -239,8 +236,9 @@ const Login = () => {
         </form>
         <p>Already have an account</p>
         <button onClick={(e) => setIsLogin(!isLogin)} type="button">Login</button>
-      </Container>
+      </>
       }
+      </Container>
 </Layout>
   )
 }

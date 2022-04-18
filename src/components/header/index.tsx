@@ -1,15 +1,27 @@
 import React from 'react'
-import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useAppDispatch } from '@store'
+import { signout } from '@store/actions'
+import Cookies from 'js-cookie'
 
-import { Logo } from '@components'
+import { Logo, Button } from '@components'
 
 export const Header: React.FC = ({ header, url }) => {
+  const dispatch = useAppDispatch()
+  const router = useRouter()
+  const signoutHandler = () => {
+    dispatch(signout())
+    Cookies.remove('userInfo')
+    router.push('/login')
+  }
   return (
-    <h2 className="text-2xl md:text-4xl font-bold tracking-tight md:tracking-tighter leading-tight mb-20 mt-8">
-      <Link href={url}>
-        <a className="hover:underline">{header}</a>
-      </Link>
-      .
-    </h2>
+    <nav className='flex items-center justify-between flex-wrap '>
+      <div className="flex items-center flex-shrink-0  mr-6">
+          <Logo/>
+      </div>
+      <div className="flex items-center flex-shrink-0 ">
+        <Button onClick={signoutHandler} className="text-xl">Log Out</Button>
+      </div>
+    </nav>
   )
 }
