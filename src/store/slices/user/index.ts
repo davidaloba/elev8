@@ -9,9 +9,11 @@ import Cookies from 'js-cookie'
 // }
 
 const initialState = {
-  userInfo: Cookies.get('userInfo')
-    ? JSON.parse(Cookies.get('userInfo'))
-    : null
+  userInfo: Cookies.get('userInfo') ? JSON.parse(Cookies.get('userInfo')) : null,
+  profile: {
+    menu: false,
+    edit: false
+  }
 }
 
 const userSlice: any = createSlice({
@@ -28,12 +30,17 @@ const userSlice: any = createSlice({
       user.userInfo = null
       console.log('user logged in', user.userInfo)
     },
-    fetchSaved: (user, action) => {
-      const saves = action.payload.saves
-      const posts = action.payload.posts
-      const saved = posts.filter((post) => saves.includes(post.slug))
-      user.saved = saved
-      console.log('Hey! I fetched saved posts ==>', saved)
+    savePost: (user, action) => {
+      user.userInfo.saves = action.payload
+      console.log(action.payload + 'was added to saves successfully')
+    },
+    toggleMenu: (user, action) => {
+      user.profile.menu = !user.profile.menu
+      console.log('user menu is' + !user.profile.menu)
+    },
+    toggleEdit: (user, action) => {
+      user.profile.edit = !user.profile.edit
+      console.log('user menu is' + !user.profile.menu)
     }
   }
 
@@ -49,7 +56,7 @@ const userSlice: any = createSlice({
 
 })
 
-export const { login, signout, fetchSaved } = userSlice.actions
+export const { login, signout, savePost, toggleMenu, toggleEdit } = userSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectCount = (state: RootState) => state.user

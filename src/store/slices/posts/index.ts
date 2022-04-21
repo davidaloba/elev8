@@ -4,12 +4,19 @@ import type { RootState } from '@store'
 
 interface IPosts {
   loading: Boolean,
-  data: (String | Number | Boolean)[]
+  all: (String | Number | Boolean)[]
+  filtered: (String | Number | Boolean)[]
+  searchTerm: String
+  current: {}
 }
 
 const initialState: IPosts = {
   loading: true,
-  data: []
+  all: [],
+  filtered: [],
+  searchTerm: '',
+  current: {}
+
 }
 
 const postsSlice: any = createSlice({
@@ -23,8 +30,25 @@ const postsSlice: any = createSlice({
       console.log(`is loading posts is ${posts.loading}`)
     },
     setPosts: (posts, action) => {
-      posts.data = action.payload
+      posts.all = action.payload
+      posts.filtered = action.payload
       console.log('Stored posts successfully')
+    },
+    filterPosts: (posts, action) => {
+      action.payload === 'all'
+        ? posts.filtered = posts.all
+        : posts.filtered = posts.all.filter((post) => post.type === action.payload)
+      console.log('filtered posts successfully')
+    },
+    setSearchTerm: (posts, action) => {
+      action.payload === 'all'
+        ? posts.filtered = posts.all
+        : posts.filtered = posts.all.filter((post) => post.type === action.payload)
+      console.log('filtered posts successfully')
+    },
+    expandPost: (posts, action) => {
+      posts.current = action.payload
+      console.log(action.payload + 'current post stored successfully')
     }
   }
 
@@ -40,7 +64,7 @@ const postsSlice: any = createSlice({
 
 })
 
-export const { setLoading, setPosts } = postsSlice.actions
+export const { setLoading, setPosts, filterPosts, setSearchTerm, expandPost } = postsSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectCount = (state: RootState) => state.posts

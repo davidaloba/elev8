@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useAppSelector, useAppDispatch, AppState } from '@store'
+import { useAppSelector, useAppDispatch, RootState } from '@store'
 import { fetchPosts, fetchSaved, _user } from '@store/actions'
 import axios from 'axios'
 

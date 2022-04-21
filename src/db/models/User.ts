@@ -2,7 +2,8 @@ import mongoose from 'mongoose'
 
 const profileSchema = new mongoose.Schema(
   {
-    name: String,
+    firstName: String,
+    lastName: String,
     avatar: String,
     phone: { type: String, required: true },
     dob: String,
@@ -17,9 +18,9 @@ const profileSchema = new mongoose.Schema(
 
 const userSchema = new mongoose.Schema(
   {
-    userName: { type: String, required: true, unique: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
+    userName: { type: String, required: true, unique: true },
     isAdmin: { type: Boolean, required: true, default: false },
     points: { type: Number, required: false },
     saves: { type: Array, required: false },

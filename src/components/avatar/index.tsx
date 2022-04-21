@@ -1,19 +1,13 @@
 import React from 'react'
 import Image from 'next/image'
 
-export const Avatar: React.FC = ({ author }) => {
+export const Avatar: React.FC = ({ src, alt, width, height }) => {
   return (
-    <div className="flex items-center">
-      <div className="w-12 h-12 relative mr-4">
-        <Image
-          src={author.avatar}
-          layout="fill"
-          className="rounded-full"
-          alt={author.name}
-        />
+      <div >
+      {alt === 'task' && (<Image src='/avatar.png' width={width} height={height} className="rounded-full" alt={alt} />)}
+      {alt === 'freebie' && (<Image src='/avatar.png' width={width} height={height} className="rounded-full" alt={alt} />)}
+      {alt === 'premium' && (<Image src='/avatar.png' width={width} height={height} className="rounded-full" alt={alt} />)}
+      {alt !== ('task' || 'freebie' || 'premium') && (<Image src={src || '/avatar.png'} width={width} height={height} className="rounded-full" alt={alt} />)}
       </div>
-      <div className="text-xl font-bold">{author.name}</div>
-    </div>
-    // <Image alt="" src={avatar} width="42" height="42" />
   )
 }

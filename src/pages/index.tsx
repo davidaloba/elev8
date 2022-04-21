@@ -1,43 +1,39 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { useAppSelector } from '@store'
-import { fetchPosts } from '@store/actions'
+import { RootState, useAppSelector, useAppDispatch } from '@store'
+import { login } from '@store/actions'
+import { getError } from '@db/error'
+import Cookies from 'js-cookie'
+import axios from 'axios'
 
 import {
-  Layout,
-  Header,
+  Container,
   Intro,
-  Posts,
-  Container
+  Footer
 } from '@components'
 
-const Home = (props) => {
+const Login = () => {
+  const { userInfo, loading } = useAppSelector((state: RootState) => state.user)
+  const dispatch = useAppDispatch()
   const router = useRouter()
-  const { user, posts } = useAppSelector((state) => state)
+  const { redirect } = router.query // login?redirect=/shipping
 
   useEffect(() => {
-    if (!user.userInfo) {
-      return router.push('/login')
+    if (userInfo) {
+      router.push('/app')
     }
-    const postsApi = 'http://localhost:3000/api/posts/'
-    fetchPosts(postsApi)
-  }, [])
+  }, [router, userInfo])
 
-  console.log(posts)
-  console.log(user)
+  console.log(userInfo)
 
-  if (posts.loading) {
-    return <div className='loading'></div>
-  }
   return (
-      <Layout>
-        <Container >
-        <Header />
-        <Intro header='Blog' url='/' />
-        {posts.length > 0 && <Posts posts={posts} title='All Posts'/>}
-        </Container>
-      </Layout>
+    <>
+      <Container>
+        <Intro header='Login' url='/' />
+        <Footer />
+      </Container>
+    </>
   )
 }
 
-export default Home
+export default Login

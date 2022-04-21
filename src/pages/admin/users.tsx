@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import NextLink from 'next/link'
 import React, { useEffect, useContext, useReducer } from 'react'
-import {
+import Layout, {
   CircularProgress,
   Grid,
   List,
@@ -22,7 +22,6 @@ import {
 } from '@components'
 import { getError } from '@db/error'
 import { Store } from '@store'
-import Layout from '@components/layout'
 import useStyles from '@styles/styles'
 import { useSnackbar } from 'notistack'
 

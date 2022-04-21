@@ -19,7 +19,7 @@ import {
 } from '@components'
 import { getError } from '@db/error'
 import { Store } from '@store'
-import Layout from '@components/layout'
+import Layout from '@components/home'
 import useStyles from '@styles/styles'
 import { Controller, useForm } from 'react-hook-form'
 import { useSnackbar } from 'notistack'
