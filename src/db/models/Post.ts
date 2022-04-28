@@ -2,12 +2,22 @@ import mongoose from 'mongoose'
 
 const repliesSchema = new mongoose.Schema(
   {
-    userName: { type: String, required: true },
-    comment: { type: String, required: true },
+    userName: String,
+    comment: String,
     avatar: String
   },
   {
     timestamps: true
+  }
+)
+const dataSchema = new mongoose.Schema(
+  {
+    link: String,
+    points: Number,
+    cost: Number
+  },
+  {
+    timestamps: false
   }
 )
 
@@ -17,9 +27,8 @@ const postSchema = new mongoose.Schema({
   title: { type: String, required: true },
   body: { type: String, required: true },
   image: { type: String },
-  points: { type: Number },
-  isPaidFor: { type: Boolean },
-  replies: [repliesSchema]
+  replies: [repliesSchema],
+  data: dataSchema
 },
 {
   timestamps: true

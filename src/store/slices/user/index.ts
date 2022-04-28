@@ -1,12 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import type { RootState } from '@store'
 import Cookies from 'js-cookie'
-// import user from './thunk'
-
-// interface IUser {
-//   loading: Boolean,
-//   userInfo: {}
-// }
 
 const initialState = {
   userInfo: Cookies.get('userInfo') ? JSON.parse(Cookies.get('userInfo')) : null,

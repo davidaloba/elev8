@@ -12,7 +12,7 @@ import {
   Footer
 } from '@components'
 
-const Login = () => {
+const Index = () => {
   const { userInfo, loading } = useAppSelector((state: RootState) => state.user)
   const dispatch = useAppDispatch()
   const router = useRouter()
@@ -36,4 +36,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Index

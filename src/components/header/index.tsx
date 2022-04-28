@@ -1,16 +1,13 @@
 import React from 'react'
-import { useRouter } from 'next/router'
 import { useAppDispatch, useAppSelector } from '@store'
 import { setSearchTerm, toggleMenu } from '@store/actions'
-import Cookies from 'js-cookie'
 
 import Image from 'next/image'
-import { Logo, Button, Avatar } from '@components'
+import { Avatar } from '@components'
 
 export const Header: React.FC = ({ header, url }) => {
-  const { user, posts } = useAppSelector((state: RootState) => state)
+  const { user } = useAppSelector((state: RootState) => state)
   const dispatch = useAppDispatch()
-  const router = useRouter()
 
   const searchValue = React.useRef('')
 
@@ -41,7 +38,7 @@ export const Header: React.FC = ({ header, url }) => {
           <div onClick={openMenu} className='rounded-lg cursor-pointer bg-lime-700 '>
             <Image src='/icons/linkedin-icon.svg' width='16' height='16' alt='points' />
           </div>
-          <p className='text-base'> { user.userInfo.points ? user.userInfo.points : 0}  Pts</p>
+          <p className='text-base'> {user.userInfo.profile.points ? user.userInfo.profile.points : 0}  Pts</p>
         </div>
 
         <div onClick={openMenu} className=" cursor-pointer">

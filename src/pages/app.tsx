@@ -3,8 +3,15 @@ import { useAppSelector } from '@store'
 
 import { Home, Profile } from '@components'
 
-const Index = (props) => {
+/* TODO
+  work on point system
+  work on admin side
+  work on form validations
+ */
+
+const App = (props) => {
   const { user } = useAppSelector((state: RootState) => state)
+  console.log(user)
 
   return (
     <>
@@ -16,4 +23,4 @@ const Index = (props) => {
   )
 }
 
-export default Index
+export default App

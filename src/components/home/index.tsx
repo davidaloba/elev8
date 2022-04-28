@@ -9,6 +9,7 @@ export const Home: React.FC = ({ preview, children, header, url }) => {
   const router = useRouter()
   const dispatch = useAppDispatch()
   const { user, posts } = useAppSelector((state: RootState) => state)
+  console.log(posts)
 
   useEffect(() => {
     if (!user.userInfo) {
@@ -20,10 +21,11 @@ export const Home: React.FC = ({ preview, children, header, url }) => {
   const filteredPosts = posts.filtered
   const currentPost = posts.current
 
-  const types = ['all', 'freebie', 'task', 'premium']
+  const types = ['all', 'tasks', 'freebies', 'premium']
   const filterItems = (type) => {
     dispatch(expandPost({}))
     dispatch(filterPosts(type))
+    window.scrollTo(0, 0)
   }
 
   if (posts.loading) {

@@ -10,6 +10,7 @@ export const Replies = () => {
   const dispatch = useAppDispatch()
   const { user, posts } = useAppSelector((state: RootState) => state)
   const currentPost = posts.current
+
   const [reply, setReply] = useState('')
 
   const replyHandler = async () => {

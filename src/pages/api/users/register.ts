@@ -8,26 +8,28 @@ const handler = nc()
 
 handler.post(async (req, res) => {
   await db.connect()
+  console.log(req.body)
+
   const newUser = new User({
-    userName: req.body.userName,
     email: req.body.email,
     password: bcrypt.hashSync(req.body.password),
-    isAdmin: false
+    isAdmin: false,
+    userName: req.body.userName,
+    profile: {
+      dob: req.body.dob
+    }
   })
   const user = await newUser.save()
-  console.log(user)
   await db.disconnect()
 
   const token = signToken(user)
   console.log(token)
   res.send({
     token,
-    userName: user.userName,
     email: user.email,
-    saves: user.saves,
     isAdmin: user.isAdmin,
-    isAuthor: user.isAuthor,
-    authorProfile: user.authorProfile
+    userName: user.userName,
+    profile: user.profile
   })
 })
 

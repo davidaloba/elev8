@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react'
-import { expandPost, fetchPosts, filterPosts, toggleMenu } from '@store/actions'
+import { fetchPosts, signout, toggleMenu } from '@store/actions'
 import { useAppDispatch, useAppSelector } from '@store'
 import { useRouter } from 'next/router'
 
-import { Header, Intro, Button, Container, Post, Replies } from '@components'
+import { Intro, Container, EditProfile, ProfileInfo } from '@components'
+import Cookies from 'js-cookie'
 
-export const Profile: React.FC = ({ preview, children, header, url }) => {
+export const Profile: React.FC = () => {
   const router = useRouter()
   const dispatch = useAppDispatch()
-  const { user, posts } = useAppSelector((state: RootState) => state)
+  const { user } = useAppSelector((state: RootState) => state)
 
   useEffect(() => {
     if (!user.userInfo) {
@@ -17,8 +18,15 @@ export const Profile: React.FC = ({ preview, children, header, url }) => {
     fetchPosts('http://localhost:3000/api/posts/')
   }, [router, user.userInfo])
 
-  const menuHandler = async () => {
+  const closeMenu = async () => {
     dispatch(toggleMenu())
+  }
+
+  // TO-DO: FIX signout before redirect err
+  const logoutHandler = () => {
+    dispatch(signout())
+    Cookies.remove('userInfo')
+    router.push('/login')
   }
 
   return (
@@ -27,18 +35,21 @@ export const Profile: React.FC = ({ preview, children, header, url }) => {
         <Container>
           <Intro header='Profile' />
           <div className="flex justify-end items-center">
-            <div onClick={menuHandler} className="filter-btn" >[CLOSE]
+            <div onClick={closeMenu} className="cursor-pointer" >[CLOSE]
             </div>
           </div>
         </Container>
         {/* <Alert preview={preview} /> */}
       </header>
-
       <main className="min-h-screen">
-        {/* {user.profile.menu
-            ? <EditProfile />
-            : <ProfileInfo />
-          } */}
+        {user.profile.edit
+          ? <EditProfile />
+          : <ProfileInfo />
+        }
+        <div className="flex justify-center items-center">
+          <div onClick={logoutHandler} className="cursor-pointer" >[LOG OUT]
+          </div>
+        </div>
       </main>
 
       <footer className="border-b bg-accent-1 border-accent-2">

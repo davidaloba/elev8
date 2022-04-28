@@ -7,19 +7,16 @@ import Cookies from 'js-cookie'
 import axios from 'axios'
 
 import {
-  Layout,
   Container,
-  Header,
   Button,
   Intro,
   Footer
 } from '@components'
 
 const Login = () => {
-  const { userInfo, loading } = useAppSelector((state: RootState) => state.user)
+  const { userInfo } = useAppSelector((state: RootState) => state.user)
   const dispatch = useAppDispatch()
   const router = useRouter()
-  const { redirect } = router.query // login?redirect=/shipping
 
   useEffect(() => {
     if (userInfo) {
@@ -28,16 +25,15 @@ const Login = () => {
   }, [router, userInfo])
 
   const [isLogin, setIsLogin] = useState(true)
+
   const [userName, setUserName] = useState('')
   const [email, setEmail] = useState('')
-  const [password, setPassword] = useState(false)
-  const [confirmPassword, setConfirmPassword] = useState(false)
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
-  const [phone, setPhone] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
   const [dob, setDob] = useState('')
+  console.log(userName, email, password, dob)
 
-  const loginHandler = async (email, password) => {
+  const loginHandler = async () => {
     console.log(email, password)
     try {
       const { data } = await axios.post('/api/users/login', {
@@ -52,7 +48,7 @@ const Login = () => {
     }
   }
 
-  const registerHandler = async (userName, email, password, confirmPassword) => {
+  const registerHandler = async () => {
     if (password !== confirmPassword) {
       alert('Password and confirm password are not match')
     }
@@ -60,7 +56,8 @@ const Login = () => {
       const { data } = await axios.post('/api/users/register', {
         userName,
         email,
-        password
+        password,
+        dob
       })
       dispatch(login(data))
       Cookies.set('userInfo', data)
@@ -70,8 +67,6 @@ const Login = () => {
       alert(getError(err))
     }
   }
-
-  console.log(userInfo)
 
   return (
     <>
@@ -139,75 +134,6 @@ const Login = () => {
               <h1>Register</h1>
               <form className=''>
                 <div>
-                  <label htmlFor="email">Username</label>
-                  <input
-                    type='text'
-                    name="userName"
-                    id="userName"
-                    value={userName}
-                    onChange={(e) => setUserName(e.target.value)}
-                    className='outlined fullWidth'
-                  // rules={{
-                  //   required: true,
-                  //   minLength: 2
-                  // }}
-                  // error={Boolean(errors.name)}
-                  // helperText={
-                  //   errors.name
-                  //     ? errors.name.type === 'minLength'
-                  //       ? 'Name length is more than 1'
-                  //       : 'Name is required'
-                  //     : ''
-                  // }
-                  ></input>
-                </div>
-                <div>
-                  <label htmlFor="email">First Name</label>
-                  <input
-                    type='text'
-                    name="firstName"
-                    id="firstName"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    className='outlined fullWidth'
-                  // rules={{
-                  //   required: true,
-                  //   minLength: 2
-                  // }}
-                  // error={Boolean(errors.name)}
-                  // helperText={
-                  //   errors.name
-                  //     ? errors.name.type === 'minLength'
-                  //       ? 'Name length is more than 1'
-                  //       : 'Name is required'
-                  //     : ''
-                  // }
-                  ></input>
-                </div>
-                <div>
-                  <label htmlFor="email">Last Name</label>
-                  <input
-                    type='text'
-                    name="lastName"
-                    id="lastName"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    className='outlined fullWidth'
-                  // rules={{
-                  //   required: true,
-                  //   minLength: 2
-                  // }}
-                  // error={Boolean(errors.name)}
-                  // helperText={
-                  //   errors.name
-                  //     ? errors.name.type === 'minLength'
-                  //       ? 'Name length is more than 1'
-                  //       : 'Name is required'
-                  //     : ''
-                  // }
-                  ></input>
-                </div>
-                <div>
                   <label htmlFor="email">Email</label>
                   <input
                     type='email'
@@ -215,52 +141,6 @@ const Login = () => {
                     id="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className='outlined fullWidth'
-                  // rules={{
-                  //   required: true,
-                  //   pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/
-                  // }}
-                  // error={Boolean(errors.email)}
-                  // helperText={
-                  //   errors.email
-                  //     ? errors.email.type === 'pattern'
-                  //       ? 'Email is not valid'
-                  //       : 'Email is required'
-                  //     : ''
-                  // }
-                  ></input>
-                </div>
-                <div>
-                  <label htmlFor="email">Phone Number</label>
-                  <input
-                    type='telephone'
-                    name="phone"
-                    id="phone"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    className='outlined fullWidth'
-                  // rules={{
-                  //   required: true,
-                  //   minLength: 2
-                  // }}
-                  // error={Boolean(errors.name)}
-                  // helperText={
-                  //   errors.name
-                  //     ? errors.name.type === 'minLength'
-                  //       ? 'Name length is more than 1'
-                  //       : 'Name is required'
-                  //     : ''
-                  // }
-                  ></input>
-                </div>
-                <div>
-                  <label htmlFor="email">Date of Birth</label>
-                  <input
-                    type='date'
-                    name="dob"
-                    id="dob"
-                    value={dob}
-                    onChange={(e) => setDob(e.target.value)}
                     className='outlined fullWidth'
                   // rules={{
                   //   required: true,
@@ -323,7 +203,53 @@ const Login = () => {
                   ></input>
                 </div>
                 <div>
-                  <Button onClick={registerHandler} type="button" color="primary">Login</Button>
+                  <label htmlFor="email">Username</label>
+                  <input
+                    type='text'
+                    name="userName"
+                    id="userName"
+                    value={userName}
+                    onChange={(e) => setUserName(e.target.value)}
+                    className='outlined fullWidth'
+                  // rules={{
+                  //   required: true,
+                  //   minLength: 2
+                  // }}
+                  // error={Boolean(errors.name)}
+                  // helperText={
+                  //   errors.name
+                  //     ? errors.name.type === 'minLength'
+                  //       ? 'Name length is more than 1'
+                  //       : 'Name is required'
+                  //     : ''
+                  // }
+                  ></input>
+                </div>
+                <div>
+                  <label htmlFor="email">Date of Birth</label>
+                  <input
+                    type='date'
+                    name="dob"
+                    id="dob"
+                    value={dob}
+                    onChange={(e) => setDob(e.target.value)}
+                    className='outlined fullWidth'
+                  // rules={{
+                  //   required: true,
+                  //   pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/
+                  // }}
+                  // error={Boolean(errors.email)}
+                  // helperText={
+                  //   errors.email
+                  //     ? errors.email.type === 'pattern'
+                  //       ? 'Email is not valid'
+                  //       : 'Email is required'
+                  //     : ''
+                  // }
+                  ></input>
+                </div>
+                <div>
+                  <Button onClick={registerHandler} type="button" color="primary">Sign up</Button>
                 </div>
               </form>
               <p>Already have an account</p>
