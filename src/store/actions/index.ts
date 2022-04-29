@@ -1,8 +1,14 @@
 import { getError } from '@db/error'
 import { store } from '@store'
+import axios from 'axios'
 
+import { } from '@store/slices/admin/thunk'
 import { } from '@store/slices/user/thunk'
 import { } from '@store/slices/posts/thunk'
+import {
+  fetchAdminSummary,
+  fetchAdminPosts
+} from '@store/slices/admin'
 import {
   login,
   signout,
@@ -17,9 +23,23 @@ import {
   setSearchTerm,
   expandPost
 } from '@store/slices/posts'
+import router from 'next/router'
+import Cookies from 'js-cookie'
+
+const dispatch = store.dispatch
+
+const fetchData = async (url, bearer, action) => {
+  try {
+    const { data } = await axios.get(url, {
+      headers: { authorization: `Bearer ${bearer}` }
+    })
+    dispatch(action(data))
+  } catch (err) {
+    alert(getError(err))
+  }
+}
 
 const fetchPosts = async (url) => {
-  const dispatch = store.dispatch
   dispatch(setLoading(true))
   try {
     const posts = await fetch(url).then(
@@ -51,7 +71,16 @@ const getPeriod = (date) => {
   return updated
 }
 
+// TODO: FIX signout before redirect err
+const logoutHandler = () => {
+  dispatch(signout())
+  Cookies.remove('userInfo')
+  router.push('/login')
+}
+
 export {
+  fetchAdminSummary,
+  fetchAdminPosts,
   login,
   filterPosts,
   signout,
@@ -63,4 +92,4 @@ export {
   toggleMenu,
   toggleEdit
 }
-export { fetchPosts, getPeriod }
+export { fetchPosts, getPeriod, fetchData, logoutHandler }

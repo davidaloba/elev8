@@ -12,9 +12,9 @@ const repliesSchema = new mongoose.Schema(
 )
 const dataSchema = new mongoose.Schema(
   {
-    link: String,
-    points: Number,
-    cost: Number
+    link: { type: String, default: null },
+    points: { type: Number, default: null },
+    cost: { type: Number, default: null }
   },
   {
     timestamps: false
@@ -26,9 +26,8 @@ const postSchema = new mongoose.Schema({
   slug: { type: String, required: true, unique: true },
   title: { type: String, required: true },
   body: { type: String, required: true },
-  image: { type: String },
-  replies: [repliesSchema],
-  data: dataSchema
+  data: dataSchema,
+  replies: [repliesSchema]
 },
 {
   timestamps: true

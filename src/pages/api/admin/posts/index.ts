@@ -16,16 +16,15 @@ handler.get(async (req, res) => {
 handler.post(async (req, res) => {
   await db.connect()
   const newPost = new Post({
-    name: 'sample name',
-    slug: 'sample-slug-' + Math.random(),
-    image: '/images/shirt1.jpg',
-    price: 0,
-    categories: 'sample categories',
-    brand: 'sample brand',
-    countInStock: 0,
-    description: 'sample description',
-    rating: 0,
-    numReviews: 0
+    type: req.body.type,
+    slug: req.body.slug,
+    title: req.body.title,
+    body: req.body.body,
+    data: {
+      link: req.body.link,
+      points: req.body.points,
+      cost: req.body.cost
+    }
   })
 
   const post = await newPost.save()

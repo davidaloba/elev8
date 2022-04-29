@@ -1,24 +1,31 @@
-import React from 'react'
-import { useAppSelector } from '@store'
+import React, { useEffect } from 'react'
+import { RootState, useAppSelector } from '@store'
 
 import { Home, Profile } from '@components'
+import router from 'next/router'
 
 /* TODO
-  work on point system
   work on admin side
   work on form validations
  */
 
-const App = (props) => {
+const App = () => {
   const { user } = useAppSelector((state: RootState) => state)
   console.log(user)
+
+  useEffect(() => {
+    if (!user.userInfo) {
+      router.push('/login')
+    }
+    if (user.userInfo.isAdmin) router.push('/admin')
+  }, [user.userInfo])
 
   return (
     <>
       {user.profile.menu
-        ? <Profile/>
+        ? <Profile />
         : <Home header='Home' url='' />
-        }
+      }
     </>
   )
 }

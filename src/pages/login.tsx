@@ -20,7 +20,9 @@ const Login = () => {
 
   useEffect(() => {
     if (userInfo) {
-      router.push('/app')
+      userInfo.isAdmin
+        ? router.push('/admin')
+        : router.push('/app')
     }
   }, [router, userInfo])
 

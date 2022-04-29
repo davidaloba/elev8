@@ -7,17 +7,17 @@ import { getError } from '@db/error'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 
-import { Avatar, Container } from '..'
+import { Avatar, Container } from '@components'
 
-export const EditProfile = () => {
+export const EditProfile: React.FC = () => {
   const dispatch = useAppDispatch()
   const { user } = useAppSelector((state: RootState) => state)
 
   const [email, setEmail] = useState(user.userInfo.email)
   const [firstName, setFirstName] = useState(user.userInfo.profile.firstName)
   const [lastName, setLastName] = useState(user.userInfo.profile.lastName)
-  // TO-DO: ADD EDIT/UPLOAD AVATAR
-  const [avatar, setAvatar] = useState(user.userInfo.profile.phone)
+  // TODO: ADD EDIT/UPLOAD AVATAR
+  // const [avatar, setAvatar] = useState(user.userInfo.profile.phone)
   const [phone, setPhone] = useState(user.userInfo.profile.phone)
   const [dob, setDob] = useState(user.userInfo.profile.dob)
   const [facebook, setFacebook] = useState(user.userInfo.profile.facebook)
@@ -27,8 +27,6 @@ export const EditProfile = () => {
   const [editPassword, setEditPassword] = useState(false)
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
-
-  console.log(firstName, lastName, avatar, phone, dob, facebook, instagram, twitter, email, password)
 
   const submitHandler = async () => {
     if (password !== confirmPassword) {
@@ -67,9 +65,7 @@ export const EditProfile = () => {
       </div>
       <div className='flex flex-wrap justify-between  border  mb-8 p-4 '>
         <Container>
-          <div></div>
-        </Container>
-        <Container>
+          <form action="">
           <div>
             <label htmlFor="email">First Name</label>
             <input
@@ -79,18 +75,6 @@ export const EditProfile = () => {
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               className='outlined fullWidth'
-            // rules={{
-            //   required: true,
-            //   minLength: 2
-            // }}
-            // error={Boolean(errors.name)}
-            // helperText={
-            //   errors.name
-            //     ? errors.name.type === 'minLength'
-            //       ? 'Name length is more than 1'
-            //       : 'Name is required'
-            //     : ''
-            // }
             ></input>
           </div>
           <div>
@@ -102,18 +86,6 @@ export const EditProfile = () => {
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
               className='outlined fullWidth'
-            // rules={{
-            //   required: true,
-            //   minLength: 2
-            // }}
-            // error={Boolean(errors.name)}
-            // helperText={
-            //   errors.name
-            //     ? errors.name.type === 'minLength'
-            //       ? 'Name length is more than 1'
-            //       : 'Name is required'
-            //     : ''
-            // }
             ></input>
           </div>
           <div>
@@ -125,18 +97,6 @@ export const EditProfile = () => {
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               className='outlined fullWidth'
-            // rules={{
-            //   required: true,
-            //   minLength: 2
-            // }}
-            // error={Boolean(errors.name)}
-            // helperText={
-            //   errors.name
-            //     ? errors.name.type === 'minLength'
-            //       ? 'Name length is more than 1'
-            //       : 'Name is required'
-            //     : ''
-            // }
             ></input>
           </div>
           <div>
@@ -148,18 +108,6 @@ export const EditProfile = () => {
               value={facebook}
               onChange={(e) => setFacebook(e.target.value)}
               className='outlined fullWidth'
-            // rules={{
-            //   required: true,
-            //   minLength: 2
-            // }}
-            // error={Boolean(errors.name)}
-            // helperText={
-            //   errors.name
-            //     ? errors.name.type === 'minLength'
-            //       ? 'Name length is more than 1'
-            //       : 'Name is required'
-            //     : ''
-            // }
             ></input>
           </div>
           <div>
@@ -171,18 +119,6 @@ export const EditProfile = () => {
               value={instagram}
               onChange={(e) => setInstagram(e.target.value)}
               className='outlined fullWidth'
-            // rules={{
-            //   required: true,
-            //   minLength: 2
-            // }}
-            // error={Boolean(errors.name)}
-            // helperText={
-            //   errors.name
-            //     ? errors.name.type === 'minLength'
-            //       ? 'Name length is more than 1'
-            //       : 'Name is required'
-            //     : ''
-            // }
             ></input>
           </div>
           <div>
@@ -194,18 +130,6 @@ export const EditProfile = () => {
               value={twitter}
               onChange={(e) => setTwitter(e.target.value)}
               className='outlined fullWidth'
-            // rules={{
-            //   required: true,
-            //   minLength: 2
-            // }}
-            // error={Boolean(errors.name)}
-            // helperText={
-            //   errors.name
-            //     ? errors.name.type === 'minLength'
-            //       ? 'Name length is more than 1'
-            //       : 'Name is required'
-            //     : ''
-            // }
             ></input>
           </div>
           <div>
@@ -217,18 +141,6 @@ export const EditProfile = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className='outlined fullWidth'
-            // rules={{
-            //   required: true,
-            //   pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/
-            // }}
-            // error={Boolean(errors.email)}
-            // helperText={
-            //   errors.email
-            //     ? errors.email.type === 'pattern'
-            //       ? 'Email is not valid'
-            //       : 'Email is required'
-            //     : ''
-            // }
             ></input>
           </div>
           <div>
@@ -240,20 +152,9 @@ export const EditProfile = () => {
               value={dob}
               onChange={(e) => setDob(e.target.value)}
               className='outlined fullWidth'
-            // rules={{
-            //   required: true,
-            //   pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/
-            // }}
-            // error={Boolean(errors.email)}
-            // helperText={
-            //   errors.email
-            //     ? errors.email.type === 'pattern'
-            //       ? 'Email is not valid'
-            //       : 'Email is required'
-            //     : ''
-            // }
             ></input>
           </div>
+          </form>
         </Container>
         {editPassword &&
           <Container>
@@ -266,18 +167,6 @@ export const EditProfile = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className='outlined fullWidth'
-              // rules={{
-              //   required: true,
-              //   minLength: 6
-              // }}
-              // error={Boolean(errors.password)}
-              // helperText={
-              //   errors.password
-              //     ? errors.password.type === 'minLength'
-              //       ? 'Password length is more than 5'
-              //       : 'Password is required'
-              //     : ''
-              // }
               ></input>
             </div>
             <div>
@@ -289,18 +178,6 @@ export const EditProfile = () => {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 className='outlined fullWidth'
-              // rules={{
-              //   required: true,
-              //   minLength: 6
-              // }}
-              // error={Boolean(errors.confirmPassword)}
-              // helperText={
-              //   errors.confirmPassword
-              //     ? errors.confirmPassword.type === 'minLength'
-              //       ? 'Confirm password length is more than 5'
-              //       : 'Confirm password is required'
-              //     : ''
-              // }
               ></input>
             </div>
           </Container>}

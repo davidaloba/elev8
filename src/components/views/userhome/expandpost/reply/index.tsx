@@ -2,7 +2,7 @@ import React from 'react'
 import { getPeriod } from '@store/actions'
 import axios from 'axios'
 
-import { Avatar, Button } from '..'
+import { Avatar, Button } from '@components'
 
 export const Reply = ({ reply }) => {
   console.log(reply)
