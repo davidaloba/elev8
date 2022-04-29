@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
 
 import axios from 'axios'
 
@@ -7,7 +6,6 @@ import { getError } from '@db/error'
 import { RootState, useAppDispatch, useAppSelector } from '@store'
 import { fetchAdminPosts, fetchAdminSummary, fetchData } from '@store/actions'
 
-import NextLink from 'next/link'
 import {
   Button, Container
 } from '@components'
@@ -103,7 +101,6 @@ export const AdminPosts: React.FC = () => {
           </div>}
         </div>
       </Container>
-
       <Container>
         {isCreatePost && <div className='flex flex-wrap justify-between  border  mb-8 p-4 '>
           <Container>
@@ -114,11 +111,9 @@ export const AdminPosts: React.FC = () => {
                   type='text'
                   name="slug"
                   id="slug"
-
                   value={slug}
                   onChange={(e) => setSlug(e.target.value)}
                   className='outlined fullWidth'
-
                 ></input>
               </div>
               <div>
@@ -127,11 +122,9 @@ export const AdminPosts: React.FC = () => {
                   type='text'
                   name="title"
                   id="title"
-
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   className='outlined fullWidth'
-
                 ></input>
               </div>
               <div>
@@ -140,11 +133,9 @@ export const AdminPosts: React.FC = () => {
                   type='text'
                   name="body"
                   id="body"
-
                   value={body}
                   onChange={(e) => setBody(e.target.value)}
                   className='outlined fullWidth'
-
                 ></input>
               </div>
               <div>
@@ -153,12 +144,10 @@ export const AdminPosts: React.FC = () => {
                   type="text"
                   name="type"
                   id="type"
-
                   value={type}
                   onChange={(e) => setType(e.target.value)}
                   className='outlined fullWidth'
                   placeholder='select the post type..'
-
                 >
                   <option value={null} selected disabled >Select your option</option>
                   <option value="freebies">Freebies</option>
@@ -207,10 +196,8 @@ export const AdminPosts: React.FC = () => {
               </div>
             </form>
           </Container>
-
-          </div>
+        </div>
         }
-
         {!isCreatePost && <table>
           <thead>
             <tr className='border-2' >
@@ -248,7 +235,6 @@ export const AdminPosts: React.FC = () => {
                   </tr>
                   )))
                 : <tr className='border-2 font-italic ' > <div className=' px-10 py-4 italic' >No posts...  </div> </tr>
-
               }
             </tbody>}
         </table>}

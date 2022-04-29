@@ -17,7 +17,6 @@ export const OpenPost: React.FC = ({ post }) => {
     slug,
     title,
     body,
-    image,
     data,
     updatedAt
   } = post

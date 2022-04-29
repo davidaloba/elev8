@@ -1,13 +1,12 @@
 import React from 'react'
 import { getPeriod } from '@store/actions'
-import axios from 'axios'
 
-import { Avatar, Button } from '@components'
+import { Avatar } from '@components'
 
-export const Reply = ({ reply }) => {
+export const Reply: React.FC = ({ reply }) => {
   console.log(reply)
 
-  const { comment, userName, updatedAt, avatar } = reply
+  const { comment, userName, updatedAt } = reply
   const updated = getPeriod(updatedAt)
 
   return (

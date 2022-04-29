@@ -9,7 +9,7 @@ import router from 'next/router'
   work on form validations
  */
 
-const App = () => {
+const App: React.FC = () => {
   const { user } = useAppSelector((state: RootState) => state)
   console.log(user)
 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { RootState, useAppSelector, useAppDispatch } from '@store'
 import { login } from '@store/actions'
@@ -13,7 +13,7 @@ import {
   Footer
 } from '@components'
 
-const Login = () => {
+const Login: React.FC = () => {
   const { userInfo } = useAppSelector((state: RootState) => state.user)
   const dispatch = useAppDispatch()
   const router = useRouter()

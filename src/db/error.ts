@@ -1,5 +1,6 @@
 import db from '.'
 
+// TODO: get error messages to show in alert
 const getError = (err) =>
   err.response && err.response.data && err.response.data.message
     ? err.response.data.message

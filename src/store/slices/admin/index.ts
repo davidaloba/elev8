@@ -1,9 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { RootState } from '@store'
-import Cookies from 'js-cookie'
 
 const initialState = {
-  // summary: Cookies.get('summary') ? JSON.parse(Cookies.get('summary')) : null,
   summary: {
     postsCount: null,
     usersCount: null

@@ -2,9 +2,6 @@ import { getError } from '@db/error'
 import { store } from '@store'
 import axios from 'axios'
 
-import { } from '@store/slices/admin/thunk'
-import { } from '@store/slices/user/thunk'
-import { } from '@store/slices/posts/thunk'
 import {
   fetchAdminSummary,
   fetchAdminPosts

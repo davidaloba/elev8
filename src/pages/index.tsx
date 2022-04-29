@@ -1,10 +1,6 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { RootState, useAppSelector, useAppDispatch } from '@store'
-import { login } from '@store/actions'
-import { getError } from '@db/error'
-import Cookies from 'js-cookie'
-import axios from 'axios'
+import { RootState, useAppSelector } from '@store'
 
 import {
   Container,
@@ -12,11 +8,9 @@ import {
   Footer
 } from '@components'
 
-const Index = () => {
-  const { userInfo, loading } = useAppSelector((state: RootState) => state.user)
-  const dispatch = useAppDispatch()
+const Index: React.FC = () => {
+  const { userInfo } = useAppSelector((state: RootState) => state.user)
   const router = useRouter()
-  const { redirect } = router.query // login?redirect=/shipping
 
   useEffect(() => {
     if (userInfo) {
@@ -29,7 +23,7 @@ const Index = () => {
   return (
     <>
       <Container>
-        <Intro header='Login' url='/' />
+        <Intro header='Login' url='/login' />
         <Footer />
       </Container>
     </>
