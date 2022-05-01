@@ -1,7 +1,7 @@
 import nc from 'next-connect'
 import Post from '@db/models/Post'
 import User from '@db/models/User'
-import { isAuth, isAdmin, isAuthor } from '@utils/auth'
+import { isAuth, isAdmin } from '@utils/auth'
 import db from '@db'
 import { onError } from '@db/error'
 

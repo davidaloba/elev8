@@ -1,6 +1,5 @@
 import nc from 'next-connect'
 import Post from '@db/models/Post'
-import User from '@db/models/User'
 import db from '@db'
 
 // import mongoose from 'mongoose'

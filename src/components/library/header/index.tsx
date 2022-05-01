@@ -1,16 +1,8 @@
-import React from 'react'
-import { useRouter } from 'next/router'
-
-import { useAppSelector, RootState } from '@store'
 
 import Link from 'next/link'
 import { Logo } from '../logo'
 
-export const Header: React.FC = () => {
-  const { userInfo } = useAppSelector((state: RootState) => state.user)
-
-  const router = useRouter()
-
+export const Header = () => {
   return (
     <section className=" pt-10 mb-10 md:mb-12">
       <nav className='flex items-baseline justify-between  '>

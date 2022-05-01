@@ -1,9 +1,8 @@
-import React from 'react'
 import { getPeriod } from '@store/actions'
 
 import { Avatar } from '@components'
 
-export const Reply: React.FC = ({ reply }) => {
+export const Reply = ({ reply }) => {
   console.log(reply)
 
   const { comment, userName, updatedAt } = reply

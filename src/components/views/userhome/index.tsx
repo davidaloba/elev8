@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
 import { expandPost, fetchPosts, filterPosts } from '@store/actions'
 import { RootState, useAppDispatch, useAppSelector } from '@store'
 
-import { Intro, Button, Container } from '@components'
+import { Intro, Container } from '@components'
 import { AppBar } from './appbar'
 import { Post } from './post'
 import { ExpandPost } from './expandpost'
 
-export const Home: React.FC = () => {
+export const Home = () => {
   const dispatch = useAppDispatch()
   const { user, posts } = useAppSelector((state: RootState) => state)
 

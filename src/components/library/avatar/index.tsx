@@ -1,7 +1,6 @@
-import React from 'react'
 import Image from 'next/image'
 
-export const Avatar: React.FC = ({ src, alt, width, height }) => {
+export const Avatar = ({ src, alt, width, height }) => {
   return (
       <div >
       {alt === 'task' && (<Image src='/avatar.png' width={width} height={height} className="rounded-full" alt={alt} />)}
