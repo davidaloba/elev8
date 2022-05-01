@@ -1,17 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-import axios from 'axios'
-
-import { getError } from '@db/error'
 import { RootState, useAppDispatch, useAppSelector } from '@store'
 import { fetchAdminSummary, fetchData, logoutHandler } from '@store/actions'
 
-import NextLink from 'next/link'
 import Image from 'next/image'
-import { AdminPosts } from '@components'
-import { Button, Container, Intro } from '@components'
-import Cookies from 'js-cookie'
+import { AdminPosts, Container, Intro } from '@components'
 
 const AdminDashboard = () => {
   const dispatch = useAppDispatch()
@@ -67,7 +61,7 @@ const AdminDashboard = () => {
 
       <footer className="border-b bg-accent-1 border-accent-2">
         <div className="container mx-auto px-5">
-          <p className="py-2 text-center text-sm">The source code for this blog is <a href="https://github.com/mistertaavetti/next-bootstrap" className="underline hover:text-success duration-200 transition-colors">available on GitHub</a>.</p>
+          <p className="py-2 text-center text-base">Elev8 © copyright 2022</p>
         </div>
       </footer>
     </>

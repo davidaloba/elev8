@@ -36,39 +36,40 @@ const Login: React.FC = () => {
   console.log(userName, email, password, dob)
 
   const loginHandler = async () => {
-    console.log(email, password)
-    try {
-      const { data } = await axios.post('/api/users/login', {
-        email,
-        password
-      })
-      dispatch(login(data))
-      Cookies.set('userInfo', data)
-      router.push('/app')
-    } catch (err) {
-      alert(getError(err))
-    }
+    if (email.length > 0 && password.length > 0) {
+      try {
+        const { data } = await axios.post('/api/users/login', {
+          email,
+          password
+        })
+        dispatch(login(data))
+        Cookies.set('userInfo', data)
+        router.push('/app')
+      } catch (err) {
+        alert(getError(err))
+      }
+    } else alert('please enter your email and password to login')
   }
 
-  const registerHandler = async () => {
-    if (password !== confirmPassword) {
-      alert('Password and confirm password are not match')
-    }
-    try {
-      const { data } = await axios.post('/api/users/register', {
-        userName,
-        email,
-        password,
-        dob
-      })
-      dispatch(login(data))
-      Cookies.set('userInfo', data)
-      console.log(data)
-      router.push('/app')
-    } catch (err) {
-      alert(getError(err))
-    }
-  }
+  // const registerHandler = async () => {
+  //   if (password !== confirmPassword) {
+  //     alert('Password and confirm password are not match')
+  //   }
+  //   try {
+  //     const { data } = await axios.post('/api/users/register', {
+  //       userName,
+  //       email,
+  //       password,
+  //       dob
+  //     })
+  //     dispatch(login(data))
+  //     Cookies.set('userInfo', data)
+  //     console.log(data)
+  //     router.push('/app')
+  //   } catch (err) {
+  //     alert(getError(err))
+  //   }
+  // }
 
   return (
     <>
@@ -76,11 +77,14 @@ const Login: React.FC = () => {
         <Intro title='Login' url='/' />
         {
           isLogin
-            ? <>
-              <hr className="border-accent-2 mt-28 mb-24" />
-              <h1>Login</h1>
-              <form className=''>
-                <div>
+            ? <div className='mb-20'>
+              {/* <hr className="border-accent-2 mt-28 mb-24" /> */}
+              <div className='mt-6 mb-10'>
+                {/* <h1>Login</h1> */}
+                <p className='mb-4'>Enter the login details provided to in the confirmation email you received</p>
+              </div>
+              <form className='mb-8'>
+                <div className='mb-6'>
                   <label htmlFor="email">Email</label>
                   <input
                     type='email'
@@ -88,22 +92,10 @@ const Login: React.FC = () => {
                     id="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className='outlined fullWidth'
-                  // rules={{
-                  //   required: true,
-                  //   pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/
-                  // }}
-                  // error={Boolean(errors.email)}
-                  // helperText={
-                  //   errors.email
-                  //     ? errors.email.type === 'pattern'
-                  //       ? 'Email is not valid'
-                  //       : 'Email is required'
-                  //     : ''
-                  // }
+                    className=''
                   ></input>
                 </div>
-                <div>
+                <div className=' mb-6'>
                   <label htmlFor="email">Password</label>
                   <input
                     type='password'
@@ -111,28 +103,22 @@ const Login: React.FC = () => {
                     id="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className='outlined fullWidth'
-                  // rules={{
-                  //   required: true,
-                  //   minLength: 6
-                  // }}
-                  // error={Boolean(errors.password)}
-                  // helperText={
-                  //   errors.password
-                  //     ? errors.password.type === 'minLength'
-                  //       ? 'Password length is more than 5'
-                  //       : 'Password is required'
-                  //     : ''
-                  // }
+                    className=''
                   ></input>
                 </div>
-                <button onClick={(e) => loginHandler(email, password)} className='py-2 px-6 rounded-2xl border-none bg-lime-500 hover:bg-green-600 focus:outline-none ring-opacity-75 ring-green-400 focus:ring text-white text-xl font-semibold'>Login</button>
+                <button onClick={(e) => loginHandler(email, password)} className='mt-4 py-2 rounded-2xl border-none bg-green-700  text-white font-semibold'>Login</button>
               </form>
-              <p>Don't have an account? Click
-                <span onClick={(e) => setIsLogin(!isLogin)} className='cursor-pointer text-green-900'> here </span>
+              <div className='text-xl'>
+              <p>Haven't registered yet? Click
+                <a href='' className='cursor-pointer text-green-900'> here </a>
                 to register.
               </p>
-            </>
+              {/* <p>Don't have an account? Click
+                <span onClick={(e) => setIsLogin(!isLogin)} className='cursor-pointer text-green-900'> here </span>
+                to register.
+              </p> */}
+              </div>
+            </div>
             : <>
               <hr className="border-accent-2 mt-28 mb-24" />
               <h1>Register</h1>
@@ -145,7 +131,7 @@ const Login: React.FC = () => {
                     id="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className='outlined fullWidth'
+                    className=''
                   // rules={{
                   //   required: true,
                   //   pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/
@@ -168,7 +154,7 @@ const Login: React.FC = () => {
                     id="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className='outlined fullWidth'
+                    className=''
                   // rules={{
                   //   required: true,
                   //   minLength: 6
@@ -191,7 +177,7 @@ const Login: React.FC = () => {
                     id="confirmPassword"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    className='outlined fullWidth'
+                    className=''
                   // rules={{
                   //   required: true,
                   //   minLength: 6
@@ -214,7 +200,7 @@ const Login: React.FC = () => {
                     id="userName"
                     value={userName}
                     onChange={(e) => setUserName(e.target.value)}
-                    className='outlined fullWidth'
+                    className=''
                   // rules={{
                   //   required: true,
                   //   minLength: 2
@@ -237,7 +223,7 @@ const Login: React.FC = () => {
                     id="dob"
                     value={dob}
                     onChange={(e) => setDob(e.target.value)}
-                    className='outlined fullWidth'
+                    className=''
                   // rules={{
                   //   required: true,
                   //   pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/
