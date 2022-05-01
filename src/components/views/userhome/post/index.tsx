@@ -50,6 +50,7 @@ export const Post:React.FC = ({ post }) => {
       setConfirmPayment(false)
     } catch (err) {
       alert(getError(err))
+      setConfirmPayment(false)
     }
   }
 
@@ -74,10 +75,10 @@ export const Post:React.FC = ({ post }) => {
   // }
 
   return (
-    <>
-      {type === 'freebies' && (<div className='flex justify-between border rounded-3xl mb-8 p-4'>
-        <div className=" mr-4">
-          <Avatar type={type} width='70' height='70' />
+    <div className=''>
+      {type === 'freebies' && (<div className='flex justify-between bg-white border rounded-3xl mb-8 p-4'>
+        <div className="rounded-full p-3 mr-4 bg-blue-700 h-min">
+          <Image src='/free.png' width='36' height='36' alt={type} />
         </div>
         <div className='w-full'>
           <div className=" mb-3">
@@ -109,9 +110,9 @@ export const Post:React.FC = ({ post }) => {
         </div>
       </div>)}
 
-      {type === 'tasks' && (<div className='flex justify-between border rounded-3xl mb-8 p-4'>
-        <div className=" mr-4">
-          <Avatar type={type} width='70' height='70' />
+      {type === 'tasks' && (<div className='flex justify-between  bg-white border rounded-3xl mb-8 p-4'>
+        <div className="rounded-full  bg-amber-500 h-min p-3 mr-4">
+          <Image src='/checklist.png' width='36' height='36' alt={type} />
         </div>
         <div className='w-full'>
           <div className=" mb-3">
@@ -120,13 +121,13 @@ export const Post:React.FC = ({ post }) => {
               {isTaskDone === false
                 ? <div className='flex items-center justify-between bg-red-900 text-base text-slate-50 px-1'>
                   <div className='mr-1 mt-1'>
-                    <Image src='/icons/github-icon.svg' width='15' height='15' className="rounded-full" alt={type} />
+                    <Image src='/checklist.png' width='15' height='15' alt={type} />
                   </div>
                   [TO-DO]
                 </div>
                 : <div className='flex items-center justify-between bg-green-900 text-base text-slate-50 px-1'>
-                  <div className='mr-1 mt-1'>
-                    <Image src='/icons/github-icon.svg' width='15' height='15' className="rounded-full" alt={type} />
+                  <div className=' mr-1 mt-1'>
+                    <Image src='/checklist.png' width='15' height='15' alt={type} />
                   </div>
                   [DONE]
                 </div>
@@ -155,9 +156,9 @@ export const Post:React.FC = ({ post }) => {
         </div>
       </div>)}
 
-      {type === 'premium' && (<div className='flex justify-between border rounded-3xl mb-8 p-4'>
-        <div className=" mr-4">
-          <Avatar type={type} width='70' height='70' />
+      {type === 'premium' && (<div className='flex justify-between  bg-white border rounded-3xl mb-8 p-4'>
+        <div className="rounded-full  bg-indigo-700 h-min  p-3 mr-4">
+          <Image src='/diamond.png' width='36' height='36' alt={type} />
         </div>
         <div className='w-full'>
           <div className=" mb-3">
@@ -166,13 +167,13 @@ export const Post:React.FC = ({ post }) => {
               {isPremiumPaid === false
                 ? <div className='flex items-center justify-between bg-lime-600 text-base text-slate-50 px-1'>
                   <div className='mr-1 mt-1'>
-                    <Image src='/icons/linkedin-icon.svg' width='15' height='15' className="rounded-full" alt={type} />
+                    <Image src='/diamond.png' width='15' height='15' className="rounded-full" alt={type} />
                   </div>
                   {data.cost} Pts
                 </div>
                 : <div className='flex items-center justify-between bg-lime-600 text-base text-slate-50 px-1'>
                   <div className='mr-1 mt-1'>
-                    <Image src='/icons/linkedin-icon.svg' width='15' height='15' className="rounded-full" alt={type} />
+                    <Image src='/diamond.png' width='15' height='15' className="rounded-full" alt={type} />
                   </div>
                   [PAID]
                 </div>}
@@ -194,22 +195,22 @@ export const Post:React.FC = ({ post }) => {
                 [SAVE]
               </div> */}
                 {isPremiumPaid === false
-                  ? <div onClick={() => setConfirmPayment(true)} className='text-base hover:cursor-pointer mr-2'>[PAY]</div>
+                  ? <div onClick={() => setConfirmPayment(true)} className='text-base cursor-pointer mr-2'>[PAY]</div>
                   : <div onClick={expandHandler} className='text-base hover:cursor-pointer mr-2'>
                     [VIEW]
                   </div>}
               </div>
             </div>)
             : (<div className="text-base mt-5 p-2 border rounded-lg" >
-              Would you like to pay "{data.cost} Pts" to view "{title}"
+              Would you like to pay "{data.cost} Pts" to view this post
               <div className=" flex items-center  mt-2">
-                <div onClick={() => setConfirmPayment(false)} className='text-base hover:cursor-pointer mr-2'>[NO]</div>
+                <div onClick={() => setConfirmPayment(false)} className='text-base cursor-pointer mr-2'>[NO]</div>
                 <div onClick={payHandler} className='text-base hover:cursor-pointer mr-2'>[YES]</div>
               </div>
             </div>)
           }
         </div>
       </div>)}
-    </>
+    </div>
   )
 }

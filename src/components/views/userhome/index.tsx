@@ -4,7 +4,7 @@ import { expandPost, fetchPosts, filterPosts } from '@store/actions'
 import { RootState, useAppDispatch, useAppSelector } from '@store'
 
 import { Intro, Button, Container } from '@components'
-import { Header } from './header'
+import { AppBar } from './appbar'
 import { Post } from './post'
 import { ExpandPost } from './expandpost'
 
@@ -16,7 +16,7 @@ export const Home: React.FC = () => {
     fetchPosts('http://localhost:3000/api/posts/')
   }, [])
 
-  const filteredPosts = posts.filtered
+  const filteredPosts = posts.filtered.posts
   const currentPost = posts.current
 
   const types = ['all', 'tasks', 'freebies', 'premium']
@@ -28,27 +28,26 @@ export const Home: React.FC = () => {
 
   if (posts.loading) {
     return <Container>
-      <Intro header='Loading...' />
+      <Intro title='Loading...' />
     </Container>
   }
   return (
     <>
-      <header className='pt-4 pb-6 sticky top-0 z-50 bg-white'>
+      <header className='pt-4 pb-6 sticky bg-slate-100 top-0 z-50'>
         <Container>
-          <Intro header='Home' />
-          {user.userInfo && <Header />}
-          <div className=' bg-white'>
-            <div className="flex justify-between rounded-full bg-slate-300 py-5 px-10 items-center">
+          <Intro title='Home' />
+          {user.userInfo && <AppBar />}
+          <div className=' '>
+            <div className="flex justify-between rounded-full bg-white py-5 px-10 items-center">
               {types.map((type, index) => {
                 return (
-                  <Button
-                    type="button"
-                    className="filter-btn"
+                  <div
+                    className={`py-2 px-6 rounded-2xl text-xl font-semibold uppercase cursor-pointer ${posts.filtered.type === type && 'bg-green-700 text-white'}`}
                     key={index}
                     onClick={() => filterItems(type)}
                   >
                     {type}
-                  </Button>
+                  </div>
                 )
               })}
             </div>

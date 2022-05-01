@@ -20,10 +20,10 @@ export const Profile: React.FC = () => {
   }
 
   return (
-    <>
-      <header className='pt-4 pb-6 sticky top-0 z-50 bg-white'>
+    <div className='bg-white'>
+      <header className='pt-4 pb-6 sticky top-0 z-50 '>
         <Container>
-          <Intro header='Profile' />
+          <Intro title='Profile' />
           <div className="flex justify-end items-center">
             <div onClick={closeMenu} className="cursor-pointer" >[CLOSE]
             </div>
@@ -48,6 +48,6 @@ export const Profile: React.FC = () => {
           <p className="py-2 text-center text-sm">The source code for this blog is <a href="https://github.com/mistertaavetti/next-bootstrap" className="underline hover:text-success duration-200 transition-colors">available on GitHub</a>.</p>
         </div>
       </footer>
-    </>
+    </div>
   )
 }

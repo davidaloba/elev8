@@ -10,23 +10,22 @@ import router from 'next/router'
  */
 
 const App: React.FC = () => {
-  const { user } = useAppSelector((state: RootState) => state)
-  console.log(user)
+  const { userInfo, profile } = useAppSelector((state: RootState) => state.user)
 
   useEffect(() => {
-    if (!user.userInfo) {
+    if (!userInfo) {
       router.push('/login')
     }
-    if (user.userInfo.isAdmin) router.push('/admin')
-  }, [user.userInfo])
+    if (userInfo.isAdmin) router.push('/admin')
+  }, [userInfo])
 
   return (
-    <>
-      {user.profile.menu
+    <div className=' bg-stone-100'>
+      {profile.menu
         ? <Profile />
-        : <Home header='Home' url='' />
+        : <Home title='Home' url='' />
       }
-    </>
+    </div>
   )
 }
 

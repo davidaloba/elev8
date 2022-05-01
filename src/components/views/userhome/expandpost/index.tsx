@@ -27,9 +27,9 @@ export const ExpandPost: React.FC = () => {
 
   return (
     <Container >
-      <section className=' bg-white'>
+      <section className=''>
         {/* <div className='sticky top-[286px] z-50 py-4 bg-white '> */}
-        <div className='py-4 bg-white '>
+        <div className='py-4 '>
           <OpenPost
             post={currentPost}
             key={currentPost.slug}

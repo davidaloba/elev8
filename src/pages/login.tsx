@@ -73,7 +73,7 @@ const Login: React.FC = () => {
   return (
     <>
       <Container>
-        <Intro header='Login' url='/' />
+        <Intro title='Login' url='/' />
         {
           isLogin
             ? <>
@@ -126,10 +126,12 @@ const Login: React.FC = () => {
                   // }
                   ></input>
                 </div>
-                <Button onClick={(e) => loginHandler(email, password)} type="button" color="primary">Login</Button>
+                <button onClick={(e) => loginHandler(email, password)} className='py-2 px-6 rounded-2xl border-none bg-lime-500 hover:bg-green-600 focus:outline-none ring-opacity-75 ring-green-400 focus:ring text-white text-xl font-semibold'>Login</button>
               </form>
-              <p>Don't have an account?</p>
-              <button onClick={(e) => setIsLogin(!isLogin)}>Register</button>
+              <p>Don't have an account? Click
+                <span onClick={(e) => setIsLogin(!isLogin)} className='cursor-pointer text-green-900'> here </span>
+                to register.
+              </p>
             </>
             : <>
               <hr className="border-accent-2 mt-28 mb-24" />
@@ -251,11 +253,13 @@ const Login: React.FC = () => {
                   ></input>
                 </div>
                 <div>
-                  <Button onClick={registerHandler} type="button" color="primary">Sign up</Button>
+                  <button onClick={(e) => loginHandler(email, password)} className='py-2 px-6 rounded-2xl border-none bg-lime-500 hover:bg-green-600 focus:outline-none ring-opacity-75 ring-green-400 focus:ring text-white text-xl font-semibold'>Sign up</button>
                 </div>
               </form>
-              <p>Already have an account</p>
-              <button onClick={(e) => setIsLogin(!isLogin)} type="button">Login</button>
+              <p>Already have an account? Click
+                 <span onClick={(e) => setIsLogin(!isLogin)} className='cursor-pointer text-green-900'> here </span>
+                 to login.
+              </p>
             </>
         }
         <Footer />

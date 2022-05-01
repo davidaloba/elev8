@@ -3,7 +3,7 @@ import { toggleEdit } from '@store/actions'
 import { RootState, useAppDispatch, useAppSelector } from '@store'
 
 import Image from 'next/image'
-import { Avatar } from '@components'
+// import { Avatar } from '@components'
 
 export const ProfileInfo: React.FC = () => {
   const dispatch = useAppDispatch()
@@ -16,12 +16,12 @@ export const ProfileInfo: React.FC = () => {
 
   return (
     <div className='  border rounded-3xl mb-8 p-6 '>
-      <div className="flex items-center my-10 justify-center">
+      {/* <div className="flex items-center my-10 justify-center">
         <Avatar src='/avatar.png' type={user.userInfo.userName} width='92' height='92' />
-      </div>
+      </div> */}
       <div className=" mb-10 mx-6 p-6 " >
         <div className="flex flex-col items-center justify-center rounded-3xl border  p-4  " >
-          <div className=""><Image src='/avatar.png' width='32' height='32' className="rounded-full" alt='name' /></div>
+          <div className="rounded-full bg-indigo-700 p-4" ><Image src='/diamond.png' width='32' height='32' alt='name' /></div>
           <div className=" ">Points Balance</div>
           <div className=' text-3xl font-bold'>{user.userInfo.profile.points}  </div>
         </div>

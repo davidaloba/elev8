@@ -32,7 +32,7 @@ const AdminDashboard = () => {
     < >
       <header className='pt-4 pb-6 sticky top-0 z-50 bg-white'>
         <Container>
-          <Intro header='Dashboard' />
+          <Intro title='Dashboard' />
           <div className="flex justify-center items-center">
             <div onClick={logoutHandler} className="cursor-pointer" >[LOG OUT]
             </div>

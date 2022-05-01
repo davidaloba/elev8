@@ -3,6 +3,6 @@ import Image from 'next/image'
 
 export const Logo: React.FC = () => {
   return (
-    <Image src="/avatar.png" alt="nextjs" width="60" height="60" />
+    <Image src="/logo.png" alt="nextjs" width="120" height="60" />
   )
 }

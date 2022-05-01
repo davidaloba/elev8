@@ -182,7 +182,7 @@ export const EditProfile: React.FC = () => {
             </div>
           </Container>}
         {!editPassword && <Container>
-          <div onClick={() => setEditPassword(true)} className='my-6 cursor-pointer'>[EDIT PASSWORD]</div>
+          <div onClick={() => setEditPassword(true)} className='my-6 cursor-pointer'>[EDIT PASSWORD?]</div>
         </Container>
         }
         <div className=' mt-6 ' >

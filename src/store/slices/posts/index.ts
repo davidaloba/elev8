@@ -2,18 +2,21 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '@store'
 // import posts from './thunk'
 
-interface IPosts {
-  loading: Boolean,
-  all: (String | Number | Boolean)[]
-  filtered: (String | Number | Boolean)[]
-  searchTerm: String
-  current: {}
-}
+// interface IPosts {
+//   loading: Boolean,
+//   all: (String | Number | Boolean)[]
+//   filtered: (String | Number | Boolean)[]
+//   searchTerm: String
+//   current: {}
+// }
 
-const initialState: IPosts = {
+const initialState = {
   loading: true,
   all: [],
-  filtered: [],
+  filtered: {
+    type: 'all',
+    posts: []
+  },
   searchTerm: '',
   current: {}
 
@@ -31,19 +34,20 @@ const postsSlice: any = createSlice({
     },
     setPosts: (posts, action) => {
       posts.all = action.payload
-      posts.filtered = action.payload
+      posts.filtered.posts = action.payload
       console.log('Stored posts successfully')
     },
     filterPosts: (posts, action) => {
       action.payload === 'all'
-        ? posts.filtered = posts.all
-        : posts.filtered = posts.all.filter((post) => post.type === action.payload)
+        ? posts.filtered.posts = posts.all
+        : posts.filtered.posts = posts.all.filter((post) => post.type === action.payload)
+      posts.filtered.type = action.payload
       console.log('filtered posts successfully')
     },
     setSearchTerm: (posts, action) => {
       action.payload === 'all'
-        ? posts.filtered = posts.all
-        : posts.filtered = posts.all.filter((post) => post.type === action.payload)
+        ? posts.filtered.posts = posts.all
+        : posts.filtered.posts = posts.all.filter((post) => post.type === action.payload)
       console.log('filtered posts successfully')
     },
     expandPost: (posts, action) => {
