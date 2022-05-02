@@ -77,7 +77,7 @@ const Index = () => {
         <Container>
           <h1 className="text-6xl font-bold w-2/3 text-center mx-auto  uppercase"><span className='text-orange-500'>ELEV8ING </span>LIVES</h1>
 
-          <p className='w-4/5 text-2xl text-center mx-auto ' >Unlike the Regular online businesses where you get to put money and loss at the end. We are providing a platform where its a Win win, You gain knowledge and make money too.</p>
+          <p className='w-4/5 text-2xl text-center mx-auto ' >Unlike the Regular online businesses where you get to put money and lose at the end. We are providing a platform where its a Win win, You gain knowledge and make money too.</p>
           <button className='my-6 py-5 rounded-2xl border-none bg-green-700  text-white font-semibold'><a href="https://docs.google.com/forms/d/e/1FAIpQLSfGSd2sNg5kV8eguvJyW9BOyRNiStJfapoXfX5aOXQG7xt0XQ/viewform?usp=sf_link" target='_blank' rel='noreferrer '>Get started</a></button>
 
         </Container>
