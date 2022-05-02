@@ -18,8 +18,6 @@ const Login = () => {
   const router = useRouter()
 
   useEffect(() => {
-    console.log(userInfo)
-
     if (userInfo) {
       userInfo.isAdmin
         ? router.push('/admin')
@@ -42,7 +40,6 @@ const Login = () => {
           email: email,
           password: password
         })
-        console.log(data)
         dispatch(login(data))
         Cookies.set('userInfo', data)
         router.push('/app')

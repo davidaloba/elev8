@@ -19,9 +19,7 @@ handler.post(async (req, res) => {
       userName: user.userName,
       profile: user.profile
     })
-    console.log('sign-in success')
   } else {
-    console.log('sign-in fail')
     res.status(401).send({ message: 'Invalid email or password' })
   }
 })

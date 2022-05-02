@@ -13,7 +13,7 @@ export const Home = () => {
   const { user, posts } = useAppSelector((state: RootState) => state)
 
   useEffect(() => {
-    fetchPosts('http://localhost:3000/api/posts/')
+    fetchPosts('/api/posts')
   }, [])
 
   const filteredPosts = posts.filtered.posts

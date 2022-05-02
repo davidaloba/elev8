@@ -12,7 +12,7 @@ export const Profile = () => {
   const { user } = useAppSelector((state: RootState) => state)
 
   useEffect(() => {
-    fetchPosts('http://localhost:3000/api/posts/')
+    fetchPosts('/api/posts')
   }, [])
 
   const closeMenu = async () => {
