@@ -1,16 +1,8 @@
-import React from 'react'
-import { useRouter } from 'next/router'
-
-import { useAppSelector, RootState } from '@store'
 
 import Link from 'next/link'
 import { Logo } from '../logo'
 
-export const Header: React.FC = () => {
-  const { userInfo } = useAppSelector((state: RootState) => state.user)
-
-  const router = useRouter()
-
+export const Header = () => {
   return (
     <section className=" pt-10 mb-10 md:mb-12">
       <nav className='flex items-baseline justify-between  '>
@@ -20,7 +12,7 @@ export const Header: React.FC = () => {
           </div>
         </Link>
 
-        <a href="http://forms.gle/HapRsSLZ8zcxxVzc6">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfGSd2sNg5kV8eguvJyW9BOyRNiStJfapoXfX5aOXQG7xt0XQ/viewform?usp=sf_link">
           <button className='mt-4 py-2 rounded-2xl border-none bg-green-700  text-white font-semibold'>Get started</button>
         </a>
         {/* {!userInfo

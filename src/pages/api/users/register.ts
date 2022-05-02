@@ -8,7 +8,6 @@ const handler = nc()
 
 handler.post(async (req, res) => {
   await db.connect()
-  console.log(req.body)
 
   const newUser = new User({
     email: req.body.email,
@@ -23,7 +22,6 @@ handler.post(async (req, res) => {
   await db.disconnect()
 
   const token = signToken(user)
-  console.log(token)
   res.send({
     token,
     email: user.email,

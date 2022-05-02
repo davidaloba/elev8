@@ -1,11 +1,8 @@
-import React from 'react'
 
 import Link from 'next/link'
 import { Logo } from '../logo'
 
-export const Intro: React.FC = ({ title }) => {
-  console.log()
-
+export const Intro = ({ title }) => {
   return (
     <section className=" pt-10 mb-10 md:mb-12">
       <nav className='flex items-baseline justify-between  '>

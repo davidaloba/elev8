@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import data from '@db/data'
-import { FaChevronLeft, FaChevronRight, FaQuoteRight } from 'react-icons/fa'
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import Image from 'next/image'
 
-export const Testimonies: React.FC = () => {
+export const Testimonies = () => {
   const people = data.testimonies
   const [index, setIndex] = useState(0)
-  const { name, job, image, text } = people[index]
+  const { name, job, text } = people[index]
 
   const checkNumber = (number) => {
     if (number > people.length - 1) {
@@ -30,14 +30,6 @@ export const Testimonies: React.FC = () => {
       const newIndex = index - 1
       return checkNumber(newIndex)
     })
-  }
-
-  const randomPerson = () => {
-    let randomNumber = Math.floor(Math.random() * people.length)
-    if (randomNumber === index) {
-      randomNumber = index + 1
-    }
-    setIndex(checkNumber(randomNumber))
   }
 
   return (

@@ -1,14 +1,13 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import Image from 'next/image'
 import { getPeriod, expandPost, login } from '@store/actions'
 import { RootState, useAppDispatch, useAppSelector } from '@store'
 import axios from 'axios'
 
-import { Avatar } from '@components'
 import { getError } from '@db/error'
 import Cookies from 'js-cookie'
 
-export const Post:React.FC = ({ post }) => {
+export const Post = ({ post }) => {
   const dispatch = useAppDispatch()
 
   const { user } = useAppSelector((state: RootState) => state)

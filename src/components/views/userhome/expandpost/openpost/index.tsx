@@ -1,14 +1,12 @@
-import React from 'react'
 import Image from 'next/image'
 import { getPeriod, expandPost, login } from '@store/actions'
 import { RootState, useAppDispatch, useAppSelector } from '@store'
 import axios from 'axios'
 
-import { Avatar } from '@components'
 import { getError } from '@db/error'
 import Cookies from 'js-cookie'
 
-export const OpenPost: React.FC = ({ post }) => {
+export const OpenPost = ({ post }) => {
   const dispatch = useAppDispatch()
 
   const { user } = useAppSelector((state: RootState) => state)
@@ -33,7 +31,6 @@ export const OpenPost: React.FC = ({ post }) => {
     const points = data.points
     const task = slug
     try {
-      console.log(points, task)
       const { data } = await axios.put(
         '/api/users/tasks',
         {

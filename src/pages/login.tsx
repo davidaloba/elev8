@@ -32,7 +32,6 @@ const Login = () => {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [dob, setDob] = useState('')
-  console.log(userName, email, password, dob)
 
   const loginHandler = async () => {
     if (email.length > 0 && password.length > 0) {
@@ -63,7 +62,6 @@ const Login = () => {
   //     })
   //     dispatch(login(data))
   //     Cookies.set('userInfo', data)
-  //     console.log(data)
   //     router.push('/app')
   //   } catch (err) {
   //     alert(getError(err))
@@ -108,11 +106,11 @@ const Login = () => {
                 <button onClick={(e) => loginHandler(email, password)} className='mt-4 py-2 rounded-2xl border-none bg-green-700  text-white font-semibold'>Login</button>
               </form>
               <div className='text-xl'>
-              <p>Haven't registered yet? Click
-                <a href='' className='cursor-pointer text-green-900'> here </a>
-                to register.
-              </p>
-              {/* <p>Don't have an account? Click
+                <p>Haven't registered yet? Click
+                  <a href='' className='cursor-pointer text-green-900'> here </a>
+                  to register.
+                </p>
+                {/* <p>Don't have an account? Click
                 <span onClick={(e) => setIsLogin(!isLogin)} className='cursor-pointer text-green-900'> here </span>
                 to register.
               </p> */}
@@ -242,8 +240,8 @@ const Login = () => {
                 </div>
               </form>
               <p>Already have an account? Click
-                 <span onClick={(e) => setIsLogin(!isLogin)} className='cursor-pointer text-green-900'> here </span>
-                 to login.
+                <span onClick={(e) => setIsLogin(!isLogin)} className='cursor-pointer text-green-900'> here </span>
+                to login.
               </p>
             </>
         }

@@ -1,11 +1,10 @@
-import React from 'react'
 import { toggleEdit } from '@store/actions'
 import { RootState, useAppDispatch, useAppSelector } from '@store'
 
 import Image from 'next/image'
 // import { Avatar } from '@components'
 
-export const ProfileInfo: React.FC = () => {
+export const ProfileInfo = () => {
   const dispatch = useAppDispatch()
   const { user } = useAppSelector((state: RootState) => state)
 

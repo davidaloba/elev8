@@ -7,12 +7,10 @@ import { signToken } from '@utils/auth'
 const handler = nc()
 
 handler.post(async (req, res) => {
-  console.log(req.body)
   await db.connect()
   const user = await User.findOne({ email: req.body.email })
   await db.disconnect()
   if (user && bcrypt.compareSync(req.body.password, user.password)) {
-    const token = signToken(user)
     res.send({
       token,
       email: user.email,
@@ -20,6 +18,7 @@ handler.post(async (req, res) => {
       userName: user.userName,
       profile: user.profile
     })
+    const token = signToken(user)
   } else {
     res.status(401).send({ message: 'Invalid email or password' })
   }

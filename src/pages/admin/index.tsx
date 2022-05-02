@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 import { RootState, useAppDispatch, useAppSelector } from '@store'
@@ -12,7 +12,6 @@ const AdminDashboard = () => {
   const router = useRouter()
   const { user, admin } = useAppSelector((state: RootState) => state)
   const userInfo = user.userInfo
-  console.log(admin)
 
   useEffect(() => {
     if (!userInfo) {

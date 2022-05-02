@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import type { RootState } from '@store'
 // import posts from './thunk'
 
@@ -30,35 +30,29 @@ const postsSlice: any = createSlice({
   reducers: {
     setLoading: (posts, action) => {
       posts.loading = action.payload
-      console.log(`is loading posts is ${posts.loading}`)
     },
     setPosts: (posts, action) => {
       posts.all = action.payload
       posts.filtered.posts = action.payload
-      console.log('Stored posts successfully')
     },
     filterPosts: (posts, action) => {
       action.payload === 'all'
         ? posts.filtered.posts = posts.all
         : posts.filtered.posts = posts.all.filter((post) => post.type === action.payload)
       posts.filtered.type = action.payload
-      console.log('filtered posts successfully')
     },
     setSearchTerm: (posts, action) => {
       action.payload === 'all'
         ? posts.filtered.posts = posts.all
         : posts.filtered.posts = posts.all.filter((post) => post.type === action.payload)
-      console.log('filtered posts successfully')
     },
     expandPost: (posts, action) => {
       posts.current = action.payload
-      console.log(action.payload + 'current post stored successfully')
     }
   }
 
   // extraReducers: (builder) => {
   //   builder.addCase(posts, (state, action) => {
-  //     console.log('hydrate persited posts state')
   //     return {
   //       ...state,
   //       ...action.payload.posts

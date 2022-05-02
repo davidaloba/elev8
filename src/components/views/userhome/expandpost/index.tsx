@@ -1,11 +1,10 @@
-import React from 'react'
 
-import { useAppSelector } from '@store'
+import { RootState, useAppSelector } from '@store'
 
 import { Container } from '@components'
 import { OpenPost } from './openpost'
 
-export const ExpandPost: React.FC = () => {
+export const ExpandPost = () => {
   const { posts } = useAppSelector((state: RootState) => state)
   const currentPost = posts.current
 
