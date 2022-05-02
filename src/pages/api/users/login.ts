@@ -11,6 +11,7 @@ handler.post(async (req, res) => {
   const user = await User.findOne({ email: req.body.email })
   await db.disconnect()
   if (user && bcrypt.compareSync(req.body.password, user.password)) {
+    const token = signToken(user)
     res.send({
       token,
       email: user.email,
@@ -18,8 +19,9 @@ handler.post(async (req, res) => {
       userName: user.userName,
       profile: user.profile
     })
-    const token = signToken(user)
+    console.log('sign-in success')
   } else {
+    console.log('sign-in fail')
     res.status(401).send({ message: 'Invalid email or password' })
   }
 })

@@ -18,6 +18,8 @@ const Login = () => {
   const router = useRouter()
 
   useEffect(() => {
+    console.log(userInfo)
+
     if (userInfo) {
       userInfo.isAdmin
         ? router.push('/admin')
@@ -37,9 +39,10 @@ const Login = () => {
     if (email.length > 0 && password.length > 0) {
       try {
         const { data } = await axios.post('/api/users/login', {
-          email,
-          password
+          email: email,
+          password: password
         })
+        console.log(data)
         dispatch(login(data))
         Cookies.set('userInfo', data)
         router.push('/app')
@@ -103,8 +106,8 @@ const Login = () => {
                     className=''
                   ></input>
                 </div>
-                <button onClick={(e) => loginHandler(email, password)} className='mt-4 py-2 rounded-2xl border-none bg-green-700  text-white font-semibold'>Login</button>
               </form>
+                <button onClick={(e) => loginHandler(email, password)} className='mt-4 py-2 rounded-2xl border-none bg-green-700  text-white font-semibold'>Login</button>
               <div className='text-xl'>
                 <p>Haven't registered yet? Click
                   <a href='' className='cursor-pointer text-green-900'> here </a>
