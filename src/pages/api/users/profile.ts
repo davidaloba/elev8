@@ -9,7 +9,6 @@ handler.use(isAuth)
 
 handler.put(async (req, res) => {
   await db.connect()
-  console.log(req.body)
 
   const user = await User.findOne({ email: req.body.email })
   user.profile.firstName = req.body.firstName
@@ -26,7 +25,6 @@ handler.put(async (req, res) => {
     : user.password
   await user.save()
   await db.disconnect()
-  console.log(user)
   const token = signToken(user)
 
   res.send({

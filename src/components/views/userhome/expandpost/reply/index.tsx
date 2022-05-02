@@ -3,8 +3,6 @@ import { getPeriod } from '@store/actions'
 import { Avatar } from '@components'
 
 export const Reply = ({ reply }) => {
-  console.log(reply)
-
   const { comment, userName, updatedAt } = reply
   const updated = getPeriod(updatedAt)
 

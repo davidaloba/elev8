@@ -18,17 +18,14 @@ const userSlice: any = createSlice({
     fetchAdminSummary: (admin, action) => {
       admin.summary.postsCount = action.payload.postsCount
       admin.summary.usersCount = action.payload.usersCount
-      console.log(action.payload, ' was added to admin summary in')
     },
     fetchAdminPosts: (admin, action) => {
       admin.posts = action.payload
-      console.log(' fetch admin posts successful', action.payload)
     }
   }
 
   // extraReducers: (builder) => {
   //   builder.addCase(admin, (state, action) => {
-  //     console.log('hydrate persited admin state')
   //     return {
   //       ...state,
   //       ...action.payload.admin

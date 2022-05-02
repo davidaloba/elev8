@@ -33,7 +33,6 @@ export const AdminPosts = () => {
     if (type !== 'tasks') setPoints(null)
     if (type !== 'tasks') setLink(null)
   }, [type])
-  console.log(slug, title, body, type, link, points, cost)
 
   const createHandler = async () => {
     if (!window.confirm('Are you sure?')) {

@@ -32,7 +32,6 @@ const Login = () => {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [dob, setDob] = useState('')
-  console.log(userName, email, password, dob)
 
   const loginHandler = async () => {
     if (email.length > 0 && password.length > 0) {
@@ -63,7 +62,6 @@ const Login = () => {
   //     })
   //     dispatch(login(data))
   //     Cookies.set('userInfo', data)
-  //     console.log(data)
   //     router.push('/app')
   //   } catch (err) {
   //     alert(getError(err))

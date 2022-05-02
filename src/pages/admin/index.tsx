@@ -12,7 +12,6 @@ const AdminDashboard = () => {
   const router = useRouter()
   const { user, admin } = useAppSelector((state: RootState) => state)
   const userInfo = user.userInfo
-  console.log(admin)
 
   useEffect(() => {
     if (!userInfo) {

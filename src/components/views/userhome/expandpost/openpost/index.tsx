@@ -31,7 +31,6 @@ export const OpenPost = ({ post }) => {
     const points = data.points
     const task = slug
     try {
-      console.log(points, task)
       const { data } = await axios.put(
         '/api/users/tasks',
         {

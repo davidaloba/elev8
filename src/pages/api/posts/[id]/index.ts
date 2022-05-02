@@ -13,7 +13,6 @@ handler.get(async (req, res) => {
     })
   await db.disconnect()
   res.send(post)
-  // console.log(post)
 })
 
 export default handler
