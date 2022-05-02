@@ -7,9 +7,10 @@ import { signToken } from '@utils/auth'
 const handler = nc()
 
 handler.post(async (req, res) => {
-  console.log(req.body)
   await db.connect()
+  console.log(req.body)
   const user = await User.findOne({ email: req.body.email })
+  console.log(user)
   await db.disconnect()
   if (user && bcrypt.compareSync(req.body.password, user.password)) {
     const token = signToken(user)
