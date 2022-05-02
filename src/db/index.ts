@@ -1,6 +1,8 @@
 import mongoose from 'mongoose'
+import path from 'path'
 
 const connection = {}
+const mongoCertPath = path.resolve('./src/db/ca-certificate.crt')
 
 async function connect () {
   if (connection.isConnected) {
@@ -17,7 +19,8 @@ async function connect () {
   }
   const db = await mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    tlsCAFile: mongoCertPath
   })
   console.log('new connection')
   connection.isConnected = db.connections[0].readyState
