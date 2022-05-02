@@ -24,7 +24,7 @@ export const AdminPosts = () => {
   const [slug, setSlug] = useState('')
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
-  const [type, setType] = useState('')
+  const [type, setType] = useState('freebies')
   const [link, setLink] = useState(null)
   const [points, setPoints] = useState(null)
   const [cost, setCost] = useState(null)
@@ -32,6 +32,7 @@ export const AdminPosts = () => {
     if (type !== 'premium') setCost(null)
     if (type !== 'tasks') setPoints(null)
     if (type !== 'tasks') setLink(null)
+    console.log(type)
   }, [type])
 
   const createHandler = async () => {
