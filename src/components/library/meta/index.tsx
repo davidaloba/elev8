@@ -1,7 +1,6 @@
-import React from 'react'
 import Head from 'next/head'
 
-export const Meta: React.FC = ({ children }) => {
+export const Meta = ({ children }) => {
   return (
     <Head>
       <link

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { RootState, useAppSelector, useAppDispatch } from '@store'
 import { login } from '@store/actions'
@@ -8,12 +8,11 @@ import axios from 'axios'
 
 import {
   Container,
-  Button,
   Intro,
   Footer
 } from '@components'
 
-const Login: React.FC = () => {
+const Login = () => {
   const { userInfo } = useAppSelector((state: RootState) => state.user)
   const dispatch = useAppDispatch()
   const router = useRouter()

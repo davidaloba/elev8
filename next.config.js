@@ -6,7 +6,7 @@ module.exports = {
     // Dangerously allow postion builds to successfully complete even if
     // your project has type errors.
     // !! WARN !!
-    // ignoreBuildErrors: true,
+    ignoreBuildErrors: true
   },
   eslint: {
     dirs: ['./src', './test']

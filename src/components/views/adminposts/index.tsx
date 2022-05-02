@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import axios from 'axios'
 
@@ -10,12 +10,13 @@ import {
   Button, Container
 } from '@components'
 
-export const AdminPosts: React.FC = () => {
+export const AdminPosts = () => {
   const dispatch = useAppDispatch()
   const { admin, user } = useAppSelector((state: RootState) => state)
 
   useEffect(() => {
     fetchData('/api/admin/posts', user.userInfo.token, fetchAdminPosts)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const [isCreatePost, setIsCreatePost] = useState(false)

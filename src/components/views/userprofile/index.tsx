@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
 import { fetchPosts, toggleMenu, logoutHandler } from '@store/actions'
 import { RootState, useAppDispatch, useAppSelector } from '@store'
@@ -7,7 +7,7 @@ import { Intro, Container } from '@components'
 import { EditProfile } from './profileedit'
 import { ProfileInfo } from './profileinfo'
 
-export const Profile: React.FC = () => {
+export const Profile = () => {
   const dispatch = useAppDispatch()
   const { user } = useAppSelector((state: RootState) => state)
 

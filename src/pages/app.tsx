@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { RootState, useAppSelector } from '@store'
 
 import { Home, Profile } from '@components'
@@ -9,7 +9,7 @@ import router from 'next/router'
   work on form validations
  */
 
-const App: React.FC = () => {
+const App = () => {
   const { userInfo, profile } = useAppSelector((state: RootState) => state.user)
 
   useEffect(() => {

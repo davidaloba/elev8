@@ -1,19 +1,18 @@
-import React from 'react'
 import { RootState, useAppDispatch, useAppSelector } from '@store'
-import { setSearchTerm, toggleMenu } from '@store/actions'
+import { toggleMenu } from '@store/actions'
 
 import Image from 'next/image'
 import { Avatar } from '@components'
 
-export const AppBar: React.FC = () => {
+export const AppBar = () => {
   const { user } = useAppSelector((state: RootState) => state)
   const dispatch = useAppDispatch()
 
-  const searchValue = React.useRef('')
+  // const searchValue = React.useRef('')
 
-  const searchPost = () => {
-    dispatch(setSearchTerm(searchValue.current.value))
-  }
+  // const searchPost = () => {
+  //   dispatch(setSearchTerm(searchValue.current.value))
+  // }
 
   const openMenu = () => {
     dispatch(toggleMenu())

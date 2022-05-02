@@ -1,5 +1,3 @@
-import React from 'react'
-
 import Image from 'next/image'
 import {
   Container,
@@ -8,7 +6,7 @@ import {
   Testimonies
 } from '@components'
 
-const Index: React.FC = () => {
+const Index = () => {
   // We are providing acces to information that will help you make money instantly and teacjing skills that will make you compete with counterparts all around the world
 
   return (<>

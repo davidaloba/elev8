@@ -1,9 +1,8 @@
-import React from 'react'
 
 import Link from 'next/link'
 import { Logo } from '../logo'
 
-export const Intro: React.FC = ({ title }) => {
+export const Intro = ({ title }) => {
   console.log()
 
   return (

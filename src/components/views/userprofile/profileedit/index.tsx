@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import { login, toggleEdit } from '@store/actions'
 import { RootState, useAppDispatch, useAppSelector } from '@store'
@@ -9,7 +9,7 @@ import Cookies from 'js-cookie'
 
 import { Avatar, Container } from '@components'
 
-export const EditProfile: React.FC = () => {
+export const EditProfile = () => {
   const dispatch = useAppDispatch()
   const { user } = useAppSelector((state: RootState) => state)
 
