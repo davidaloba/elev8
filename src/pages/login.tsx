@@ -32,14 +32,13 @@ const Login = () => {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [dob, setDob] = useState('')
-  console.log(userName, email, password, dob)
 
   const loginHandler = async () => {
     if (email.length > 0 && password.length > 0) {
       try {
         const { data } = await axios.post('/api/users/login', {
-          email,
-          password
+          email: email,
+          password: password
         })
         dispatch(login(data))
         Cookies.set('userInfo', data)
@@ -105,7 +104,7 @@ const Login = () => {
                     className=''
                   ></input>
                 </div>
-                <button onClick={(e) => loginHandler(email, password)} className='mt-4 py-2 rounded-2xl border-none bg-green-700  text-white font-semibold'>Login</button>
+                <button onClick={loginHandler} className='mt-4 py-2 rounded-2xl border-none bg-green-700  text-white font-semibold'>Login</button>
               </form>
               <div className='text-xl'>
               <p>Haven't registered yet? Click
