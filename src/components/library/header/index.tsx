@@ -12,7 +12,7 @@ export const Header = () => {
           </div>
         </Link>
 
-        <a href="http://forms.gle/HapRsSLZ8zcxxVzc6">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfGSd2sNg5kV8eguvJyW9BOyRNiStJfapoXfX5aOXQG7xt0XQ/viewform?usp=sf_link">
           <button className='mt-4 py-2 rounded-2xl border-none bg-green-700  text-white font-semibold'>Get started</button>
         </a>
         {/* {!userInfo
