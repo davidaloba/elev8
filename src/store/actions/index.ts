@@ -4,7 +4,8 @@ import axios from 'axios'
 
 import {
   fetchAdminSummary,
-  fetchAdminPosts
+  fetchAdminPosts,
+  fetchAdminUsers
 } from '@store/slices/admin'
 import {
   login,
@@ -75,6 +76,7 @@ const logoutHandler = () => {
 
 export {
   fetchAdminSummary,
+  fetchAdminUsers,
   fetchAdminPosts,
   login,
   filterPosts,

@@ -2,8 +2,7 @@ import mongoose from 'mongoose'
 
 const profileSchema = new mongoose.Schema(
   {
-    dob: { type: String, required: true },
-    points: { type: Number, required: false, default: 0 },
+    dob: { type: String, required: false },
     phone: String,
     firstName: String,
     lastName: String,
@@ -11,9 +10,10 @@ const profileSchema = new mongoose.Schema(
     facebook: String,
     instagram: String,
     twitter: String,
-    saves: [{ type: String, unique: true }],
-    tasks: [{ type: String, unique: true }],
-    paid: [{ type: String, unique: true }]
+    points: { type: Number, required: false, default: 0 },
+    saves: { type: Array, sparse: true },
+    tasks: { type: Array, sparse: true },
+    paid: { type: Array, sparse: true }
   },
   {
     timestamps: true

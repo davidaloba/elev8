@@ -1,17 +1,18 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
 import { RootState, useAppDispatch, useAppSelector } from '@store'
 import { fetchAdminSummary, fetchData, logoutHandler } from '@store/actions'
 
 import Image from 'next/image'
-import { AdminPosts, Container, Intro } from '@components'
+import { AdminPosts, AdminUsers, Container, Intro } from '@components'
 
 const AdminDashboard = () => {
   const dispatch = useAppDispatch()
   const router = useRouter()
   const { user, admin } = useAppSelector((state: RootState) => state)
   const userInfo = user.userInfo
+  const [tab, setTab] = useState('posts')
 
   useEffect(() => {
     if (!userInfo) {
@@ -37,14 +38,14 @@ const AdminDashboard = () => {
         <section>
           <Container >
             <div className="flex items-center justify-around my-4 ">
-              <div className="flex flex-col items-center justify-center rounded-3xl border p-4  w-1/3 mr-4 " >
+              <div onClick={() => setTab('posts')} className=" cursor-pointer flex flex-col items-center justify-center rounded-3xl border p-4  w-1/3 mr-4 " >
                 <div className=""><Image src='/avatar.png' width='32' height='32' className="rounded-full" alt='name' /></div>
                 {admin.summary.postsCount
                   ? <div className=' text-3xl font-bold'>{admin.summary.postsCount}</div>
                   : <div className=' text-3xl font-bold'>Loading...</div>}
                 <div className=" ">Posts</div>
               </div>
-              <div className="flex flex-col items-center justify-center rounded-3xl border p-4  w-1/3 " >
+              <div onClick={() => setTab('users')} className="cursor-pointer flex flex-col items-center justify-center rounded-3xl border p-4  w-1/3 " >
                 <div className=""><Image src='/avatar.png' width='32' height='32' className="rounded-full" alt='name' /></div>
                 {admin.summary.usersCount
                   ? <div className=' text-3xl font-bold'>{admin.summary.usersCount}</div>
@@ -55,7 +56,9 @@ const AdminDashboard = () => {
           </Container>
         </section>
 
-        <AdminPosts />
+        {tab === 'posts' && <AdminPosts />}
+        {tab === 'users' && <AdminUsers />}
+
       </main>
 
       <footer className="border-b bg-accent-1 border-accent-2">
