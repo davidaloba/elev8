@@ -8,14 +8,14 @@ handler.use(isAuth, isAdmin)
 
 handler.get(async (req, res) => {
   await db.connect()
-  const user = await User.findById(req.query.id)
+  const user = await User.findOne(req.query.id)
   await db.disconnect()
   res.send(user)
 })
 
 handler.put(async (req, res) => {
   await db.connect()
-  const user = await User.findById(req.query.id)
+  const user = await User.findOne(req.query.id)
   if (user) {
     user.name = req.body.name
     user.isAdmin = Boolean(req.body.isAdmin)
@@ -30,7 +30,7 @@ handler.put(async (req, res) => {
 
 handler.delete(async (req, res) => {
   await db.connect()
-  const user = await User.findById(req.query.id)
+  const user = await User.findOne(req.query.id)
   if (user) {
     await user.remove()
     await db.disconnect()

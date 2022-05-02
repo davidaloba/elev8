@@ -6,7 +6,8 @@ const initialState = {
     postsCount: null,
     usersCount: null
   },
-  posts: null
+  posts: null,
+  users: null
 }
 
 const userSlice: any = createSlice({
@@ -21,6 +22,9 @@ const userSlice: any = createSlice({
     },
     fetchAdminPosts: (admin, action) => {
       admin.posts = action.payload
+    },
+    fetchAdminUsers: (admin, action) => {
+      admin.users = action.payload
     }
   }
 
@@ -37,7 +41,8 @@ const userSlice: any = createSlice({
 
 export const {
   fetchAdminSummary,
-  fetchAdminPosts
+  fetchAdminPosts,
+  fetchAdminUsers
 } = userSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type

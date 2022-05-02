@@ -13,10 +13,10 @@ handler.post(async (req, res) => {
     email: req.body.email,
     password: bcrypt.hashSync(req.body.password),
     isAdmin: false,
-    userName: req.body.userName,
-    profile: {
-      dob: req.body.dob
-    }
+    userName: req.body.userName
+    // profile: {
+    //   dob: req.body.dob
+    // }
   })
   const user = await newUser.save()
   await db.disconnect()

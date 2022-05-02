@@ -37,7 +37,6 @@ export const Home = () => {
         <Container>
           <Intro title='Home' />
           {user.userInfo && <AppBar />}
-          <div className=' '>
             <div className="flex justify-between rounded-full bg-white py-5 px-10 items-center">
               {types.map((type, index) => {
                 return (
@@ -51,23 +50,23 @@ export const Home = () => {
                 )
               })}
             </div>
-          </div>
         </Container>
       </header>
       <main className="min-h-screen">
+        <Container className='pt-0'>
         {/* <Alert preview={preview} /> */}
-        <main className='pt-0'>
           {!currentPost.slug
-            ? <Container>
+            ? <>
                 {filteredPosts.map((post) => (
                   <Post
                     post={post}
                     key={post.slug}
                   />
                 ))}
-              </Container>
+              </>
             : <ExpandPost />
-          }</main>
+          }
+          </Container>
       </main>
       <footer className="border-b bg-accent-1 border-accent-2">
         <div className="container mx-auto px-5">

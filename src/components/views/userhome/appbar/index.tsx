@@ -19,7 +19,7 @@ export const AppBar = () => {
   }
 
   return (
-    <section className='mb-8 p-4'>
+    <section className=' p-4'>
       <form className='flex items-center justify-between'>
         <div className='w-full'></div> {/* Place holder for search bar */}
         {/* <input
