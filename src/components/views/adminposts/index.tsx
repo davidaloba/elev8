@@ -218,7 +218,7 @@ export const AdminPosts = () => {
                 ? (admin.posts.map((post) => (
                   <tr key={post.slug} className='border-2' >
                     <td className='p-4 border-x'>{post.slug}</td>
-                    <td className='p-4 border-x'>${post.title}</td>
+                    <td className='p-4 border-x'>{post.title}</td>
                     <td className='p-4 border-x'>{post.body.substring(0, 120)}...</td>
                     <td className='p-4 border-x'>{post.type}</td>
                     {post.data.link ? <td className='p-4 border-x'>{post.data.link}</td> : <td className='p-4 border-x'>nil</td>}
