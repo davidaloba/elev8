@@ -13,7 +13,13 @@ handler.post(async (req, res) => {
     email: req.body.email,
     password: bcrypt.hashSync(req.body.password),
     isAdmin: false,
-    userName: req.body.userName
+    userName: req.body.userName,
+    profile: {
+      points: 0,
+      saves: [],
+      tasks: [],
+      paid: []
+    }
     // profile: {
     //   dob: req.body.dob
     // }
