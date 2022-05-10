@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
-import { getPeriod, expandPost, login } from '@store/actions'
+import { getPeriod, expandPost, login, getScrollPosition } from '@store/actions'
 import { RootState, useAppDispatch, useAppSelector } from '@store'
 import axios from 'axios'
 
@@ -10,7 +10,7 @@ import Cookies from 'js-cookie'
 export const Post = ({ post }) => {
   const dispatch = useAppDispatch()
 
-  const { user } = useAppSelector((state: RootState) => state)
+  const { user, posts } = useAppSelector((state: RootState) => state)
   const {
     type,
     slug,
@@ -25,8 +25,24 @@ export const Post = ({ post }) => {
   const isPremiumPaid = user.userInfo.profile.paid.includes(slug)
   const [confirmPayment, setConfirmPayment] = useState(false)
 
+  // ##########################################
+  const [scrollPosition, setScrollPosition] = useState(0)
+  const handleScroll = () => {
+    const position = window.pageYOffset
+    setScrollPosition(position)
+  }
+  useEffect(() => {
+    document.documentElement.scrollTop = document.body.scrollTop = posts.scrollPosition
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [posts.scrollPosition])
+  // ###############################################
+
   const expandHandler = async () => {
     dispatch(expandPost(post))
+    dispatch(getScrollPosition(scrollPosition))
     window.scrollTo(0, 0)
   }
 

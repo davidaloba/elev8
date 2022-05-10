@@ -29,7 +29,7 @@ handler.post(async (req, res) => {
 
   const post = await newPost.save()
   await db.disconnect()
-  res.send({ message: 'Post Created', post })
+  res.send(post)
 })
 
 export default handler

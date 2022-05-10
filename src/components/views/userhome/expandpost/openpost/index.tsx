@@ -5,6 +5,7 @@ import axios from 'axios'
 
 import { getError } from '@db/error'
 import Cookies from 'js-cookie'
+import { useState } from 'react'
 
 export const OpenPost = ({ post }) => {
   const dispatch = useAppDispatch()
@@ -21,6 +22,7 @@ export const OpenPost = ({ post }) => {
   const updated = getPeriod(updatedAt)
 
   const isTaskDone = user.userInfo.profile.tasks.includes(slug)
+  const [isLinkClicked, setIsLinkClicked] = useState(false)
   const isPremiumPaid = user.userInfo.profile.paid.includes(slug)
 
   const closeHandler = async () => {
@@ -83,6 +85,11 @@ export const OpenPost = ({ post }) => {
           </div>
           <div> <div className=''>
             <p className='text-lg'> {body} </p>
+            {data.link && <div className='mt-1'>
+              <a href={data.link} target='_blank' className=' text-base mt-1 p-1 border rounded hover:cursor-pointer' rel="noreferrer">
+                [{data.link} ]
+              </a>
+            </div>}
           </div>
           </div>
           <div className=" flex items-center justify-between  mt-5">
@@ -131,16 +138,20 @@ export const OpenPost = ({ post }) => {
             <div className=''>
               <p className='text-lg'> {body} </p>
               {isTaskDone === false
-                ? <div className='mt-4 p-1 text-lg'>
-                  Click the link below to complete the data.
-                  <div>
+                ? isLinkClicked === false
+                  ? <div className='mt-4 p-1 text-lg'>
+                  Click the link below to complete the task.
                     <div className='mt-1'>
-                      <a href={data.link} target='_blank' onClick={taskHandler} className=' text-base mt-1 p-1 border rounded hover:cursor-pointer' rel="noreferrer">
-                        [THE LINK: {data.link} ]
+                      <a href={data.link} target='_blank' onClick={() => setIsLinkClicked(true)} className=' text-base mt-1 p-1 border rounded hover:cursor-pointer' rel="noreferrer">
+                        [{data.link} ]
                       </a>
                     </div>
-                  </div>
                 </div>
+                  : <div className='mt-1'>
+                    <div onClick={taskHandler} className=' text-base mt-1 p-1 border rounded hover:cursor-pointer'>
+                      [CLICK TO CLAIM YOUR POINTS]
+                    </div>
+                  </div>
                 : <div className='mt-4 p-1 text-lg border rounded'> You have completed this task </div>
               }
             </div>
@@ -186,6 +197,11 @@ export const OpenPost = ({ post }) => {
           <div>
             <div className=''>
               <p className='text-lg'> {body} </p>
+              {data.link && <div className='mt-1'>
+                <a href={data.link} target='_blank' className=' text-base mt-1 p-1 border rounded hover:cursor-pointer' rel="noreferrer">
+                  [{data.link} ]
+                </a>
+              </div>}
             </div>
           </div>
           <div className=" flex items-center justify-between  mt-5">

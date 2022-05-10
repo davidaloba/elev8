@@ -6,7 +6,7 @@ const handler = nc()
 
 handler.get(async (req, res) => {
   await db.connect()
-  const posts = await Post.find({})
+  const posts = await Post.find({}).sort('-createdAt')
   await db.disconnect()
   res.send(posts)
 })

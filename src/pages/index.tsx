@@ -5,6 +5,7 @@ import {
   Footer,
   Testimonies
 } from '@components'
+import Link from 'next/link'
 
 const Index = () => {
   // We are providing acces to information that will help you make money instantly and teacjing skills that will make you compete with counterparts all around the world
@@ -21,6 +22,7 @@ const Index = () => {
         <h1 className="text-6xl font-bold w-2/3 text-center mx-auto -mt-28 mb-8">Earn & Learn while having Fun </h1>
         <p className='w-4/5 text-center mx-auto ' >Elev8 is a community of young and vibrant people that empowers it's members with skills to make money online.</p>
         <button className='my-6 py-5 rounded-2xl border-none bg-green-700  text-white font-semibold'><a href="https://docs.google.com/forms/d/e/1FAIpQLSfGSd2sNg5kV8eguvJyW9BOyRNiStJfapoXfX5aOXQG7xt0XQ/viewform?usp=sf_link" target='_blank' rel='noreferrer '>Get started</a></button>
+        <p className='w-4/5 text-center mx-auto text-xl'> Click   <span className='text-green-700'><Link href='./login' passHref>here </Link></span> to login if you already have an account.</p>
       </Container>
       <div className='max-w-7xl mt-4  mx-auto flex flex-col items-center justify-center'>
         <Image src="/bg-1.png" alt="nextjs" width='800px' height='450' />

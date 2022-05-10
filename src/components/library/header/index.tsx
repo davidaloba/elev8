@@ -7,12 +7,12 @@ export const Header = () => {
     <section className=" pt-10 mb-10 md:mb-12">
       <nav className='flex items-baseline justify-between  '>
         <Link href='./' passHref>
-          <div className="flex items-center flex-shrink-0  mr-10">
+          <div className="flex items-center flex-shrink-0  mr-10 cursor-pointer">
             <Logo />
           </div>
         </Link>
 
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfGSd2sNg5kV8eguvJyW9BOyRNiStJfapoXfX5aOXQG7xt0XQ/viewform?usp=sf_link">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfGSd2sNg5kV8eguvJyW9BOyRNiStJfapoXfX5aOXQG7xt0XQ/viewform?usp=sf_link" target='_blank' rel="noreferrer">
           <button className='mt-4 py-2 rounded-2xl border-none bg-green-700  text-white font-semibold'>Get started</button>
         </a>
         {/* {!userInfo

@@ -18,7 +18,8 @@ const initialState = {
     posts: []
   },
   searchTerm: '',
-  current: {}
+  current: {},
+  scrollPosition: 0
 
 }
 
@@ -48,6 +49,9 @@ const postsSlice: any = createSlice({
     },
     expandPost: (posts, action) => {
       posts.current = action.payload
+    },
+    getScrollPosition: (posts, action) => {
+      posts.scrollPosition = action.payload
     }
   }
 
@@ -62,7 +66,7 @@ const postsSlice: any = createSlice({
 
 })
 
-export const { setLoading, setPosts, filterPosts, setSearchTerm, expandPost } = postsSlice.actions
+export const { setLoading, setPosts, filterPosts, setSearchTerm, expandPost, getScrollPosition } = postsSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectCount = (state: RootState) => state.posts

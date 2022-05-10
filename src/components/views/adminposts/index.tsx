@@ -31,7 +31,6 @@ export const AdminPosts = () => {
   useEffect(() => {
     if (type !== 'premium') setCost(null)
     if (type !== 'tasks') setPoints(null)
-    if (type !== 'tasks') setLink(null)
     console.log(type)
   }, [type])
 
@@ -56,8 +55,15 @@ export const AdminPosts = () => {
         }
       )
       dispatch({ type: 'CREATE_SUCCESS' })
-      alert(`${data} was created successfully`)
+      alert(`${data.title} was created successfully`)
       setIsCreatePost(false)
+      setSlug('')
+      setTitle('')
+      setBody('')
+      setType('freebies')
+      setLink(null)
+      setPoints(null)
+      setCost(null)
       fetchData('/api/admin/posts', user.userInfo.token, fetchAdminPosts)
       fetchData('/api/admin/summary', user.userInfo.token, fetchAdminSummary)
     } catch (err) {
@@ -106,6 +112,24 @@ export const AdminPosts = () => {
         {isCreatePost && <div className='flex flex-wrap justify-between  border  mb-8 p-4 '>
           <Container>
             <form action="">
+
+              <div>
+                <label htmlFor="type">Type</label>
+                <select
+                  type="text"
+                  name="type"
+                  id="type"
+                  value={type}
+                  onChange={(e) => setType(e.target.value)}
+                  className='outlined fullWidth'
+                  placeholder='select the post type..'
+                >
+                  <option value={null} selected disabled >Select your option</option>
+                  <option value="freebies">Freebies</option>
+                  <option value="tasks">Tasks</option>
+                  <option value="premium">Premium</option>
+                </select>
+              </div>
               <div>
                 <label htmlFor="slug">Slug</label>
                 <input
@@ -139,26 +163,9 @@ export const AdminPosts = () => {
                   className='outlined fullWidth'
                 ></input>
               </div>
-              <div>
-                <label htmlFor="type">Type</label>
-                <select
-                  type="text"
-                  name="type"
-                  id="type"
-                  value={type}
-                  onChange={(e) => setType(e.target.value)}
-                  className='outlined fullWidth'
-                  placeholder='select the post type..'
-                >
-                  <option value={null} selected disabled >Select your option</option>
-                  <option value="freebies">Freebies</option>
-                  <option value="tasks">Tasks</option>
-                  <option value="premium">Premium</option>
-                </select>
-              </div>
-              {type === 'tasks' && <>
+
                 <div>
-                  <label htmlFor="link">Task Link</label>
+                  <label htmlFor="link">Link</label>
                   <input
                     type='text'
                     name="link"
@@ -168,6 +175,8 @@ export const AdminPosts = () => {
                     className='outlined fullWidth'
                   ></input>
                 </div>
+
+              {type === 'tasks' &&
                 <div>
                   <label htmlFor="points">Points</label>
                   <input
@@ -179,7 +188,7 @@ export const AdminPosts = () => {
                     className='outlined fullWidth'
                   ></input>
                 </div>
-              </>}
+              }
               {type === 'premium' && <div>
                 <label htmlFor="cost">Cost</label>
                 <input

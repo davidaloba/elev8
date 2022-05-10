@@ -19,7 +19,8 @@ import {
   setPosts,
   filterPosts,
   setSearchTerm,
-  expandPost
+  expandPost,
+  getScrollPosition
 } from '@store/slices/posts'
 import router from 'next/router'
 import Cookies from 'js-cookie'
@@ -75,6 +76,7 @@ const logoutHandler = () => {
 }
 
 export {
+  getScrollPosition,
   fetchAdminSummary,
   fetchAdminUsers,
   fetchAdminPosts,

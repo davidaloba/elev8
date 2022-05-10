@@ -21,7 +21,7 @@ export const Profile = () => {
 
   return (
     <div className='bg-white'>
-      <header className='pt-4 pb-6 sticky top-0 z-50 '>
+      <header className='pt-4 pb-6 sticky top-0 z-50 bg-white'>
         <Container>
           <Intro title='Profile' />
           <div className="flex justify-end items-center">
