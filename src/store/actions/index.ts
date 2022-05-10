@@ -40,10 +40,8 @@ const fetchData = async (url, bearer, action) => {
 const fetchPosts = async (url) => {
   dispatch(setLoading(true))
   try {
-    const posts = await fetch(url).then(
-      (data) => data.json()
-    )
-    dispatch(setPosts(posts))
+    const { data } = await axios.get(url)
+    dispatch(setPosts(data))
     dispatch(setLoading(false))
   } catch (err) {
     alert(getError(err))

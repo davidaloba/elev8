@@ -67,13 +67,13 @@ const Index = () => {
 
         </Container>
       </section>
-      <section className='bg-white 100 py-10'>
+      {/* <section className='bg-white 100 py-10'>
         <Container>
           <h1 className="text-6xl font-bold w-2/3 text-center mx-auto mb-6  uppercase">Testimonies</h1>
           <Testimonies />
         </Container>
-      </section>
-      <section className='bg-slate-100 100 py-10'>
+      </section> */}
+      <section className='bg-white 100 py-10'>
         <Container>
           <h1 className="text-6xl font-bold w-2/3 text-center mx-auto  uppercase"><span className='text-orange-500'>ELEV8ING </span>LIVES</h1>
 

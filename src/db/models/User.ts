@@ -10,10 +10,10 @@ const profileSchema = new mongoose.Schema(
     facebook: String,
     instagram: String,
     twitter: String,
-    points: { type: Number, required: false, default: 0 },
-    saves: { type: Array, sparse: true },
-    tasks: { type: Array, sparse: true },
-    paid: { type: Array, sparse: true }
+    points: { type: Number, required: true, default: 0 },
+    saves: { type: Array },
+    tasks: { type: Array },
+    paid: { type: Array }
   },
   {
     timestamps: true

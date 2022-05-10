@@ -18,7 +18,7 @@ export const ExpandPost = () => {
   //     },
   //     { headers: { authorization: `Bearer ${user.userInfo.token}` } }
   //     )
-  //     fetchPosts('http://localhost:3000/api/posts/')
+  //     fetchPosts('/api/posts')
   //   } catch (err) {
   //     alert(getError(err))
   //   }

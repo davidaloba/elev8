@@ -54,21 +54,21 @@ export const AdminUsers = () => {
     }
   }
 
-  const deleteHandler = async (userId) => {
-    if (!window.confirm('Are you sure you want to delete this user?')) {
-      return
-    }
-    try {
-      await axios.delete(`/api/admin/users/${userId}`, {
-        headers: { authorization: `Bearer ${user.userInfo.token}` }
-      })
-      fetchData('/api/admin/users', user.userInfo.token, fetchAdminUsers)
-      fetchData('/api/admin/summary', user.userInfo.token, fetchAdminSummary)
-      alert('User deleted successfully')
-    } catch (err) {
-      alert(getError(err))
-    }
-  }
+  // const deleteHandler = async (userId) => {
+  //   if (!window.confirm('Are you sure you want to delete this user?')) {
+  //     return
+  //   }
+  //   try {
+  //     await axios.delete(`/api/admin/users/${userId}`, {
+  //       headers: { authorization: `Bearer ${user.userInfo.token}` }
+  //     })
+  //     fetchData('/api/admin/users', user.userInfo.token, fetchAdminUsers)
+  //     fetchData('/api/admin/summary', user.userInfo.token, fetchAdminSummary)
+  //     alert('User deleted successfully')
+  //   } catch (err) {
+  //     alert(getError(err))
+  //   }
+  // }
 
   return (
     <section className="mt-24 mb-12">
@@ -161,13 +161,13 @@ export const AdminUsers = () => {
                     <td className='p-4 border-x'>{user.userName}</td>
                     <td className='p-4 border-x'>${user.email}</td>
                     <td>
-                      <Button
+                      {/* <Button
                         onClick={() => deleteHandler(user._id)}
                         size="small"
                         variant="contained"
                       >
                         Delete
-                      </Button>
+                      </Button> */}
                     </td>
                   </tr>
                   )))
