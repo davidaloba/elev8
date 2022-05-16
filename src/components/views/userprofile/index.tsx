@@ -1,7 +1,8 @@
-import { toggleMenu, logoutHandler } from '@store/actions'
+import { toggleMenu } from '@store/actions'
 import { RootState, useAppDispatch, useAppSelector } from '@store'
 
-import { Intro, Container } from '@components'
+import Image from 'next/image'
+import { Container } from '@components'
 import { EditProfile } from './profileedit'
 import { ProfileInfo } from './profileinfo'
 
@@ -14,27 +15,23 @@ export const Profile = () => {
   }
 
   return (
-    <div className='bg-white'>
-      <header className='pt-4 pb-6 sticky top-0 z-50 bg-white'>
+    <div className='bg-slate-100'>
+      <header className='pt-10 pb-6 sticky top-0 z-50 '>
         <Container>
-          <Intro title='Profile' />
-          <div className="flex justify-end items-center">
-            <div onClick={closeMenu} className="cursor-pointer" >[CLOSE]
-            </div>
+          <div className="flex justify-start mt-8 items-center">
+            {!user.profile.edit && <div onClick={closeMenu} className="cursor-pointer pb-1 pt-2 px-2 bg-white rounded-full " >
+              <Image src='/close.png' width='20' height='20' alt='[CLOSE]' />
+              </div>}
           </div>
         </Container>
         {/* <Alert preview={preview} /> */}
       </header>
       <main className="min-h-screen">
-        <Container>
-        {user.profile.edit
-          ? <EditProfile />
-          : <ProfileInfo />
-        }
-        <div className="flex justify-center items-center">
-          <div onClick={logoutHandler} className="cursor-pointer" >[LOG OUT]
-          </div>
-        </div>
+        <Container >
+          {user.profile.edit
+            ? <EditProfile />
+            : <ProfileInfo />
+          }
         </Container>
       </main>
       <footer className="border-b bg-accent-1 border-accent-2">

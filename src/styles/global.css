@@ -7,7 +7,7 @@
 
   #root { @apply h-full }
   html { @apply text-[65%] box-border }
-  body { @apply text-2xl m-0 h-[100vh] font-sans antialiased }
+  body { @apply text-2xl text-gray-800 m-0 h-[100vh] font-sans antialiased }
   main { @apply p-6     }
 
   /* Header */
@@ -25,12 +25,12 @@
   input,
   select,
   textarea,
-  button { @apply p-4 rounded-lg border border-gray-500 border-solid  font-sans antialiased bg-gray-100 cursor-pointer}
+  button { @apply px-4 py-2 rounded-lg border border-green-900 border-solid  font-sans antialiased bg-green-50 cursor-pointer}
   
   input,
   select,
   textarea,
-  button { @apply hover:border hover:border-zinc-500 hover:border-solid }
+  button { @apply hover:border hover:border-green-500 hover:border-solid }
 
   button.primary { @apply bg-emerald-700 }
   button.block {@apply w-full }

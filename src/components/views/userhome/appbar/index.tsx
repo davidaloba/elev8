@@ -21,7 +21,7 @@ export const AppBar = () => {
   return (
     <section className=' p-4'>
       <form className='flex items-center justify-between'>
-        <div className='w-full'></div> {/* Place holder for search bar */}
+        <div className='w-full h-0'></div> {/* Place holder for search bar */}
         {/* <input
           type="text"
           id="searchPost"
@@ -33,14 +33,14 @@ export const AppBar = () => {
           // onChange={(e) => setReply(e.target.value)}
           className='text-lg h-auto mr-8 w-full border-[1px] border-slate-200'
         ></input> */}
-        <div className='flex flex-wrap rounded-full mr-2'>
+        <div className='flex flex-wrap rounded-full mr-2 '>
           <div onClick={openMenu} className='rounded-full cursor-pointer bg-indigo-700 p-1 '>
             <Image src='/diamond.png' width='16' height='16' alt='points' />
           </div>
           <p className='text-base'> {user.userInfo.profile.points ? user.userInfo.profile.points : 0}  Pts</p>
         </div>
-        <div onClick={openMenu} className=" cursor-pointer">
-          <Avatar src='/avatar.png' type={user.userInfo.userName} width='50' height='50' />
+        <div onClick={openMenu} className="rounded-full bg-green-700 pt-2 pb-1 px-2 cursor-pointer">
+          <Avatar src='/avatar.png' alt={user.userInfo.userName} width='50' height='50' />
         </div>
       </form>
     </section>

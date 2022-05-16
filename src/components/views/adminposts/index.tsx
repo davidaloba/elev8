@@ -67,7 +67,6 @@ export const AdminPosts = () => {
       fetchData('/api/admin/posts', user.userInfo.token, fetchAdminPosts)
       fetchData('/api/admin/summary', user.userInfo.token, fetchAdminSummary)
     } catch (err) {
-      dispatch({ type: 'CREATE_FAIL' })
       alert(getError(err))
     }
   }
@@ -97,7 +96,7 @@ export const AdminPosts = () => {
               Posts
             </div>
           </div>
-          {!isCreatePost && <div align="right" item xs={6}>
+          {!isCreatePost && <div>
             <Button
               onClick={() => setIsCreatePost(true)}
               color="primary"
@@ -221,7 +220,7 @@ export const AdminPosts = () => {
             </tr>
           </thead>
           {!admin.posts
-            ? <div className=' text-3xl font-bold'>loading...</div>
+            ? <tbody><tr><td className=' text-3xl font-bold' >loading...</td></tr></tbody>
             : <tbody>
               {admin.posts.length > 0
                 ? (admin.posts.map((post) => (

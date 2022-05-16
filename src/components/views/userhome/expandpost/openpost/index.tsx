@@ -85,8 +85,8 @@ export const OpenPost = ({ post }) => {
           </div>
           <div> <div className=''>
             <p className='text-lg'> {body} </p>
-            {data.link && <div className='mt-1'>
-              <a href={data.link} target='_blank' className=' text-base mt-1 p-1 border rounded hover:cursor-pointer' rel="noreferrer">
+            {data.link && <div className='mt-4  hover:cursor-pointer text-center text-lg border rounded  text-blue-700 font-bold bg-white border-blue-600  py-2 w-11/12'>
+              <a href={data.link} target='_blank' className=' text-base mt-1 p-1' rel="noreferrer">
                 [{data.link} ]
               </a>
             </div>}
@@ -102,7 +102,7 @@ export const OpenPost = ({ post }) => {
               </div>)} */}
             </div>
             <div className='flex items-center justify-between'>
-              <div onClick={closeHandler} className='text-base cursor-pointer sticky top-[470px] z-10'>[CLOSE]
+              <div onClick={closeHandler} className='text-base cursor-pointer sticky top-[470px] z-10'><Image src='/close.png' width='12' height='12' alt='[CLOSE]' />
               </div>
             </div>
           </div>
@@ -141,18 +141,18 @@ export const OpenPost = ({ post }) => {
                 ? isLinkClicked === false
                   ? <div className='mt-4 p-1 text-lg'>
                   Click the link below to complete the task.
-                    <div className='mt-1'>
-                      <a href={data.link} target='_blank' onClick={() => setIsLinkClicked(true)} className=' text-base mt-1 p-1 border rounded hover:cursor-pointer' rel="noreferrer">
+                    <div className='mt-4  hover:cursor-pointer text-center text-lg border rounded  text-blue-700 font-bold bg-white border-blue-600  py-2 w-11/12'>
+                      <a href={data.link} target='_blank' onClick={() => setIsLinkClicked(true)} className='text-base mt-1 p-1' rel="noreferrer">
                         [{data.link} ]
                       </a>
                     </div>
                 </div>
                   : <div className='mt-1'>
-                    <div onClick={taskHandler} className=' text-base mt-1 p-1 border rounded hover:cursor-pointer'>
-                      [CLICK TO CLAIM YOUR POINTS]
-                    </div>
+                    <button onClick={taskHandler} className=' cursor-pointer  text-green-700 font-bold bg-white border-green-600 hover:border-green-600 py-2 text-lg mt-1 p-1 border rounded w-11/12'>
+                      Click to claim your points
+                    </button>
                   </div>
-                : <div className='mt-4 p-1 text-lg border rounded'> You have completed this task </div>
+                : <div className='mt-4 text-center text-lg border rounded  text-green-700 font-bold bg-white border-green-600 hover:border-green-600 py-2 w-11/12'> You have completed this task </div>
               }
             </div>
           </div>
@@ -163,7 +163,7 @@ export const OpenPost = ({ post }) => {
               </div> */}
             </div>
             <div className='flex items-center justify-between'>
-              <div onClick={closeHandler} className='text-base cursor-pointer'>[CLOSE]
+              <div onClick={closeHandler} className='text-base cursor-pointer'><Image src='/close.png' width='12' height='12' alt='[CLOSE]' />
               </div>
             </div>
           </div>
@@ -189,7 +189,7 @@ export const OpenPost = ({ post }) => {
                   <div className='mr-1 mt-1'>
                     <Image src='/icons/linkedin-icon.svg' width='15' height='15' className="rounded-full" alt={type} />
                   </div>
-                  [PAID]
+                  Paid
                 </div>}
             </div>
             <div className="text-base mt-1">{updated} ago</div>
@@ -197,8 +197,8 @@ export const OpenPost = ({ post }) => {
           <div>
             <div className=''>
               <p className='text-lg'> {body} </p>
-              {data.link && <div className='mt-1'>
-                <a href={data.link} target='_blank' className=' text-base mt-1 p-1 border rounded hover:cursor-pointer' rel="noreferrer">
+              {data.link && <div className='mt-4  hover:cursor-pointer text-center text-lg border rounded  text-blue-700 font-bold bg-white border-blue-600  py-2 w-11/12'>
+                <a href={data.link} target='_blank' className=' text-base mt-1 p-1' rel="noreferrer">
                   [{data.link} ]
                 </a>
               </div>}
@@ -211,7 +211,7 @@ export const OpenPost = ({ post }) => {
               </div> */}
             </div>
             <div className='flex items-center justify-between'>
-              <div onClick={closeHandler} className='text-base cursor-pointer'>[CLOSE]
+              <div onClick={closeHandler} className='text-base cursor-pointer'><Image src='/close.png' width='12' height='12' alt='[CLOSE]' />
               </div>
             </div>
           </div>

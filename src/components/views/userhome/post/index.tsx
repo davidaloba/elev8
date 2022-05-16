@@ -116,9 +116,9 @@ export const Post = ({ post }) => {
               {/*  <div onClick={saveHandler} className=' text-base hover:cursor-pointer mr-2'>
                 [SAVE]
               </div> */}
-              <div onClick={expandHandler} className='text-base hover:cursor-pointer mr-2'>
-                [VIEW]
-              </div>
+              <button onClick={expandHandler} className=" cursor-pointer text-base text-white font-bold  bg-green-600 border-0 py-1 mr-2">
+                View
+              </button>
             </div>
 
           </div>
@@ -138,13 +138,13 @@ export const Post = ({ post }) => {
                   <div className='mr-1 mt-1'>
                     <Image src='/checklist.png' width='15' height='15' alt={type} />
                   </div>
-                  [TO-DO]
+                  To-do
                 </div>
                 : <div className='flex items-center justify-between bg-green-900 text-base text-slate-50 px-1'>
                   <div className=' mr-1 mt-1'>
                     <Image src='/checklist.png' width='15' height='15' alt={type} />
                   </div>
-                  [DONE]
+                  Done
                 </div>
               }
             </div>
@@ -163,9 +163,9 @@ export const Post = ({ post }) => {
               {/* <div onClick={saveHandler} className=' text-base hover:cursor-pointer mr-2'>
                 [SAVE]
               </div> */}
-              <div onClick={expandHandler} className='text-base hover:cursor-pointer mr-2'>
-                [VIEW]
-              </div>
+              <button onClick={expandHandler} className=" cursor-pointer text-base text-white font-bold  bg-green-600 border-0 py-1 mr-2">
+                View
+              </button>
             </div>
           </div>
         </div>
@@ -190,7 +190,7 @@ export const Post = ({ post }) => {
                   <div className='mr-1 mt-1'>
                     <Image src='/diamond.png' width='15' height='15' className="rounded-full" alt={type} />
                   </div>
-                  [PAID]
+                  Paid
                 </div>}
             </div>
             <div className="text-base mt-1">{updated} ago</div>
@@ -210,17 +210,17 @@ export const Post = ({ post }) => {
                 [SAVE]
               </div> */}
                 {isPremiumPaid === false
-                  ? <div onClick={() => setConfirmPayment(true)} className='text-base cursor-pointer mr-2'>[PAY]</div>
-                  : <div onClick={expandHandler} className='text-base hover:cursor-pointer mr-2'>
-                    [VIEW]
-                  </div>}
+                  ? <button onClick={() => setConfirmPayment(true)} className=" cursor-pointer text-base text-white font-bold  bg-green-600 border-0 py-1 mr-2" >Pay</button>
+                  : <button onClick={expandHandler} className=" cursor-pointer text-base text-white font-bold  bg-green-600 border-0 py-1 mr-2">
+                    View
+                  </button>}
               </div>
             </div>)
-            : (<div className="text-base mt-5 p-2 border rounded-lg" >
-              Would you like to pay "{data.cost} Pts" to view this post
-              <div className=" flex items-center  mt-2">
-                <div onClick={() => setConfirmPayment(false)} className='text-base cursor-pointer mr-2'>[NO]</div>
-                <div onClick={payHandler} className='text-base hover:cursor-pointer mr-2'>[YES]</div>
+            : (<div className="text-base mt-5 p-2 border rounded-lg 'mt-4  hover:cursor-pointer text-center    text-green-700 font-bold bg-white border-green-600  py-2 w-11/12" >
+              Would you like to pay "{data.cost} Pts" to View this post
+              <div className=" flex justify-center mt-4">
+                <button onClick={() => setConfirmPayment(false)} className='text-base cursor-pointer mr-10  text-green-700 font-bold bg-white border-green-600 hover:border-green-600 border py-1 px-4 '>No</button>
+                <button onClick={payHandler} className='text-base hover:cursor-pointer ml-10 rounded cursor-pointer text-white font-bold  bg-green-600 border-0 py-1 px-4 '>Yes</button>
               </div>
             </div>)
           }

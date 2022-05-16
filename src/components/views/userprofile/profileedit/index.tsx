@@ -59,137 +59,136 @@ export const EditProfile = () => {
   }
 
   return (
-    <div className='  border rounded-3xl mb-8 p-4 '>
+    <div className='bg-white border rounded-3xl mb-8 py-6 px-10 '>
       <div className="flex items-center my-10 justify-center">
         <Avatar src='/avatar.png' type={user.userInfo.userName} width='92' height='92' />
       </div>
-      <div className='flex flex-wrap justify-between  border  mb-8 p-4 '>
+      <div className='flex flex-wrap justify-between py-4  mb-8 '>
         <Container>
           <form action="">
-          <div>
-            <label htmlFor="email">First Name</label>
-            <input
-              type='text'
-              name="firstName"
-              id="firstName"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              className='outlined fullWidth'
-            ></input>
-          </div>
-          <div>
-            <label htmlFor="email">Last Name</label>
-            <input
-              type='text'
-              name="lastName"
-              id="lastName"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              className='outlined fullWidth'
-            ></input>
-          </div>
-          <div>
-            <label htmlFor="email">Phone Number</label>
-            <input
-              type='telephone'
-              name="phone"
-              id="phone"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              className='outlined fullWidth'
-            ></input>
-          </div>
-          <div>
-            <label htmlFor="email">Facebook</label>
-            <input
-              type='text'
-              name="facebook"
-              id="facebook"
-              value={facebook}
-              onChange={(e) => setFacebook(e.target.value)}
-              className='outlined fullWidth'
-            ></input>
-          </div>
-          <div>
-            <label htmlFor="email">Instagram</label>
-            <input
-              type='text'
-              name="instagram"
-              id="instagram"
-              value={instagram}
-              onChange={(e) => setInstagram(e.target.value)}
-              className='outlined fullWidth'
-            ></input>
-          </div>
-          <div>
-            <label htmlFor="email">Twitter</label>
-            <input
-              type='text'
-              name="twitter"
-              id="twitter"
-              value={twitter}
-              onChange={(e) => setTwitter(e.target.value)}
-              className='outlined fullWidth'
-            ></input>
-          </div>
-          <div>
-            <label htmlFor="email">Email</label>
-            <input
-              type='email'
-              name="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className='outlined fullWidth'
-            ></input>
-          </div>
-          <div>
-            <label htmlFor="email">Date of Birth</label>
-            <input
-              type='date'
-              name="dob"
-              id="dob"
-              value={dob}
-              onChange={(e) => setDob(e.target.value)}
-              className='outlined fullWidth'
-            ></input>
-          </div>
+            <div className='my-4'>
+              <label htmlFor="email">First Name</label>
+              <input
+                type='text'
+                name="firstName"
+                id="firstName"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                className='outlined fullWidth'
+              ></input>
+            </div>
+            <div className='my-4'>
+              <label htmlFor="email">Last Name</label>
+              <input
+                type='text'
+                name="lastName"
+                id="lastName"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                className='outlined fullWidth'
+              ></input>
+            </div>
+            <div className='my-4'>
+              <label htmlFor="email">Phone Number</label>
+              <input
+                type='telephone'
+                name="phone"
+                id="phone"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                className='outlined fullWidth'
+              ></input>
+            </div>
+            <div className='my-4'>
+              <label htmlFor="email">Facebook</label>
+              <input
+                type='text'
+                name="facebook"
+                id="facebook"
+                value={facebook}
+                onChange={(e) => setFacebook(e.target.value)}
+                className='outlined fullWidth'
+              ></input>
+            </div>
+            <div className='my-4'>
+              <label htmlFor="email">Instagram</label>
+              <input
+                type='text'
+                name="instagram"
+                id="instagram"
+                value={instagram}
+                onChange={(e) => setInstagram(e.target.value)}
+                className='outlined fullWidth'
+              ></input>
+            </div>
+            <div className='my-4'>
+              <label htmlFor="email">Twitter</label>
+              <input
+                type='text'
+                name="twitter"
+                id="twitter"
+                value={twitter}
+                onChange={(e) => setTwitter(e.target.value)}
+                className='outlined fullWidth'
+              ></input>
+            </div >
+            <div className='my-4'>
+              <label htmlFor="email">Email</label>
+              <input
+                type='email'
+                name="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className='outlined fullWidth'
+              ></input>
+            </div>
+            <div className='my-4'>
+              <label htmlFor="email">Date of Birth</label>
+              <input
+                type='date'
+                name="dob"
+                id="dob"
+                value={dob}
+                onChange={(e) => setDob(e.target.value)}
+                className='outlined fullWidth'
+              ></input>
+            </div >
           </form>
+          {editPassword &&
+            <>
+              <div className='my-4'>
+                <label htmlFor="email">Password</label>
+                <input
+                  type='password'
+                  name="password"
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className='outlined fullWidth'
+                ></input>
+              </div>
+              <div className='my-4'>
+                <label htmlFor="email">Confirm Password</label>
+                <input
+                  type='password'
+                  name="confirmPassword"
+                  id="confirmPassword"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  className='outlined fullWidth'
+                ></input>
+              </div>
+            </>}
+          {!editPassword && <>
+            <div onClick={() => setEditPassword(true)} className='my-6 text-green-900 font-bold cursor-pointer hover:underline'>Edit password?</div>
+          </>
+          }
+          <div className=' mt-6 ' >
+            <button onClick={submitHandler} className=" cursor-pointer text-xl text-white font-bold  bg-green-600 border-0 py-2 mr-8" >Submit</button>
+            <button onClick={() => dispatch(toggleEdit())} className=" cursor-pointer text-xl text-green-700 font-bold bg-white border-green-600 hover:border-green-600 border-2 py-2 ">Cancel</button>
+          </div>
         </Container>
-        {editPassword &&
-          <Container>
-            <div>
-              <label htmlFor="email">Password</label>
-              <input
-                type='password'
-                name="password"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className='outlined fullWidth'
-              ></input>
-            </div>
-            <div>
-              <label htmlFor="email">Confirm Password</label>
-              <input
-                type='password'
-                name="confirmPassword"
-                id="confirmPassword"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                className='outlined fullWidth'
-              ></input>
-            </div>
-          </Container>}
-        {!editPassword && <Container>
-          <div onClick={() => setEditPassword(true)} className='my-6 cursor-pointer'>[EDIT PASSWORD?]</div>
-        </Container>
-        }
-        <div className=' mt-6 ' >
-          <button onClick={submitHandler} type="button" color="primary">Submit</button>
-          <div onClick={() => dispatch(toggleEdit())} className='mt-2 cursor-pointer'>[X]</div>
-        </div>
-
       </div>
     </div>
 
