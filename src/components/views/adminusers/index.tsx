@@ -16,15 +16,21 @@ export const AdminUsers = () => {
 
   useEffect(() => {
     fetchData('/api/admin/users', user.userInfo.token, fetchAdminUsers)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const [isCreateUser, setIsCreateUser] = useState(false)
+  const [isResetPassword, setIsResetPassword] = useState(false)
 
   const [userName, setUserName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+
+  const [editUser, setEditUser] = useState('')
+  const [newPassword, setNewPassword] = useState('')
+  const [confirmNewPassword, setConfirmNewPassword] = useState('')
+  console.log(newPassword, confirmNewPassword)
 
   const createHandler = async () => {
     if (!window.confirm('Are you sure?')) {
@@ -43,32 +49,62 @@ export const AdminUsers = () => {
         headers: { authorization: `Bearer ${user.userInfo.token}` }
       }
       )
-      dispatch({ type: 'CREATE_SUCCESS' })
-      alert(`${data} was created successfully`)
+      alert(`${data.email} was created successfully`)
       setIsCreateUser(false)
       fetchData('/api/admin/users', user.userInfo.token, fetchAdminUsers)
       fetchData('/api/admin/summary', user.userInfo.token, fetchAdminSummary)
+      setUserName('')
+      setEmail('')
+      setPassword('')
+      setConfirmPassword('')
     } catch (err) {
       dispatch({ type: 'CREATE_FAIL' })
       alert(getError(err))
     }
   }
 
-  // const deleteHandler = async (userId) => {
-  //   if (!window.confirm('Are you sure you want to delete this user?')) {
-  //     return
-  //   }
-  //   try {
-  //     await axios.delete(`/api/admin/users/${userId}`, {
-  //       headers: { authorization: `Bearer ${user.userInfo.token}` }
-  //     })
-  //     fetchData('/api/admin/users', user.userInfo.token, fetchAdminUsers)
-  //     fetchData('/api/admin/summary', user.userInfo.token, fetchAdminSummary)
-  //     alert('User deleted successfully')
-  //   } catch (err) {
-  //     alert(getError(err))
-  //   }
-  // }
+  const resetPasswordHandler = async () => {
+    if (!window.confirm('Are you sure?')) {
+      return
+    }
+    if (newPassword !== confirmNewPassword) {
+      alert('Password and confirm password do not match')
+    }
+    try {
+      const { data } = await axios.put(`/api/admin/users/${editUser}`, {
+        email: editUser,
+        password: newPassword
+      },
+      {
+        headers: { authorization: `Bearer ${user.userInfo.token}` }
+      }
+      )
+      alert('Password updated successfully')
+      setIsResetPassword(false)
+      setNewPassword('')
+      setConfirmNewPassword('')
+    } catch (err) {
+      setNewPassword('')
+      setConfirmNewPassword('')
+      alert(getError(err))
+    }
+  }
+
+  const deleteHandler = async (userId) => {
+    if (!window.confirm('Are you sure you want to delete this user?')) {
+      return
+    }
+    try {
+      await axios.delete(`/api/admin/users/${userId}`, {
+        headers: { authorization: `Bearer ${user.userInfo.token}` }
+      })
+      fetchData('/api/admin/users', user.userInfo.token, fetchAdminUsers)
+      fetchData('/api/admin/summary', user.userInfo.token, fetchAdminSummary)
+      alert('User deleted successfully')
+    } catch (err) {
+      alert(getError(err))
+    }
+  }
 
   return (
     <section className="mt-24 mb-12">
@@ -79,9 +115,12 @@ export const AdminUsers = () => {
               Users
             </div>
           </div>
-          {!isCreateUser && <div align="right" item xs={6}>
+          {(!isCreateUser && !isResetPassword) && <div align="right" item xs={6}>
             <Button
-              onClick={() => setIsCreateUser(true)}
+              onClick={() => {
+                setIsCreateUser(true)
+                setIsResetPassword(false)
+              }}
               color="primary"
               variant="contained"
             >
@@ -139,17 +178,59 @@ export const AdminUsers = () => {
                 ></input>
               </div>
             </form>
-              <div>
-                <button onClick={createHandler} className='py-2 mt-3 px-6 rounded-2xl border-none bg-lime-500 hover:bg-green-600 focus:outline-none ring-opacity-75 ring-green-400 focus:ring text-white text-xl font-semibold'>Create User</button>
-              </div>
+            <div>
+              <button onClick={createHandler} className='py-2 mt-3 px-6 rounded-2xl border-none bg-green-700 hover:bg-green-600 focus:outline-none ring-opacity-75 ring-green-400 focus:ring text-white text-xl font-semibold  mr-3'>Create User</button>
+              <button onClick={() => setIsCreateUser(false)} className='py-2 mt-3 px-6 rounded-2xl border-none bg-red-700 hover:bg-red-500 focus:outline-none ring-opacity-75 ring-green-400 focus:ring text-white text-xl font-semibold'>Cancel</button>
+            </div>
           </Container>
         </div>
         }
-        {!isCreateUser && <table>
+        {isResetPassword && <div className='flex flex-wrap justify-between  border  mb-8 p-4 '>
+          <Container>
+            <div className=' font-bold text-3xl mb-6'> Password Reset for "{editUser}" </div>
+            <form className=''>
+              <div>
+                <label htmlFor="email">Enter New Password</label>
+                <input
+                  type='password'
+                  name="password"
+                  id="password"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  className='outlined fullWidth'
+                ></input>
+              </div>
+              <div>
+                <label htmlFor="email">Confirm Password</label>
+                <input
+                  type='password'
+                  name="confirmPassword"
+                  id="confirmPassword"
+                  value={confirmNewPassword}
+                  onChange={(e) => setConfirmNewPassword(e.target.value)}
+                  className='outlined fullWidth'
+                ></input>
+              </div>
+            </form>
+            <div>
+              <button onClick={resetPasswordHandler} className='py-2 mt-3 px-6 rounded-2xl border-none bg-green-700 hover:bg-green-600 focus:outline-none ring-opacity-75 ring-green-400 focus:ring text-white text-xl font-semibold mr-3'>Reset Password</button>
+              <button onClick={() => {
+                setIsResetPassword(false)
+                setNewPassword(null)
+              }} className='py-2 mt-3 px-6 rounded-2xl border-none bg-red-700 hover:bg-red-500 focus:outline-none ring-opacity-75 ring-green-400 focus:ring text-white text-xl font-semibold'>Cancel</button>
+            </div>
+          </Container>
+        </div>
+        }
+        {!isCreateUser && !isResetPassword && <table>
           <thead>
             <tr className='border-2' >
-              <th className='p-4 border-x'>USERNAME</th>
+              <th className='p-4 border-x'>FIRST NAME</th>
+              <th className='p-4 border-x'>LAST NAME</th>
               <th className='p-4 border-x'>EMAIL</th>
+              <th className='p-4 border-x'>PHONE NO.</th>
+              <th className='p-4 border-x'>USERNAME</th>
+              <th className='p-4 border-x'>POINTS</th>
             </tr>
           </thead>
           {!admin.users
@@ -158,16 +239,30 @@ export const AdminUsers = () => {
               {admin.users.length > 0
                 ? (admin.users.map((user) => (
                   <tr key={user.userName} className='border-2' >
+                    <td className='p-4 border-x'>{user.profile.firstName}</td>
+                    <td className='p-4 border-x'>{user.profile.lastName}</td>
+                    <td className='p-4 border-x'>{user.email}</td>
+                    <td className='p-4 border-x'>{user.profile.phone}</td>
                     <td className='p-4 border-x'>{user.userName}</td>
-                    <td className='p-4 border-x'>${user.email}</td>
-                    <td>
-                      {/* <Button
-                        onClick={() => deleteHandler(user._id)}
+                    <td className='p-4 border-x'>{user.profile.points}</td>
+                    <td className=' w-max'>
+                      <Button
+                        onClick={() => {
+                          setIsResetPassword(true)
+                          setEditUser(user.email)
+                        }}
+                        size="small"
+                        variant="contained"
+                      >
+                        Reset Password
+                      </Button>
+                      <Button
+                        onClick={() => deleteHandler(user.email)}
                         size="small"
                         variant="contained"
                       >
                         Delete
-                      </Button> */}
+                      </Button>
                     </td>
                   </tr>
                   )))

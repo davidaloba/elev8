@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
-import { RootState, useAppDispatch, useAppSelector } from '@store'
+import { RootState, useAppSelector } from '@store'
 import { fetchAdminSummary, fetchData, logoutHandler } from '@store/actions'
 
 import Image from 'next/image'
 import { AdminPosts, AdminUsers, Container, Intro } from '@components'
 
 const AdminDashboard = () => {
-  const dispatch = useAppDispatch()
+  const [isLoading, setIsLoading] = useState(true)
   const router = useRouter()
   const { user, admin } = useAppSelector((state: RootState) => state)
   const userInfo = user.userInfo
@@ -18,12 +18,18 @@ const AdminDashboard = () => {
     if (!userInfo) {
       router.push('/login')
     }
-    if (!userInfo.isAdmin) router.push('/app')
     fetchData('/api/admin/summary', userInfo.token, fetchAdminSummary)
-  }, [dispatch, router, userInfo])
+    userInfo.isAdmin ? setIsLoading(false) : router.push('/app')
+  }, [router, userInfo])
 
-  return (
-    < >
+  return (<>
+    {isLoading
+      ? <header className='pt-4 pb-6 sticky top-0 z-50 bg-white'>
+        <Container>
+          <Intro title='Loading...' />
+        </Container>
+      </header>
+      : <>
       <header className='pt-4 pb-6 sticky top-0 z-50 bg-white'>
         <Container>
           <Intro title='Dashboard' />
@@ -67,7 +73,8 @@ const AdminDashboard = () => {
         </div>
       </footer>
     </>
-  )
+    }
+  </>)
 }
 
 export default AdminDashboard

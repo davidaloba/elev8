@@ -1,6 +1,4 @@
-import { useEffect } from 'react'
-
-import { fetchPosts, toggleMenu, logoutHandler } from '@store/actions'
+import { toggleMenu, logoutHandler } from '@store/actions'
 import { RootState, useAppDispatch, useAppSelector } from '@store'
 
 import { Intro, Container } from '@components'
@@ -10,10 +8,6 @@ import { ProfileInfo } from './profileinfo'
 export const Profile = () => {
   const dispatch = useAppDispatch()
   const { user } = useAppSelector((state: RootState) => state)
-
-  useEffect(() => {
-    fetchPosts('/api/posts')
-  }, [])
 
   const closeMenu = async () => {
     dispatch(toggleMenu())

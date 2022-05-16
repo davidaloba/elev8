@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect } from 'react'
 
 import { expandPost, fetchPosts, filterPosts, getScrollPosition } from '@store/actions'
 import { RootState, useAppDispatch, useAppSelector } from '@store'
@@ -26,41 +26,6 @@ export const Home = () => {
     dispatch(getScrollPosition(0))
     window.scrollTo(0, 0)
   }
-
-  // #######################################################################################
-  const [postList, setPostList] = useState({ list: [1, 2, 3, 4] })
-  // tracking on which page we currently are
-  const [page, setPage] = useState(1)
-  // add loader reference
-  const loader = useRef(null)
-  // here we handle what happens when user scrolls to Load More div
-  // in this case we just update page variable
-  const handleObserver = (entities) => {
-    const target = entities[0]
-    if (target.isIntersecting) {
-      setPage(_page => _page + 1)
-    }
-  }
-  useEffect(() => {
-    const options = {
-      root: null,
-      rootMargin: '20px',
-      threshold: 1.0
-    }
-    // initialize IntersectionObserver and attaching to Load More div
-    const observer = new IntersectionObserver(handleObserver, options)
-    if (loader.current) {
-      observer.observe(loader.current)
-    }
-  }, [])
-  useEffect(() => {
-    // here we simulate adding new posts to List
-    const newList = postList.list.concat([1, 1, 1, 1])
-    setPostList({
-      list: newList
-    })
-  }, [page, postList.list])
-  // #######################################################################################
 
   if (posts.loading) {
     return <Container>
@@ -99,9 +64,6 @@ export const Home = () => {
                     key={post.slug}
                   />
                 ))}
-              <div ref={loader}>
-                <h2 className="text-center">Load More</h2>
-              </div>
               </>
             : <ExpandPost />
           }

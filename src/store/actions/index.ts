@@ -68,11 +68,10 @@ const getPeriod = (date) => {
   return updated
 }
 
-// TODO: FIX signout before redirect err
 const logoutHandler = () => {
-  dispatch(signout())
+  router.push('/')
   Cookies.remove('userInfo')
-  router.push('/login')
+  setTimeout(() => { dispatch(signout()) }, 1000)
 }
 
 export {

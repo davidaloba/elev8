@@ -13,7 +13,7 @@ handler.use(isAuth, isAdmin)
 handler.get(async (req, res) => {
   await db.connect()
   const postsCount = await Post.countDocuments()
-  const usersCount = await User.countDocuments()
+  const usersCount = await User.countDocuments({ isAdmin: false })
   await db.disconnect()
   res.send({ postsCount, usersCount })
 })

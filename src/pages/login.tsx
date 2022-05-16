@@ -42,7 +42,8 @@ const Login = () => {
         })
         dispatch(login(data))
         Cookies.set('userInfo', data)
-        router.push('/app')
+        if (data.isAdmin) router.push('/admin')
+        else router.push('/app')
       } catch (err) {
         alert(getError(err))
       }
