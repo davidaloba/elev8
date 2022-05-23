@@ -12,20 +12,44 @@ import {
   signout,
   savePost,
   toggleMenu,
-  toggleEdit
+  toggleEdit,
+  switchTab
 } from '@store/slices/user'
 import {
   setLoading,
-  setPosts,
+  loadPosts,
+  setPages,
   filterPosts,
   setSearchTerm,
   expandPost,
-  getScrollPosition
+  setScrollPosition
 } from '@store/slices/posts'
 import router from 'next/router'
 import Cookies from 'js-cookie'
 
 const dispatch = store.dispatch
+
+const initPosts = async () => {
+  dispatch(setLoading(true))
+  try {
+    const { data } = await axios.get('/api/posts')
+    dispatch(loadPosts(data.posts))
+    dispatch(setPages(data.pages))
+    dispatch(setLoading(false))
+  } catch (err) {
+    alert(getError(err))
+  }
+}
+
+const fetchPosts = async (page) => {
+  try {
+    const { data } = await axios.get(`/api/posts?page=${page}&limit=10`)
+    dispatch(loadPosts(data.posts))
+    dispatch(setPages(data.pages))
+  } catch (err) {
+    alert(getError(err))
+  }
+}
 
 const fetchData = async (url, bearer, action) => {
   try {
@@ -33,17 +57,6 @@ const fetchData = async (url, bearer, action) => {
       headers: { authorization: `Bearer ${bearer}` }
     })
     dispatch(action(data))
-  } catch (err) {
-    alert(getError(err))
-  }
-}
-
-const fetchPosts = async (url) => {
-  dispatch(setLoading(true))
-  try {
-    const { data } = await axios.get(url)
-    dispatch(setPosts(data))
-    dispatch(setLoading(false))
   } catch (err) {
     alert(getError(err))
   }
@@ -75,7 +88,7 @@ const logoutHandler = () => {
 }
 
 export {
-  getScrollPosition,
+  setScrollPosition,
   fetchAdminSummary,
   fetchAdminUsers,
   fetchAdminPosts,
@@ -85,9 +98,11 @@ export {
   setSearchTerm,
   savePost,
   setLoading,
-  setPosts,
   expandPost,
   toggleMenu,
-  toggleEdit
+  initPosts,
+  setPages,
+  toggleEdit,
+  switchTab
 }
 export { fetchPosts, getPeriod, fetchData, logoutHandler }

@@ -6,7 +6,8 @@ const initialState = {
   userInfo: Cookies.get('userInfo') ? JSON.parse(Cookies.get('userInfo')) : null,
   profile: {
     menu: false,
-    edit: false
+    edit: false,
+    tab: 'profile'
   }
 }
 
@@ -30,6 +31,9 @@ const userSlice: any = createSlice({
     },
     toggleEdit: (user, action) => {
       user.profile.edit = !user.profile.edit
+    },
+    switchTab: (user, action) => {
+      user.profile.tab = action.payload
     }
   }
 
@@ -44,7 +48,7 @@ const userSlice: any = createSlice({
 
 })
 
-export const { login, signout, savePost, toggleMenu, toggleEdit } = userSlice.actions
+export const { login, signout, savePost, toggleMenu, toggleEdit, switchTab } = userSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectCount = (state: RootState) => state.user

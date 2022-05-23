@@ -10,6 +10,7 @@ const profileSchema = new mongoose.Schema(
     facebook: String,
     instagram: String,
     twitter: String,
+    referrer: String,
     points: { type: Number, required: true, default: 0 },
     saves: { type: Array },
     tasks: { type: Array },
@@ -26,6 +27,7 @@ const userSchema = new mongoose.Schema(
     password: { type: String, required: true },
     isAdmin: { type: Boolean, required: true, default: false },
     userName: { type: String, required: true, unique: true },
+    referralCode: { type: String, required: true, unique: true },
     profile: profileSchema
   },
   {

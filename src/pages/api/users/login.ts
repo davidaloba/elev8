@@ -16,6 +16,7 @@ handler.post(async (req, res) => {
       token,
       email: user.email,
       isAdmin: user.isAdmin,
+      referralCode: user.referralCode,
       userName: user.userName,
       profile: user.profile
     })

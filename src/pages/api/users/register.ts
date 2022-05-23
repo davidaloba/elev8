@@ -1,5 +1,6 @@
 import nc from 'next-connect'
 import bcrypt from 'bcryptjs'
+import shortid from 'shortid'
 import User from '@db/models/User'
 import db from '@db'
 import { signToken } from '@utils/auth'
@@ -8,17 +9,21 @@ const handler = nc()
 
 handler.post(async (req, res) => {
   await db.connect()
+  const referralCode = shortid.generate()
+  console.log(referralCode)
 
   const newUser = new User({
     email: req.body.email,
     password: bcrypt.hashSync(req.body.password),
     isAdmin: false,
     userName: req.body.userName,
+    referralCode: referralCode,
     profile: {
+      referrer: req.body.referrer,
       points: 0,
       saves: [],
       tasks: [],
-      paid: []
+      premium: []
     }
     // profile: {
     //   dob: req.body.dob
@@ -33,6 +38,7 @@ handler.post(async (req, res) => {
     email: user.email,
     isAdmin: user.isAdmin,
     userName: user.userName,
+    referralCode: user.referralCode,
     profile: user.profile
   })
 })

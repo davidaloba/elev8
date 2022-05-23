@@ -32,6 +32,7 @@ const Login = () => {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [dob, setDob] = useState('')
+  const [referrer, setReferrer] = useState('')
 
   const loginHandler = async () => {
     if (email.length > 0 && password.length > 0) {
@@ -50,24 +51,25 @@ const Login = () => {
     } else alert('please enter your email and password to login')
   }
 
-  // const registerHandler = async () => {
-  //   if (password !== confirmPassword) {
-  //     alert('Password and confirm password are not match')
-  //   }
-  //   try {
-  //     const { data } = await axios.post('/api/users/register', {
-  //       userName,
-  //       email,
-  //       password,
-  //       dob
-  //     })
-  //     dispatch(login(data))
-  //     Cookies.set('userInfo', data)
-  //     router.push('/app')
-  //   } catch (err) {
-  //     alert(getError(err))
-  //   }
-  // }
+  const registerHandler = async () => {
+    if (password !== confirmPassword) {
+      alert('Password and confirm password are not match')
+    }
+    try {
+      const { data } = await axios.post('/api/users/register', {
+        userName,
+        email,
+        password,
+        dob,
+        referrer
+      })
+      dispatch(login(data))
+      Cookies.set('userInfo', data)
+      router.push('/app')
+    } catch (err) {
+      alert(getError(err))
+    }
+  }
 
   return (
     <>
@@ -76,10 +78,9 @@ const Login = () => {
         {
           isLogin
             ? <div className='mb-20'>
-              {/* <hr className="border-accent-2 mt-28 mb-24" /> */}
+              <hr className="border-accent-2 mt-28 mb-24" />
               <div className='mt-6 mb-10'>
-                {/* <h1>Login</h1> */}
-                <p className='mb-4'>Enter the login details provided to in the confirmation email you received</p>
+                <h1>Login</h1>
               </div>
               <form className='mb-8'>
                 <div className='mb-6'>
@@ -105,23 +106,21 @@ const Login = () => {
                   ></input>
                 </div>
               </form>
-                <button onClick={(e) => loginHandler(email, password)} className='mt-4 py-2 rounded-2xl border-none bg-green-700  text-white font-semibold'>Login</button>
+              <button onClick={loginHandler} className='mt-4 py-2 rounded-2xl border-none bg-green-700  text-white font-semibold'>Login</button>
               <div className='text-xl'>
-                <p>Haven't registered yet? Click
-                  <a href='' className='cursor-pointer text-green-900'> here </a>
+                <p>Don't have an account? Click
+                  <span onClick={(e) => setIsLogin(!isLogin)} className='cursor-pointer text-green-900'> here </span>
                   to register.
                 </p>
-                {/* <p>Don't have an account? Click
-                <span onClick={(e) => setIsLogin(!isLogin)} className='cursor-pointer text-green-900'> here </span>
-                to register.
-              </p> */}
               </div>
             </div>
-            : <>
+            : <div className='mb-20'>
               <hr className="border-accent-2 mt-28 mb-24" />
-              <h1>Register</h1>
-              <form className=''>
-                <div>
+              <div className='mt-6 mb-10'>
+                <h1>Register</h1>
+              </div>
+              <form className='mb-8'>
+                <div className='mb-6'>
                   <label htmlFor="email">Email</label>
                   <input
                     type='email'
@@ -144,7 +143,7 @@ const Login = () => {
                   // }
                   ></input>
                 </div>
-                <div>
+                <div className='mb-6'>
                   <label htmlFor="email">Password</label>
                   <input
                     type='password'
@@ -167,7 +166,7 @@ const Login = () => {
                   // }
                   ></input>
                 </div>
-                <div>
+                <div className='mb-6'>
                   <label htmlFor="email">Confirm Password</label>
                   <input
                     type='password'
@@ -190,7 +189,7 @@ const Login = () => {
                   // }
                   ></input>
                 </div>
-                <div>
+                <div className='mb-6'>
                   <label htmlFor="email">Username</label>
                   <input
                     type='text'
@@ -213,14 +212,14 @@ const Login = () => {
                   // }
                   ></input>
                 </div>
-                <div>
-                  <label htmlFor="email">Date of Birth</label>
+                <div className='mb-6'>
+                  <label htmlFor="email">Referral Code</label>
                   <input
-                    type='date'
-                    name="dob"
-                    id="dob"
-                    value={dob}
-                    onChange={(e) => setDob(e.target.value)}
+                    type='text'
+                    name="referrer"
+                    id="referrer"
+                    value={referrer}
+                    onChange={(e) => setReferrer(e.target.value)}
                     className=''
                   // rules={{
                   //   required: true,
@@ -237,14 +236,16 @@ const Login = () => {
                   ></input>
                 </div>
                 <div>
-                  <button onClick={(e) => loginHandler(email, password)} className='py-2 px-6 rounded-2xl border-none bg-lime-500 hover:bg-green-600 focus:outline-none ring-opacity-75 ring-green-400 focus:ring text-white text-xl font-semibold'>Sign up</button>
                 </div>
               </form>
-              <p>Already have an account? Click
-                <span onClick={(e) => setIsLogin(!isLogin)} className='cursor-pointer text-green-900'> here </span>
-                to login.
-              </p>
-            </>
+              <button onClick={registerHandler} className='mt-4 py-2 rounded-2xl border-none bg-green-700  text-white font-semibold'>Sign up</button>
+              <div className='text-xl'>
+                <p>Already have an account? Click
+                  <span onClick={(e) => setIsLogin(!isLogin)} className='cursor-pointer text-green-900'> here </span>
+                  to login.
+                </p>
+              </div>
+            </div>
         }
         <Footer />
       </Container>

@@ -7,7 +7,7 @@ import { getError } from '@db/error'
 import Cookies from 'js-cookie'
 import { useState } from 'react'
 
-export const OpenPost = ({ post }) => {
+export const Post = ({ post }) => {
   const dispatch = useAppDispatch()
 
   const { user } = useAppSelector((state: RootState) => state)

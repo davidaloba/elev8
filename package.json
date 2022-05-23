@@ -29,6 +29,7 @@
     "react-hook-form": "^7.29.0",
     "react-icons": "^4.3.1",
     "react-redux": "^7.2.6",
+    "shortid": "^2.2.16",
     "streamifier": "^0.1.1",
     "swr": "^0.4.0"
   },
@@ -43,6 +44,7 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-redux": "^7.1.16",
+    "@types/shortid": "^0.0.29",
     "@typescript-eslint/eslint-plugin": "^4.0.1",
     "autoprefixer": "^10.4.4",
     "dotenv": "^8.2.0",

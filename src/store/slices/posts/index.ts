@@ -13,6 +13,9 @@ import type { RootState } from '@store'
 const initialState = {
   loading: true,
   all: [],
+  pages: null,
+  page: 0,
+  nextPage: 0,
   filtered: {
     type: 'all',
     posts: []
@@ -32,9 +35,14 @@ const postsSlice: any = createSlice({
     setLoading: (posts, action) => {
       posts.loading = action.payload
     },
-    setPosts: (posts, action) => {
-      posts.all = action.payload
-      posts.filtered.posts = action.payload
+    setPages: (posts, action) => {
+      posts.pages = action.payload
+    },
+    loadPosts: (posts, action) => {
+      posts.all = [...posts.all, ...action.payload]
+      posts.filtered.posts = posts.all
+      posts.page += 1
+      posts.nextPage = posts.page + 1
     },
     filterPosts: (posts, action) => {
       action.payload === 'all'
@@ -50,8 +58,9 @@ const postsSlice: any = createSlice({
     expandPost: (posts, action) => {
       posts.current = action.payload
     },
-    getScrollPosition: (posts, action) => {
+    setScrollPosition: (posts, action) => {
       posts.scrollPosition = action.payload
+      console.log('scroll to ', action.payload)
     }
   }
 
@@ -66,7 +75,7 @@ const postsSlice: any = createSlice({
 
 })
 
-export const { setLoading, setPosts, filterPosts, setSearchTerm, expandPost, getScrollPosition } = postsSlice.actions
+export const { setLoading, filterPosts, setSearchTerm, expandPost, setScrollPosition, loadPosts, setPages } = postsSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectCount = (state: RootState) => state.posts
