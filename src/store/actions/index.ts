@@ -13,7 +13,10 @@ import {
   savePost,
   toggleMenu,
   toggleEdit,
-  switchTab
+  switchTab,
+  loadingReferral,
+  setReferralData,
+  setRequestWithdrawal
 } from '@store/slices/user'
 import {
   setLoading,
@@ -28,6 +31,19 @@ import router from 'next/router'
 import Cookies from 'js-cookie'
 
 const dispatch = store.dispatch
+
+const fetchReferralData = async (referralCode, email) => {
+  dispatch(loadingReferral(true))
+  try {
+    const { data } = await axios.get(`/api/users/referrals?referralCode=${referralCode
+      }&email=${email}`)
+    dispatch(setReferralData(data))
+    console.log(data)
+    dispatch(loadingReferral(false))
+  } catch (err) {
+    alert(getError(err))
+  }
+}
 
 const initPosts = async () => {
   dispatch(setLoading(true))
@@ -81,6 +97,10 @@ const getPeriod = (date) => {
   return updated
 }
 
+const numberWithCommas = (x) => {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+}
+
 const logoutHandler = () => {
   router.push('/')
   Cookies.remove('userInfo')
@@ -103,6 +123,9 @@ export {
   initPosts,
   setPages,
   toggleEdit,
-  switchTab
+  switchTab,
+  loadingReferral,
+  setReferralData,
+  setRequestWithdrawal
 }
-export { fetchPosts, getPeriod, fetchData, logoutHandler }
+export { fetchPosts, getPeriod, fetchData, logoutHandler, fetchReferralData, numberWithCommas }

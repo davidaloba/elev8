@@ -60,7 +60,6 @@ const postsSlice: any = createSlice({
     },
     setScrollPosition: (posts, action) => {
       posts.scrollPosition = action.payload
-      console.log('scroll to ', action.payload)
     }
   }
 

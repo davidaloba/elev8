@@ -91,7 +91,7 @@ export const EditProfile = () => {
             <div className='my-4'>
               <label htmlFor="email">Phone Number</label>
               <input
-                type='telephone'
+                type='tel'
                 name="phone"
                 id="phone"
                 value={phone}

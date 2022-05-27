@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { initPosts, fetchPosts } from '@store/actions'
 import { RootState, useAppSelector } from '@store'
-import { PostPreview } from './postpreview'
+import { PostPreview } from './post'
 import { Container } from '@components'
 
 export const Posts = () => {

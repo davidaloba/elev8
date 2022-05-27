@@ -30,7 +30,6 @@ export const AdminUsers = () => {
   const [editUser, setEditUser] = useState('')
   const [newPassword, setNewPassword] = useState('')
   const [confirmNewPassword, setConfirmNewPassword] = useState('')
-  console.log(newPassword, confirmNewPassword)
 
   const createHandler = async () => {
     if (!window.confirm('Are you sure?')) {

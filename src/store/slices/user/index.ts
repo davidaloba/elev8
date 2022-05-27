@@ -8,6 +8,11 @@ const initialState = {
     menu: false,
     edit: false,
     tab: 'profile'
+  },
+  referral: {
+    loading: true,
+    requestWithdrawal: false,
+    data: {}
   }
 }
 
@@ -34,6 +39,15 @@ const userSlice: any = createSlice({
     },
     switchTab: (user, action) => {
       user.profile.tab = action.payload
+    },
+    loadingReferral: (user, action) => {
+      user.referral.loading = action.payload
+    },
+    setRequestWithdrawal: (user, action) => {
+      user.referral.requestWithdrawal = action.payload
+    },
+    setReferralData: (user, action) => {
+      user.referral.data = action.payload
     }
   }
 
@@ -48,7 +62,7 @@ const userSlice: any = createSlice({
 
 })
 
-export const { login, signout, savePost, toggleMenu, toggleEdit, switchTab } = userSlice.actions
+export const { login, signout, savePost, toggleMenu, toggleEdit, switchTab, loadingReferral, setReferralData, setRequestWithdrawal } = userSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectCount = (state: RootState) => state.user

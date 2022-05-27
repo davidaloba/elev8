@@ -9,7 +9,7 @@ import { ViewPost } from './viewpost'
 export const Home = () => {
   const dispatch = useAppDispatch()
   const { user, posts } = useAppSelector((state: RootState) => state)
-  console.log(posts)
+  console.log(posts, user)
 
   const currentPost = posts.current
 

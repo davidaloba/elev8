@@ -5,6 +5,7 @@ import { login } from '@store/actions'
 import { getError } from '@db/error'
 import Cookies from 'js-cookie'
 import axios from 'axios'
+import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3'
 
 import {
   Container,
@@ -25,13 +26,12 @@ const Login = () => {
     }
   }, [router, userInfo])
 
-  const [isLogin, setIsLogin] = useState(true)
+  const [isLogin, setIsLogin] = useState(false)
 
   const [userName, setUserName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
-  const [dob, setDob] = useState('')
   const [referrer, setReferrer] = useState('')
 
   const loginHandler = async () => {
@@ -51,26 +51,55 @@ const Login = () => {
     } else alert('please enter your email and password to login')
   }
 
+  const config = {
+    public_key: 'FLWPUBK_TEST-c2672daab1a08b315c548e415bca5a75-X',
+    tx_ref: Date.now(),
+    amount: 100,
+    currency: 'NGN',
+    payment_options: 'card,mobilemoney,ussd',
+    customer: {
+      email: email,
+      name: userName
+    },
+    customizations: {
+      title: 'Elev8 Registration',
+      description: 'Payment for access to the Elev8 platform',
+      logo: '/logo.jpg'
+    }
+  }
+  const handleFlutterPayment = useFlutterwave(config)
+
+  const paymenthandler = () => {
+    handleFlutterPayment({
+      callback: async (response) => {
+        console.log(response)
+        try {
+          const { data } = await axios.post('/api/users/register', {
+            transaction_id: response.transaction_id,
+            userName,
+            email,
+            password,
+            referrer
+          })
+          dispatch(login(data))
+          Cookies.set('userInfo', data)
+          router.push('/app')
+        } catch (err) {
+          alert(getError(err))
+        }
+        closePaymentModal() // this will close the modal programmatically
+      },
+      onClose: () => {
+      }
+    })
+  }
+
   const registerHandler = async () => {
     if (password !== confirmPassword) {
       alert('Password and confirm password are not match')
     }
-    try {
-      const { data } = await axios.post('/api/users/register', {
-        userName,
-        email,
-        password,
-        dob,
-        referrer
-      })
-      dispatch(login(data))
-      Cookies.set('userInfo', data)
-      router.push('/app')
-    } catch (err) {
-      alert(getError(err))
-    }
+    paymenthandler()
   }
-
   return (
     <>
       <Container>
