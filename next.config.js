@@ -10,15 +10,15 @@ module.exports = {
   //       : null
   //   ].filter(Boolean)
   // },
-  async redirects () {
-    return [
-      {
-        source: '/((?!maintenance|_next).*)',
-        destination: '/maintenance',
-        permanent: false
-      }
-    ]
-  },
+  // async redirects () {
+  //   return [
+  //     {
+  //       source: '/((?!maintenance|_next).*)',
+  //       destination: '/maintenance',
+  //       permanent: false
+  //     }
+  //   ]
+  // },
   reactStrictMode: true,
   swcMinify: true,
   typescript: {
