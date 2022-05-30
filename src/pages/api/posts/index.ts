@@ -9,11 +9,13 @@ handler.get(async (req, res) => {
   const page = parseInt(req.query.page)
   const limit = parseInt(req.query.limit)
   const startIndex = (page - 1) * limit
+  console.log(startIndex)
 
   const posts = await Post.find({})
   const pages = Math.ceil(posts.length / limit)
 
-  const paginatedPosts = await Post.find({}).sort('-createdAt').skip(startIndex).limit(limit)
+  const paginatedPosts = await Post.find({}).sort('-createdAt')
+  // .skip(startIndex).limit(limit)
   await db.disconnect()
   res.send({ posts: paginatedPosts, pages })
 })
