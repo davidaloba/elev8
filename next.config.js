@@ -1,4 +1,15 @@
 module.exports = {
+  async redirects () {
+    return [
+      process.env.MAINTENANCE_MODE === '1'
+        ? {
+            source: '/((?!maintenance|_next).*)',
+            destination: '/maintenance',
+            permanent: false
+          }
+        : null
+    ].filter(Boolean)
+  },
   reactStrictMode: true,
   swcMinify: true,
   typescript: {
@@ -11,4 +22,5 @@ module.exports = {
   eslint: {
     dirs: ['./src', './test']
   }
+
 }
