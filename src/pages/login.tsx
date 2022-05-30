@@ -17,6 +17,7 @@ const Login = () => {
   const { userInfo } = useAppSelector((state: RootState) => state.user)
   const dispatch = useAppDispatch()
   const router = useRouter()
+  const { register } = router.query
 
   useEffect(() => {
     if (userInfo) {
@@ -26,7 +27,7 @@ const Login = () => {
     }
   }, [router, userInfo])
 
-  const [isLogin, setIsLogin] = useState(false)
+  const [isLogin, setIsLogin] = useState(register)
 
   const [userName, setUserName] = useState('')
   const [email, setEmail] = useState('')

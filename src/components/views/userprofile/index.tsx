@@ -49,7 +49,7 @@ export const Profile = () => {
     }
   }
 
-  const tabs = ['profile', 'referrals']
+  const tabs = ['profile', 'referrals', 'support']
   return (<>
     {user.referral.requestWithdrawal && <div className=" px-12 py-16 z-50 fixed h-screen w-screen bg-black bg-opacity-80 " >
       <div onClick={() => { dispatch(setRequestWithdrawal(false)) }} className="cursor-pointer w-max mb-20 pb-1 pt-3 px-3 bg-white rounded-full " >
