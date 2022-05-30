@@ -9,7 +9,7 @@ handler.get(async (req, res) => {
   const referralCode = req.query.referralCode
   const user = await User.findOne({ email: req.query.email })
 
-  const withdrawals = user.referral.withdrawals
+  const withdrawals = user.referral.withdrawals.sort((a, b) => b.createdAt - a.createdAt)
   const totalWithdrawals = user.referral.totalWithdrawals
 
   const referrals = await User.find({ admin: false, 'referral.referrer': referralCode })

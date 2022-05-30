@@ -2,12 +2,14 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { RootState } from '@store'
 
 const initialState = {
+  loading: true,
   summary: {
     postsCount: null,
     usersCount: null
   },
   posts: null,
-  users: null
+  users: null,
+  withdrawalRequests: null
 }
 
 const userSlice: any = createSlice({
@@ -17,14 +19,21 @@ const userSlice: any = createSlice({
 
   reducers: {
     fetchAdminSummary: (admin, action) => {
-      admin.summary.postsCount = action.payload.postsCount
-      admin.summary.usersCount = action.payload.usersCount
+      admin.summary = action.payload
     },
     fetchAdminPosts: (admin, action) => {
       admin.posts = action.payload
     },
     fetchAdminUsers: (admin, action) => {
       admin.users = action.payload
+    },
+    fetchAdminWithdrawals: (admin, action) => {
+      const data = Object.values(action.payload)
+      console.log(data)
+      admin.withdrawalRequests = data
+    },
+    setAdminLoading: (admin, action) => {
+      admin.loading = false
     }
   }
 
@@ -42,7 +51,9 @@ const userSlice: any = createSlice({
 export const {
   fetchAdminSummary,
   fetchAdminPosts,
-  fetchAdminUsers
+  fetchAdminUsers,
+  fetchAdminWithdrawals,
+  setAdminLoading
 } = userSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type

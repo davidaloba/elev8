@@ -5,7 +5,9 @@ import axios from 'axios'
 import {
   fetchAdminSummary,
   fetchAdminPosts,
-  fetchAdminUsers
+  fetchAdminUsers,
+  fetchAdminWithdrawals,
+  setAdminLoading
 } from '@store/slices/admin'
 import {
   login,
@@ -68,11 +70,13 @@ const fetchPosts = async (page) => {
 }
 
 const fetchData = async (url, bearer, action) => {
+  dispatch(setAdminLoading(true))
   try {
     const { data } = await axios.get(url, {
       headers: { authorization: `Bearer ${bearer}` }
     })
     dispatch(action(data))
+    dispatch(setAdminLoading(false))
   } catch (err) {
     alert(getError(err))
   }
@@ -126,6 +130,8 @@ export {
   switchTab,
   loadingReferral,
   setReferralData,
-  setRequestWithdrawal
+  setRequestWithdrawal,
+  fetchAdminWithdrawals,
+  setAdminLoading
 }
 export { fetchPosts, getPeriod, fetchData, logoutHandler, fetchReferralData, numberWithCommas }

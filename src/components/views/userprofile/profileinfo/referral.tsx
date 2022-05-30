@@ -87,7 +87,7 @@ export const Referral = () => {
                 {withdrawal.status === 'rejected' && <div className="rounded-full bg-red-500 h-min py-1 px-2 mr-4">
                   <Image src='/avatar.png' width='24' height='24' alt='' />
                 </div>}
-                {withdrawal.status === 'done' && <div className="rounded-full bg-green-500 h-min py-1 px-2 mr-4">
+                {withdrawal.status === 'confirmed' && <div className="rounded-full bg-green-500 h-min py-1 px-2 mr-4">
                   <Image src='/avatar.png' width='24' height='24' alt='' />
                 </div>}
               </div>
