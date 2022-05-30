@@ -1,19 +1,13 @@
 import mongoose from 'mongoose'
 
-const profileSchema = new mongoose.Schema(
+const withdrawalRequestSchema = new mongoose.Schema(
   {
-    dob: { type: String, required: false },
-    phone: String,
-    firstName: String,
-    lastName: String,
-    avatar: String,
-    facebook: String,
-    instagram: String,
-    twitter: String,
-    points: { type: Number, required: true, default: 0 },
-    saves: { type: Array },
-    tasks: { type: Array },
-    paid: { type: Array }
+    withdrawalId: { type: String, required: true, unique: true },
+    bankName: { type: String, required: true },
+    accountName: { type: String, required: true },
+    accountNo: { type: Number, required: true },
+    amount: { type: Number, required: true },
+    status: { type: String, required: true, default: 'pending' }
   },
   {
     timestamps: true
@@ -26,7 +20,26 @@ const userSchema = new mongoose.Schema(
     password: { type: String, required: true },
     isAdmin: { type: Boolean, required: true, default: false },
     userName: { type: String, required: true, unique: true },
-    profile: profileSchema
+    profile: {
+      points: { type: Number, default: 0 },
+      saves: { type: Array, default: [] },
+      tasks: { type: Array, default: [] },
+      paid: { type: Array, default: [] },
+      phone: String,
+      firstName: String,
+      lastName: String,
+      avatar: String,
+      dob: String,
+      facebook: String,
+      instagram: String,
+      twitter: String
+    },
+    referral: {
+      referralCode: { type: String, required: true, unique: true },
+      referrer: { type: String, default: 'elev8Admin' },
+      withdrawals: { type: [withdrawalRequestSchema], default: [] },
+      totalWithdrawals: { type: Number, default: 0 }
+    }
   },
   {
     timestamps: true

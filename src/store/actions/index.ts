@@ -5,45 +5,77 @@ import axios from 'axios'
 import {
   fetchAdminSummary,
   fetchAdminPosts,
-  fetchAdminUsers
+  fetchAdminUsers,
+  fetchAdminWithdrawals,
+  setAdminLoading
 } from '@store/slices/admin'
 import {
   login,
   signout,
   savePost,
   toggleMenu,
-  toggleEdit
+  toggleEdit,
+  switchTab,
+  loadingReferral,
+  setReferralData,
+  setRequestWithdrawal
 } from '@store/slices/user'
 import {
   setLoading,
-  setPosts,
+  loadPosts,
+  setPages,
   filterPosts,
   setSearchTerm,
   expandPost,
-  getScrollPosition
+  setScrollPosition
 } from '@store/slices/posts'
 import router from 'next/router'
 import Cookies from 'js-cookie'
 
 const dispatch = store.dispatch
 
-const fetchData = async (url, bearer, action) => {
+const fetchReferralData = async (referralCode, email) => {
+  dispatch(loadingReferral(true))
   try {
-    const { data } = await axios.get(url, {
-      headers: { authorization: `Bearer ${bearer}` }
-    })
-    dispatch(action(data))
+    const { data } = await axios.get(`/api/users/referrals?referralCode=${referralCode
+      }&email=${email}`)
+    dispatch(setReferralData(data))
+    dispatch(loadingReferral(false))
   } catch (err) {
     alert(getError(err))
   }
 }
 
-const fetchPosts = async (url) => {
+const initPosts = async () => {
   dispatch(setLoading(true))
   try {
-    const { data } = await axios.get(url)
-    dispatch(setPosts(data))
+    const { data } = await axios.get('/api/posts')
+    dispatch(loadPosts(data.posts))
+    dispatch(setPages(data.pages))
     dispatch(setLoading(false))
+  } catch (err) {
+    alert(getError(err))
+  }
+}
+
+const fetchPosts = async (page) => {
+  try {
+    const { data } = await axios.get(`/api/posts?page=${page}&limit=10`)
+    dispatch(loadPosts(data.posts))
+    dispatch(setPages(data.pages))
+  } catch (err) {
+    alert(getError(err))
+  }
+}
+
+const fetchData = async (url, bearer, action) => {
+  dispatch(setAdminLoading(true))
+  try {
+    const { data } = await axios.get(url, {
+      headers: { authorization: `Bearer ${bearer}` }
+    })
+    dispatch(action(data))
+    dispatch(setAdminLoading(false))
   } catch (err) {
     alert(getError(err))
   }
@@ -68,6 +100,10 @@ const getPeriod = (date) => {
   return updated
 }
 
+const numberWithCommas = (x) => {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+}
+
 const logoutHandler = () => {
   router.push('/')
   Cookies.remove('userInfo')
@@ -75,7 +111,7 @@ const logoutHandler = () => {
 }
 
 export {
-  getScrollPosition,
+  setScrollPosition,
   fetchAdminSummary,
   fetchAdminUsers,
   fetchAdminPosts,
@@ -85,9 +121,16 @@ export {
   setSearchTerm,
   savePost,
   setLoading,
-  setPosts,
   expandPost,
   toggleMenu,
-  toggleEdit
+  initPosts,
+  setPages,
+  toggleEdit,
+  switchTab,
+  loadingReferral,
+  setReferralData,
+  setRequestWithdrawal,
+  fetchAdminWithdrawals,
+  setAdminLoading
 }
-export { fetchPosts, getPeriod, fetchData, logoutHandler }
+export { fetchPosts, getPeriod, fetchData, logoutHandler, fetchReferralData, numberWithCommas }

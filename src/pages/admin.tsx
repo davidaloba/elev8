@@ -5,21 +5,24 @@ import { RootState, useAppSelector } from '@store'
 import { fetchAdminSummary, fetchData, logoutHandler } from '@store/actions'
 
 import Image from 'next/image'
-import { AdminPosts, AdminUsers, Container, Intro } from '@components'
+import { AdminPosts, AdminUsers, AdminReferrals, Container, Intro } from '@components'
 
 const AdminDashboard = () => {
   const [isLoading, setIsLoading] = useState(true)
   const router = useRouter()
   const { user, admin } = useAppSelector((state: RootState) => state)
   const userInfo = user.userInfo
-  const [tab, setTab] = useState('posts')
+  const [tab, setTab] = useState('referrals')
 
+  const [loading, setLoading] = useState(true)
   useEffect(() => {
     if (!userInfo) {
       router.push('/login')
     }
-    fetchData('/api/admin/summary', userInfo.token, fetchAdminSummary)
     userInfo.isAdmin ? setIsLoading(false) : router.push('/app')
+    setLoading(true)
+    fetchData('/api/admin/summary', userInfo.token, fetchAdminSummary)
+    setLoading(false)
   }, [router, userInfo])
 
   return (<>
@@ -43,27 +46,35 @@ const AdminDashboard = () => {
       <main className="min-h-screen">
         <section>
           <Container >
-            <div className="flex items-center justify-around my-4 ">
-              <div onClick={() => setTab('posts')} className=" cursor-pointer flex flex-col items-center justify-center rounded-3xl border p-4  w-1/3 mr-4 " >
-                <div className=""><Image src='/avatar.png' width='32' height='32' className="rounded-full" alt='name' /></div>
-                {admin.summary.postsCount
-                  ? <div className=' text-3xl font-bold'>{admin.summary.postsCount}</div>
-                  : <div className=' text-3xl font-bold'>Loading...</div>}
-                <div className=" ">Posts</div>
-              </div>
-              <div onClick={() => setTab('users')} className="cursor-pointer flex flex-col items-center justify-center rounded-3xl border p-4  w-1/3 " >
-                <div className=""><Image src='/avatar.png' width='32' height='32' className="rounded-full" alt='name' /></div>
-                {admin.summary.usersCount
-                  ? <div className=' text-3xl font-bold'>{admin.summary.usersCount}</div>
-                  : <div className=' text-3xl font-bold'>Loading...</div>}
-                <div className=" ">Users</div>
-              </div>
+              <div className="flex items-center justify-around my-4 ">
+                <div onClick={() => setTab('posts')} className=" cursor-pointer flex flex-col items-center justify-center rounded-3xl border p-4  w-1/3 mr-4 " >
+                  <div className=""><Image src='/avatar.png' width='32' height='32' className="rounded-full" alt='name' /></div>
+                  {!loading
+                    ? !admin.summary.postsCount ? <div className=' text-3xl font-bold'>0</div> : <div className=' text-3xl font-bold'>{admin.summary.postsCount}</div>
+                    : <div className=' text-3xl font-bold'>Loading...</div>}
+                  <div className=" ">Posts</div>
+                </div>
+                <div onClick={() => setTab('users')} className="cursor-pointer flex flex-col items-center justify-center rounded-3xl border p-4  w-1/3  mr-4 " >
+                  <div className=""><Image src='/avatar.png' width='32' height='32' className="rounded-full" alt='name' /></div>
+                  {!loading
+                    ? !admin.summary.usersCount ? <div className=' text-3xl font-bold'>0</div> : <div className=' text-3xl font-bold'>{admin.summary.usersCount}</div>
+                    : <div className=' text-3xl font-bold'>Loading...</div>}
+                  <div className=" ">Users</div>
+                </div>
+                <div onClick={() => setTab('referrals')} className="cursor-pointer flex flex-col items-center justify-center rounded-3xl border p-4  w-1/3 " >
+                  <div className=""><Image src='/avatar.png' width='32' height='32' className="rounded-full" alt='name' /></div>
+                  {!loading
+                    ? !admin.summary.withdrawalRequestsCount ? <div className=' text-3xl font-bold'>0</div> : <div className=' text-3xl font-bold'>{admin.summary.withdrawalRequestsCount}</div>
+                    : <div className=' text-3xl font-bold'>Loading...</div>}
+                  <div className=" ">Withdrawal requests</div>
+                </div>
             </div>
           </Container>
         </section>
 
         {tab === 'posts' && <AdminPosts />}
         {tab === 'users' && <AdminUsers />}
+        {tab === 'referrals' && <AdminReferrals />}
 
       </main>
 

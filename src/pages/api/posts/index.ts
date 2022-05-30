@@ -6,9 +6,16 @@ const handler = nc()
 
 handler.get(async (req, res) => {
   await db.connect()
-  const posts = await Post.find({}).sort('-createdAt')
+  const page = parseInt(req.query.page)
+  const limit = parseInt(req.query.limit)
+  const startIndex = (page - 1) * limit
+
+  const posts = await Post.find({})
+  const pages = Math.ceil(posts.length / limit)
+
+  const paginatedPosts = await Post.find({}).sort('-createdAt').skip(startIndex).limit(limit)
   await db.disconnect()
-  res.send(posts)
+  res.send({ posts: paginatedPosts, pages })
 })
 
 export default handler

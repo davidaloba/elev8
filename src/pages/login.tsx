@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import { RootState, useAppSelector, useAppDispatch } from '@store'
 import { login } from '@store/actions'
 import { getError } from '@db/error'
 import Cookies from 'js-cookie'
 import axios from 'axios'
+import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3'
 
 import {
   Container,
@@ -16,6 +17,7 @@ const Login = () => {
   const { userInfo } = useAppSelector((state: RootState) => state.user)
   const dispatch = useAppDispatch()
   const router = useRouter()
+  const { register } = router.query
 
   useEffect(() => {
     if (userInfo) {
@@ -25,50 +27,92 @@ const Login = () => {
     }
   }, [router, userInfo])
 
-  const [isLogin, setIsLogin] = useState(true)
+  const [isLogin, setIsLogin] = useState(register)
 
   const [userName, setUserName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
-  const [dob, setDob] = useState('')
+  const [referrer, setReferrer] = useState('')
 
+  const loginForm = useRef()
   const loginHandler = async () => {
-    if (email.length > 0 && password.length > 0) {
-      try {
-        const { data } = await axios.post('/api/users/login', {
-          email: email,
-          password: password
-        })
-        dispatch(login(data))
-        Cookies.set('userInfo', data)
-        if (data.isAdmin) router.push('/admin')
-        else router.push('/app')
-      } catch (err) {
-        alert(getError(err))
-      }
-    } else alert('please enter your email and password to login')
+    const form = loginForm.current
+    if (!form.checkValidity()) {
+      return
+    }
+    try {
+      const { data } = await axios.post('/api/users/login', {
+        email: email,
+        password: password
+      })
+      dispatch(login(data))
+      Cookies.set('userInfo', data)
+      if (data.isAdmin) router.push('/admin')
+      else router.push('/app')
+    } catch (err) {
+      alert(getError(err))
+    }
   }
 
-  // const registerHandler = async () => {
-  //   if (password !== confirmPassword) {
-  //     alert('Password and confirm password are not match')
-  //   }
-  //   try {
-  //     const { data } = await axios.post('/api/users/register', {
-  //       userName,
-  //       email,
-  //       password,
-  //       dob
-  //     })
-  //     dispatch(login(data))
-  //     Cookies.set('userInfo', data)
-  //     router.push('/app')
-  //   } catch (err) {
-  //     alert(getError(err))
-  //   }
-  // }
+  const config = {
+    public_key: 'FLWPUBK_TEST-c2672daab1a08b315c548e415bca5a75-X',
+    tx_ref: Date.now(),
+    amount: 4000,
+    currency: 'NGN',
+    payment_options: 'card,mobilemoney,ussd',
+    customer: {
+      email: email,
+      name: userName
+    },
+    customizations: {
+      title: 'Elev8 Registration',
+      description: 'Payment for access to the Elev8 platform',
+      logo: '/logo.jpg'
+    }
+  }
+  const handleFlutterPayment = useFlutterwave(config)
 
+  const paymenthandler = () => {
+    handleFlutterPayment({
+      callback: async (response) => {
+        if (response.status !== 'successful') {
+          alert(` Your payment was ${response.status}.Please try again later`)
+          return
+        }
+        try {
+          const { data } = await axios.post('/api/users/register', {
+            transaction_id: response.transaction_id,
+            userName,
+            email,
+            password,
+            referrer
+          })
+          dispatch(login(data))
+          Cookies.set('userInfo', data)
+          router.push('/app')
+        } catch (err) {
+          alert(getError(err))
+        }
+        closePaymentModal() // this will close the modal programmatically
+      },
+      onClose: () => {
+      }
+    })
+  }
+
+  const registerForm = useRef()
+  const form = registerForm.current
+  const registerHandler = async (e) => {
+    if (!form.checkValidity()) {
+      return
+    }
+    if (password !== confirmPassword) {
+      alert('Password and confirm password are not match')
+      return
+    }
+    paymenthandler()
+  }
   return (
     <>
       <Container>
@@ -76,12 +120,11 @@ const Login = () => {
         {
           isLogin
             ? <div className='mb-20'>
-              {/* <hr className="border-accent-2 mt-28 mb-24" /> */}
+              <hr className="border-accent-2 mt-28 mb-24" />
               <div className='mt-6 mb-10'>
-                {/* <h1>Login</h1> */}
-                <p className='mb-4'>Enter the login details provided to in the confirmation email you received</p>
+                <h1>Login</h1>
               </div>
-              <form className='mb-8'>
+              <form ref={loginForm} className='mb-8'>
                 <div className='mb-6'>
                   <label htmlFor="email">Email</label>
                   <input
@@ -91,37 +134,40 @@ const Login = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className=''
+                    required
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                    title='Enter a valid email address'
                   ></input>
                 </div>
                 <div className=' mb-6'>
                   <label htmlFor="email">Password</label>
                   <input
                     type='password'
+                    minLength={6}
                     name="password"
                     id="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className=''
+                    required
                   ></input>
                 </div>
               </form>
-                <button onClick={(e) => loginHandler(email, password)} className='mt-4 py-2 rounded-2xl border-none bg-green-700  text-white font-semibold'>Login</button>
+              <button onClick={loginHandler} className='mt-4 py-2 rounded-2xl border-none bg-green-700  text-white font-semibold'>Login</button>
               <div className='text-xl'>
-                <p>Haven't registered yet? Click
-                  <a href='' className='cursor-pointer text-green-900'> here </a>
+                <p>Don't have an account? Click
+                  <span onClick={(e) => setIsLogin(!isLogin)} className='cursor-pointer text-green-900'> here </span>
                   to register.
                 </p>
-                {/* <p>Don't have an account? Click
-                <span onClick={(e) => setIsLogin(!isLogin)} className='cursor-pointer text-green-900'> here </span>
-                to register.
-              </p> */}
               </div>
             </div>
-            : <>
+            : <div className='mb-20'>
               <hr className="border-accent-2 mt-28 mb-24" />
-              <h1>Register</h1>
-              <form className=''>
-                <div>
+              <div className='mt-6 mb-10'>
+                <h1>Register</h1>
+              </div>
+              <form ref={registerForm} className='mb-8' >
+                <div className='mb-6'>
                   <label htmlFor="email">Email</label>
                   <input
                     type='email'
@@ -130,67 +176,41 @@ const Login = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className=''
-                  // rules={{
-                  //   required: true,
-                  //   pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/
-                  // }}
-                  // error={Boolean(errors.email)}
-                  // helperText={
-                  //   errors.email
-                  //     ? errors.email.type === 'pattern'
-                  //       ? 'Email is not valid'
-                  //       : 'Email is required'
-                  //     : ''
-                  // }
+                    required
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                    title='Enter a valid email address'
                   ></input>
                 </div>
-                <div>
+                <div className='mb-6'>
                   <label htmlFor="email">Password</label>
                   <input
                     type='password'
+                    minLength={6}
                     name="password"
                     id="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className=''
-                  // rules={{
-                  //   required: true,
-                  //   minLength: 6
-                  // }}
-                  // error={Boolean(errors.password)}
-                  // helperText={
-                  //   errors.password
-                  //     ? errors.password.type === 'minLength'
-                  //       ? 'Password length is more than 5'
-                  //       : 'Password is required'
-                  //     : ''
-                  // }
+                    required
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                    title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
+
                   ></input>
                 </div>
-                <div>
+                <div className='mb-6'>
                   <label htmlFor="email">Confirm Password</label>
                   <input
                     type='password'
+                    minLength={6}
                     name="confirmPassword"
                     id="confirmPassword"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     className=''
-                  // rules={{
-                  //   required: true,
-                  //   minLength: 6
-                  // }}
-                  // error={Boolean(errors.confirmPassword)}
-                  // helperText={
-                  //   errors.confirmPassword
-                  //     ? errors.confirmPassword.type === 'minLength'
-                  //       ? 'Confirm password length is more than 5'
-                  //       : 'Confirm password is required'
-                  //     : ''
-                  // }
+                    required
                   ></input>
                 </div>
-                <div>
+                <div className='mb-6'>
                   <label htmlFor="email">Username</label>
                   <input
                     type='text'
@@ -199,28 +219,17 @@ const Login = () => {
                     value={userName}
                     onChange={(e) => setUserName(e.target.value)}
                     className=''
-                  // rules={{
-                  //   required: true,
-                  //   minLength: 2
-                  // }}
-                  // error={Boolean(errors.name)}
-                  // helperText={
-                  //   errors.name
-                  //     ? errors.name.type === 'minLength'
-                  //       ? 'Name length is more than 1'
-                  //       : 'Name is required'
-                  //     : ''
-                  // }
+                    required
                   ></input>
                 </div>
-                <div>
-                  <label htmlFor="email">Date of Birth</label>
+                <div className='mb-6'>
+                  <label htmlFor="email">Referral Code</label>
                   <input
-                    type='date'
-                    name="dob"
-                    id="dob"
-                    value={dob}
-                    onChange={(e) => setDob(e.target.value)}
+                    type='text'
+                    name="referrer"
+                    id="referrer"
+                    value={referrer}
+                    onChange={(e) => setReferrer(e.target.value)}
                     className=''
                   // rules={{
                   //   required: true,
@@ -237,14 +246,16 @@ const Login = () => {
                   ></input>
                 </div>
                 <div>
-                  <button onClick={(e) => loginHandler(email, password)} className='py-2 px-6 rounded-2xl border-none bg-lime-500 hover:bg-green-600 focus:outline-none ring-opacity-75 ring-green-400 focus:ring text-white text-xl font-semibold'>Sign up</button>
                 </div>
               </form>
-              <p>Already have an account? Click
-                <span onClick={(e) => setIsLogin(!isLogin)} className='cursor-pointer text-green-900'> here </span>
-                to login.
-              </p>
-            </>
+              <button onClick={registerHandler} className='mt-4 py-2 rounded-2xl border-none bg-green-700  text-white font-semibold' >Register</button>
+              <div className='text-xl'>
+                <p>Already have an account? Click
+                  <span onClick={(e) => setIsLogin(!isLogin)} className='cursor-pointer text-green-900'> here </span>
+                  to login.
+                </p>
+              </div>
+            </div>
         }
         <Footer />
       </Container>

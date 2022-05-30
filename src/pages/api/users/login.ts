@@ -17,7 +17,8 @@ handler.post(async (req, res) => {
       email: user.email,
       isAdmin: user.isAdmin,
       userName: user.userName,
-      profile: user.profile
+      profile: user.profile,
+      referralCode: user.referral.referralCode
     })
   } else {
     res.status(401).send({ message: 'Invalid email or password' })

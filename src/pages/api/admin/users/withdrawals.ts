@@ -12,8 +12,6 @@ handler.use(isAuth, isAdmin)
 
 handler.get(async (req, res) => {
   await db.connect()
-  const postsCount = await Post.countDocuments()
-  const usersCount = await User.countDocuments({ isAdmin: false })
   const withdrawalRequests = await User.aggregate([
     { $match: { isAdmin: false } },
     { $unwind: '$referral.withdrawals' },
@@ -31,10 +29,24 @@ handler.get(async (req, res) => {
       }
     }
   ])
-  const withdrawalRequestsCount = withdrawalRequests.length
   await db.disconnect()
 
-  res.send({ postsCount, usersCount, withdrawalRequestsCount })
+  res.send({ ...withdrawalRequests })
+})
+
+handler.put(async (req, res) => {
+  await db.connect()
+
+  const user = await User.findOne({ userName: req.body.userName })
+  const withdrawalRequest = user.referral.withdrawals
+    .find((withdrawal) => withdrawal.withdrawalId === req.body.withdrawalId)
+
+  withdrawalRequest.status = req.query.status
+  if (req.query.status === 'rejected') user.referral.totalWithdrawals -= req.body.amount
+
+  await user.save()
+  await db.disconnect()
+  res.send({ withdrawalRequest })
 })
 
 export default handler

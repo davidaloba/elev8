@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 import { login, toggleEdit } from '@store/actions'
 import { RootState, useAppDispatch, useAppSelector } from '@store'
@@ -28,7 +28,12 @@ export const EditProfile = () => {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
 
+  const changePassword = useRef()
   const submitHandler = async () => {
+    const form = changePassword.current
+    if (!form.checkValidity()) {
+      return
+    }
     if (password !== confirmPassword) {
       alert('Passwords don\'t match')
       return
@@ -91,7 +96,7 @@ export const EditProfile = () => {
             <div className='my-4'>
               <label htmlFor="email">Phone Number</label>
               <input
-                type='telephone'
+                type='tel'
                 name="phone"
                 id="phone"
                 value={phone}
@@ -141,6 +146,8 @@ export const EditProfile = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className='outlined fullWidth'
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                title='Enter a valid email address'
               ></input>
             </div>
             <div className='my-4'>
@@ -156,7 +163,7 @@ export const EditProfile = () => {
             </div >
           </form>
           {editPassword &&
-            <>
+            <form ref={changePassword}>
               <div className='my-4'>
                 <label htmlFor="email">Password</label>
                 <input
@@ -166,12 +173,16 @@ export const EditProfile = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className='outlined fullWidth'
+                  required
+                  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                  title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
                 ></input>
               </div>
               <div className='my-4'>
                 <label htmlFor="email">Confirm Password</label>
                 <input
                   type='password'
+                  minLength={6}
                   name="confirmPassword"
                   id="confirmPassword"
                   value={confirmPassword}
@@ -179,7 +190,7 @@ export const EditProfile = () => {
                   className='outlined fullWidth'
                 ></input>
               </div>
-            </>}
+            </form>}
           {!editPassword && <>
             <div onClick={() => setEditPassword(true)} className='my-6 text-green-900 font-bold cursor-pointer hover:underline'>Edit password?</div>
           </>

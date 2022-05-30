@@ -2,9 +2,9 @@
 import { RootState, useAppSelector } from '@store'
 
 import { Container } from '@components'
-import { OpenPost } from './openpost'
+import { Post } from './post'
 
-export const ExpandPost = () => {
+export const ViewPost = () => {
   const { posts } = useAppSelector((state: RootState) => state)
   const currentPost = posts.current
 
@@ -29,7 +29,7 @@ export const ExpandPost = () => {
       <section className=''>
         {/* <div className='sticky top-[286px] z-50 py-4 bg-white '> */}
         <div className='py-4 '>
-          <OpenPost
+          <Post
             post={currentPost}
             key={currentPost.slug}
           />
