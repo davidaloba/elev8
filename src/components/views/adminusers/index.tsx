@@ -37,6 +37,7 @@ export const AdminUsers = () => {
     }
     if (password !== confirmPassword) {
       alert('Password and confirm password are not match')
+      return
     }
     try {
       const { data } = await axios.post('/api/users/register', {
@@ -141,6 +142,9 @@ export const AdminUsers = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className=''
+                  required
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                  title='Enter a valid email address'
                 ></input>
               </div>
               <div>
@@ -152,6 +156,7 @@ export const AdminUsers = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className=''
+                  required
                 ></input>
               </div>
               <div>
@@ -163,6 +168,7 @@ export const AdminUsers = () => {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   className=''
+                  required
                 ></input>
               </div>
               <div>
@@ -174,6 +180,7 @@ export const AdminUsers = () => {
                   value={userName}
                   onChange={(e) => setUserName(e.target.value)}
                   className=''
+                  required
                 ></input>
               </div>
             </form>
@@ -192,22 +199,26 @@ export const AdminUsers = () => {
                 <label htmlFor="email">Enter New Password</label>
                 <input
                   type='password'
+                    minLength={6}
                   name="password"
                   id="password"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                   className='outlined fullWidth'
+                  required
                 ></input>
               </div>
               <div>
                 <label htmlFor="email">Confirm Password</label>
                 <input
                   type='password'
+                    minLength={6}
                   name="confirmPassword"
                   id="confirmPassword"
                   value={confirmNewPassword}
                   onChange={(e) => setConfirmNewPassword(e.target.value)}
                   className='outlined fullWidth'
+                  required
                 ></input>
               </div>
             </form>

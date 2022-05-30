@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import { RootState, useAppSelector, useAppDispatch } from '@store'
 import { login } from '@store/actions'
@@ -35,27 +35,32 @@ const Login = () => {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [referrer, setReferrer] = useState('')
 
+  const loginForm = useRef()
   const loginHandler = async () => {
-    if (email.length > 0 && password.length > 0) {
-      try {
-        const { data } = await axios.post('/api/users/login', {
-          email: email,
-          password: password
-        })
-        dispatch(login(data))
-        Cookies.set('userInfo', data)
-        if (data.isAdmin) router.push('/admin')
-        else router.push('/app')
-      } catch (err) {
-        alert(getError(err))
-      }
-    } else alert('please enter your email and password to login')
+    const form = loginForm.current
+    console.log(form.checkValidity())
+    if (!form.checkValidity()) {
+      console.log(form.reportValidity())
+      return
+    }
+    try {
+      const { data } = await axios.post('/api/users/login', {
+        email: email,
+        password: password
+      })
+      dispatch(login(data))
+      Cookies.set('userInfo', data)
+      if (data.isAdmin) router.push('/admin')
+      else router.push('/app')
+    } catch (err) {
+      alert(getError(err))
+    }
   }
 
   const config = {
     public_key: 'FLWPUBK_TEST-c2672daab1a08b315c548e415bca5a75-X',
     tx_ref: Date.now(),
-    amount: 100,
+    amount: 4000,
     currency: 'NGN',
     payment_options: 'card,mobilemoney,ussd',
     customer: {
@@ -74,6 +79,10 @@ const Login = () => {
     handleFlutterPayment({
       callback: async (response) => {
         console.log(response)
+        if (response.status !== 'successful') {
+          alert(` Your payment was ${response.status}.Please try again later`)
+          return
+        }
         try {
           const { data } = await axios.post('/api/users/register', {
             transaction_id: response.transaction_id,
@@ -95,9 +104,17 @@ const Login = () => {
     })
   }
 
-  const registerHandler = async () => {
+  const registerForm = useRef()
+  const form = registerForm.current
+  const registerHandler = async (e) => {
+    console.log(form.checkValidity())
+    if (!form.checkValidity()) {
+      console.log(form.reportValidity())
+      return
+    }
     if (password !== confirmPassword) {
       alert('Password and confirm password are not match')
+      return
     }
     paymenthandler()
   }
@@ -112,7 +129,7 @@ const Login = () => {
               <div className='mt-6 mb-10'>
                 <h1>Login</h1>
               </div>
-              <form className='mb-8'>
+              <form ref={loginForm} className='mb-8'>
                 <div className='mb-6'>
                   <label htmlFor="email">Email</label>
                   <input
@@ -122,17 +139,22 @@ const Login = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className=''
+                    required
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                    title='Enter a valid email address'
                   ></input>
                 </div>
                 <div className=' mb-6'>
                   <label htmlFor="email">Password</label>
                   <input
                     type='password'
+                    minLength={6}
                     name="password"
                     id="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className=''
+                    required
                   ></input>
                 </div>
               </form>
@@ -149,7 +171,7 @@ const Login = () => {
               <div className='mt-6 mb-10'>
                 <h1>Register</h1>
               </div>
-              <form className='mb-8'>
+              <form ref={registerForm} className='mb-8' >
                 <div className='mb-6'>
                   <label htmlFor="email">Email</label>
                   <input
@@ -159,64 +181,38 @@ const Login = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className=''
-                  // rules={{
-                  //   required: true,
-                  //   pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/
-                  // }}
-                  // error={Boolean(errors.email)}
-                  // helperText={
-                  //   errors.email
-                  //     ? errors.email.type === 'pattern'
-                  //       ? 'Email is not valid'
-                  //       : 'Email is required'
-                  //     : ''
-                  // }
+                    required
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                    title='Enter a valid email address'
                   ></input>
                 </div>
                 <div className='mb-6'>
                   <label htmlFor="email">Password</label>
                   <input
                     type='password'
+                    minLength={6}
                     name="password"
                     id="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className=''
-                  // rules={{
-                  //   required: true,
-                  //   minLength: 6
-                  // }}
-                  // error={Boolean(errors.password)}
-                  // helperText={
-                  //   errors.password
-                  //     ? errors.password.type === 'minLength'
-                  //       ? 'Password length is more than 5'
-                  //       : 'Password is required'
-                  //     : ''
-                  // }
+                    required
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                    title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
+
                   ></input>
                 </div>
                 <div className='mb-6'>
                   <label htmlFor="email">Confirm Password</label>
                   <input
                     type='password'
+                    minLength={6}
                     name="confirmPassword"
                     id="confirmPassword"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     className=''
-                  // rules={{
-                  //   required: true,
-                  //   minLength: 6
-                  // }}
-                  // error={Boolean(errors.confirmPassword)}
-                  // helperText={
-                  //   errors.confirmPassword
-                  //     ? errors.confirmPassword.type === 'minLength'
-                  //       ? 'Confirm password length is more than 5'
-                  //       : 'Confirm password is required'
-                  //     : ''
-                  // }
+                    required
                   ></input>
                 </div>
                 <div className='mb-6'>
@@ -228,18 +224,7 @@ const Login = () => {
                     value={userName}
                     onChange={(e) => setUserName(e.target.value)}
                     className=''
-                  // rules={{
-                  //   required: true,
-                  //   minLength: 2
-                  // }}
-                  // error={Boolean(errors.name)}
-                  // helperText={
-                  //   errors.name
-                  //     ? errors.name.type === 'minLength'
-                  //       ? 'Name length is more than 1'
-                  //       : 'Name is required'
-                  //     : ''
-                  // }
+                    required
                   ></input>
                 </div>
                 <div className='mb-6'>
@@ -268,7 +253,7 @@ const Login = () => {
                 <div>
                 </div>
               </form>
-              <button onClick={registerHandler} className='mt-4 py-2 rounded-2xl border-none bg-green-700  text-white font-semibold'>Sign up</button>
+              <button onClick={registerHandler} className='mt-4 py-2 rounded-2xl border-none bg-green-700  text-white font-semibold' >Register</button>
               <div className='text-xl'>
                 <p>Already have an account? Click
                   <span onClick={(e) => setIsLogin(!isLogin)} className='cursor-pointer text-green-900'> here </span>

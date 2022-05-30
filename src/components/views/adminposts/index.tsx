@@ -122,6 +122,7 @@ export const AdminPosts = () => {
                   onChange={(e) => setType(e.target.value)}
                   className='outlined fullWidth'
                   placeholder='select the post type..'
+                  required
                 >
                   <option value={null} selected disabled >Select your option</option>
                   <option value="freebies">Freebies</option>
@@ -138,6 +139,7 @@ export const AdminPosts = () => {
                   value={slug}
                   onChange={(e) => setSlug(e.target.value)}
                   className='outlined fullWidth'
+                  required
                 ></input>
               </div>
               <div>
@@ -149,6 +151,7 @@ export const AdminPosts = () => {
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   className='outlined fullWidth'
+                  required
                 ></input>
               </div>
               <div>
@@ -160,6 +163,7 @@ export const AdminPosts = () => {
                   value={body}
                   onChange={(e) => setBody(e.target.value)}
                   className='outlined fullWidth'
+                  required
                 ></input>
               </div>
 
@@ -185,6 +189,7 @@ export const AdminPosts = () => {
                     value={points}
                     onChange={(e) => setPoints(e.target.value)}
                     className='outlined fullWidth'
+                    required
                   ></input>
                 </div>
               }
@@ -197,6 +202,7 @@ export const AdminPosts = () => {
                   value={cost}
                   onChange={(e) => setCost(e.target.value)}
                   className='outlined fullWidth'
+                  required
                 ></input>
               </div>}
               <div className=' mt-6 ' >

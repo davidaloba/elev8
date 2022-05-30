@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { Container } from '@components'
 import { EditProfile } from './profileedit'
 import { ProfileInfo } from './profileinfo'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { getError } from '@db/error'
 import axios from 'axios'
 
@@ -22,7 +22,13 @@ export const Profile = () => {
   const [amount, setAmount] = useState(3000)
   const [accountNo, setAccountNo] = useState('')
 
+  const withdrawalForm = useRef()
   const handleRequestWithdrawal = async () => {
+    const form = withdrawalForm.current
+    if (!form.checkValidity()) {
+      console.log(form.reportValidity())
+      return
+    }
     if (!window.confirm('Are you sure?')) {
       return
     }
@@ -59,7 +65,7 @@ export const Profile = () => {
         <div className='mt-6 mb-10'>
           <h1>Register</h1>
         </div>
-        <form className='mb-8'>
+        <form ref={withdrawalForm} className='mb-8'>
           <div className='mb-6'>
             <label htmlFor="email">Bank Name</label>
             <input
@@ -69,6 +75,7 @@ export const Profile = () => {
               value={bankName}
               onChange={(e) => setBankName(e.target.value)}
               className=''
+              required
             ></input>
           </div>
           <div className='mb-6'>
@@ -80,17 +87,21 @@ export const Profile = () => {
               value={accountName}
               onChange={(e) => setAccountName(e.target.value)}
               className=''
+              required
             ></input>
           </div>
           <div className='mb-6'>
             <label htmlFor="email">Account Number</label>
             <input
               type='number'
+              minLength={10}
+              maxLength={10}
               name="accountNo"
               id="accountNo"
               value={accountNo}
               onChange={(e) => setAccountNo(e.target.value)}
               className=''
+              required
             ></input>
           </div>
           <div className='mb-6'>
@@ -105,6 +116,7 @@ export const Profile = () => {
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
               className=''
+              required
             ></input>
           </div>
           <div>
