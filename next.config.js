@@ -1,14 +1,23 @@
 module.exports = {
+  // async redirects () {
+  //   return [
+  //     process.env.MAINTENANCE_MODE === true
+  //       ? {
+  //           source: '/((?!maintenance|_next).*)',
+  //           destination: '/maintenance',
+  //           permanent: false
+  //         }
+  //       : null
+  //   ].filter(Boolean)
+  // },
   async redirects () {
     return [
-      process.env.MAINTENANCE_MODE === '1'
-        ? {
-            source: '/((?!maintenance|_next).*)',
-            destination: '/maintenance',
-            permanent: false
-          }
-        : null
-    ].filter(Boolean)
+      {
+        source: '/((?!maintenance|_next).*)',
+        destination: '/maintenance',
+        permanent: false
+      }
+    ]
   },
   reactStrictMode: true,
   swcMinify: true,
