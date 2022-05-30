@@ -10,7 +10,6 @@ export const Referral = () => {
   useEffect(() => {
     fetchReferralData(user.userInfo.referralCode, user.userInfo.email)
   }, [dispatch, user.userInfo])
-  console.log(user.referral)
 
   const totalEarnings = !user.referral.loading && numberWithCommas(user.referral.data.totalEarnings)
   const totalWithdrawals = !user.referral.loading && numberWithCommas(user.referral.data.totalWithdrawals)

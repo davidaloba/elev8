@@ -32,7 +32,6 @@ export const EditProfile = () => {
   const submitHandler = async () => {
     const form = changePassword.current
     if (!form.checkValidity()) {
-      console.log(form.reportValidity())
       return
     }
     if (password !== confirmPassword) {

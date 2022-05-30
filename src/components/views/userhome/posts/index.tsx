@@ -29,7 +29,6 @@ export const Posts = () => {
   useEffect(() => {
     const handleObserver = (entities) => {
       const target = entities[0]
-      console.log(target.isIntersecting)
       target.isIntersecting && fetchPosts(posts.nextPage)
     }
     const options = {

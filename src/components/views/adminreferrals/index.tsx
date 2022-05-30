@@ -11,10 +11,7 @@ import {
 } from '@components'
 
 export const AdminReferrals = () => {
-  const dispatch = useAppDispatch()
   const { admin, user } = useAppSelector((state: RootState) => state)
-
-  console.log(admin.withdrawalRequests)
 
   useEffect(() => {
     fetchData('/api/admin/users/withdrawals', user.userInfo.token, fetchAdminWithdrawals)

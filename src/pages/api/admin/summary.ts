@@ -34,7 +34,6 @@ handler.get(async (req, res) => {
   const withdrawalRequestsCount = withdrawalRequests.length
   await db.disconnect()
 
-  console.log(postsCount, usersCount, withdrawalRequestsCount)
   res.send({ postsCount, usersCount, withdrawalRequestsCount })
 })
 

@@ -29,7 +29,6 @@ const userSlice: any = createSlice({
     },
     fetchAdminWithdrawals: (admin, action) => {
       const data = Object.values(action.payload)
-      console.log(data)
       admin.withdrawalRequests = data
     },
     setAdminLoading: (admin, action) => {

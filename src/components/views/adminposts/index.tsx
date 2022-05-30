@@ -31,7 +31,6 @@ export const AdminPosts = () => {
   useEffect(() => {
     if (type !== 'premium') setCost(null)
     if (type !== 'tasks') setPoints(null)
-    console.log(type)
   }, [type])
 
   const createHandler = async () => {

@@ -30,7 +30,6 @@ handler.get(async (req, res) => {
     }
   ])
   await db.disconnect()
-  console.log(withdrawalRequests)
 
   res.send({ ...withdrawalRequests })
 })
@@ -42,10 +41,8 @@ handler.put(async (req, res) => {
   const withdrawalRequest = user.referral.withdrawals
     .find((withdrawal) => withdrawal.withdrawalId === req.body.withdrawalId)
 
-  console.log(user, withdrawalRequest.status, user.referral.totalWithdrawals, req.body.amount)
   withdrawalRequest.status = req.query.status
   if (req.query.status === 'rejected') user.referral.totalWithdrawals -= req.body.amount
-  console.log(user.referral.totalWithdrawals)
 
   await user.save()
   await db.disconnect()

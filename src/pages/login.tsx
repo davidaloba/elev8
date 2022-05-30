@@ -38,9 +38,7 @@ const Login = () => {
   const loginForm = useRef()
   const loginHandler = async () => {
     const form = loginForm.current
-    console.log(form.checkValidity())
     if (!form.checkValidity()) {
-      console.log(form.reportValidity())
       return
     }
     try {
@@ -78,7 +76,6 @@ const Login = () => {
   const paymenthandler = () => {
     handleFlutterPayment({
       callback: async (response) => {
-        console.log(response)
         if (response.status !== 'successful') {
           alert(` Your payment was ${response.status}.Please try again later`)
           return
@@ -107,9 +104,7 @@ const Login = () => {
   const registerForm = useRef()
   const form = registerForm.current
   const registerHandler = async (e) => {
-    console.log(form.checkValidity())
     if (!form.checkValidity()) {
-      console.log(form.reportValidity())
       return
     }
     if (password !== confirmPassword) {

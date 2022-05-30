@@ -26,7 +26,6 @@ export const Profile = () => {
   const handleRequestWithdrawal = async () => {
     const form = withdrawalForm.current
     if (!form.checkValidity()) {
-      console.log(form.reportValidity())
       return
     }
     if (!window.confirm('Are you sure?')) {

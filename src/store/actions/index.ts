@@ -40,7 +40,6 @@ const fetchReferralData = async (referralCode, email) => {
     const { data } = await axios.get(`/api/users/referrals?referralCode=${referralCode
       }&email=${email}`)
     dispatch(setReferralData(data))
-    console.log(data)
     dispatch(loadingReferral(false))
   } catch (err) {
     alert(getError(err))

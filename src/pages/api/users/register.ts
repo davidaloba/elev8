@@ -24,7 +24,6 @@ handler.post(async (req, res) => {
     }
   })
   const user = await newUser.save()
-  console.log(user)
 
   await db.disconnect()
   const token = signToken(user)
