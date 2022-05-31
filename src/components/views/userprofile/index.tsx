@@ -92,7 +92,7 @@ export const Profile = () => {
           <div className='mb-6'>
             <label htmlFor="email">Account Number</label>
             <input
-              type='number'
+              type='text'
               minLength={10}
               maxLength={10}
               name="accountNo"
