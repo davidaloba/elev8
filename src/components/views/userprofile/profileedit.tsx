@@ -29,10 +29,14 @@ export const EditProfile = () => {
   const [confirmPassword, setConfirmPassword] = useState('')
 
   const changePassword = useRef()
+  const pwInput = changePassword.current
   const submitHandler = async () => {
-    const form = changePassword.current
-    if (!form.checkValidity()) {
-      return
+    if (password !== '') {
+      if (pwInput.validity.patternMismatch) {
+        pwInput.setCustomValidity('Password must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters')
+        alert(pwInput.validationMessage)
+        return
+      }
     }
     if (password !== confirmPassword) {
       alert('Passwords don\'t match')
@@ -163,10 +167,11 @@ export const EditProfile = () => {
             </div >
           </form>
           {editPassword &&
-            <form ref={changePassword}>
+            <form >
               <div className='my-4'>
                 <label htmlFor="email">Password</label>
                 <input
+                  ref={changePassword}
                   type='password'
                   name="password"
                   id="password"

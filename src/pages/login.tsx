@@ -17,7 +17,7 @@ const Login = () => {
   const { userInfo } = useAppSelector((state: RootState) => state.user)
   const dispatch = useAppDispatch()
   const router = useRouter()
-  const { register } = router.query
+  const { register, ref } = router.query
 
   useEffect(() => {
     if (userInfo) {
@@ -33,7 +33,6 @@ const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
-  const [referrer, setReferrer] = useState('')
 
   const loginForm = useRef()
   const loginHandler = async () => {
@@ -255,9 +254,9 @@ const Login = () => {
                     type='text'
                     name="referrer"
                     id="referrer"
-                    value={referrer}
-                    onChange={(e) => setReferrer(e.target.value)}
+                    value={ref}
                     className=''
+                    disabled
                   // rules={{
                   //   required: true,
                   //   pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/

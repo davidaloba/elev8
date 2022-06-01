@@ -61,15 +61,15 @@ export const Referral = () => {
             </div>
           </div>
           <div className='flex flex-col items-center'>
-            <div className='font-bold text-3xl mb-4'> Referral Code</div>
-            <p className='text-xl'>The code below is your referral code. Share it with freinds and family to earn money on elev8</p>
+            <div className='font-bold text-3xl mb-4'> Referral Link</div>
+            <p className='text-xl'>The link below is your referral link. Share it with freinds and family to earn money on elev8</p>
             <div className='flex justify-between my-4'>
-              <div className='border bg-white p-2 mr-3 '>{user.userInfo.referralCode}</div>
+              <div className='border bg-white p-2 mr-3 '>{`www.elev8.ng/login/?ref=${user.userInfo.referralCode}`}</div>
               <button
                 className='cursor-pointer w-auto text-xl text-white font-bold  bg-green-600 border-0 py-2'
                 onClick={() => {
                   navigator.clipboard.writeText(user.userInfo.referralCode)
-                  alert('your refferal code has succesfully been copied to your clipboard')
+                  alert('your refferal link has succesfully been copied to your clipboard')
                 }}
               > Copy </button>
             </div>
