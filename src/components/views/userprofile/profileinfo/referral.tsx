@@ -68,7 +68,7 @@ export const Referral = () => {
               <button
                 className='cursor-pointer w-auto text-xl text-white font-bold  bg-green-600 border-0 py-2'
                 onClick={() => {
-                  navigator.clipboard.writeText(user.userInfo.referralCode)
+                  navigator.clipboard.writeText(`www.elev8.ng/login/?ref=${user.userInfo.referralCode}`)
                   alert('your refferal link has succesfully been copied to your clipboard')
                 }}
               > Copy </button>
