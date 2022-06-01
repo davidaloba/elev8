@@ -14,7 +14,7 @@ handler.get(async (req, res) => {
 
   const referrals = await User.find({ admin: false, 'referral.referrer': referralCode })
   const referralsNo = await User.find({ admin: false, 'referral.referrer': referralCode }).countDocuments()
-  const totalEarnings = referralsNo * 1000
+  const totalEarnings = referralsNo * 1500
 
   const balance = totalEarnings - totalWithdrawals
 
