@@ -111,10 +111,6 @@ const Login = () => {
   const unInput = emailInput.current
 
   const registerHandler = async () => {
-    if (!form.checkValidity()) {
-      alert('Please check that you have entered all fields correctly')
-      return
-    }
     if (emInput.validity.patternMismatch) {
       emInput.setCustomValidity('You have entered an invalid email aaddress')
       alert(emInput.validationMessage)
@@ -128,6 +124,10 @@ const Login = () => {
     if (unInput.validity.tooShort) {
       unInput.setCustomValidity('You haven\'t entered a userName')
       alert(unInput.validationMessage)
+      return
+    }
+    if (!form.checkValidity()) {
+      alert('Please check that you have entered all fields correctly')
       return
     }
     if (password !== confirmPassword) {
