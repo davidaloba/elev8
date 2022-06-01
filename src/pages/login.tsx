@@ -101,10 +101,33 @@ const Login = () => {
     })
   }
 
-  const registerForm = useRef()
-  const form = registerForm.current
-  const registerHandler = async (e) => {
+  const regiserForm = useRef()
+  const passwordInput = useRef()
+  const emailInput = useRef()
+  const userNameInput = useRef()
+  const form = regiserForm.current
+  const pwInput = passwordInput.current
+  const emInput = emailInput.current
+  const unInput = emailInput.current
+
+  const registerHandler = async () => {
     if (!form.checkValidity()) {
+      alert('Please check that you have entered all fields correctly')
+      return
+    }
+    if (emInput.validity.patternMismatch) {
+      emInput.setCustomValidity('You have entered an invalid email aaddress')
+      alert(emInput.validationMessage)
+      return
+    }
+    if (pwInput.validity.patternMismatch) {
+      pwInput.setCustomValidity('Password must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters')
+      alert(pwInput.validationMessage)
+      return
+    }
+    if (unInput.validity.tooShort) {
+      unInput.setCustomValidity('You haven\'t entered a userName')
+      alert(unInput.validationMessage)
       return
     }
     if (password !== confirmPassword) {
@@ -166,31 +189,33 @@ const Login = () => {
               <div className='mt-6 mb-10'>
                 <h1>Register</h1>
               </div>
-              <form ref={registerForm} className='mb-8' >
+              <form ref={regiserForm} className='mb-8' >
                 <div className='mb-6'>
                   <label htmlFor="email">Email</label>
                   <input
+                    ref={emailInput}
                     type='email'
                     name="email"
                     id="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className=''
+                    className=' invalid:border-red-800 invalid:border-2'
                     required
                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                     title='Enter a valid email address'
                   ></input>
                 </div>
                 <div className='mb-6'>
-                  <label htmlFor="email">Password</label>
+                  <label htmlFor="email">Password </label>
                   <input
+                    ref={passwordInput}
                     type='password'
                     minLength={6}
                     name="password"
                     id="password"
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className=''
+                    onChange={(e) => setPassword(e.target.value) }
+                    className='invalid:border-red-800 invalid:border-2'
                     required
                     pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                     title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
@@ -213,12 +238,14 @@ const Login = () => {
                 <div className='mb-6'>
                   <label htmlFor="email">Username</label>
                   <input
+                    ref={userNameInput}
                     type='text'
                     name="userName"
                     id="userName"
                     value={userName}
                     onChange={(e) => setUserName(e.target.value)}
-                    className=''
+                    className=' invalid:border-red-800 invalid:border-2'
+                    minLength={3}
                     required
                   ></input>
                 </div>
