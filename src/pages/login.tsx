@@ -55,7 +55,7 @@ const Login = () => {
   }
 
   const config = {
-    public_key: 'FLWPUBK_TEST-c2672daab1a08b315c548e415bca5a75-X',
+    public_key: 'FLWPUBK-336e1502b66347f21711416b1f2b7c66-X',
     tx_ref: Date.now(),
     amount: 4000,
     currency: 'NGN',
@@ -67,7 +67,7 @@ const Login = () => {
     customizations: {
       title: 'Elev8 Registration',
       description: 'Payment for access to the Elev8 platform',
-      logo: '/logo.jpg'
+      logo: '/logo.png'
     }
   }
   const handleFlutterPayment = useFlutterwave(config)
@@ -85,7 +85,7 @@ const Login = () => {
             userName,
             email,
             password,
-            referrer
+            referrer: ref
           })
           dispatch(login(data))
           Cookies.set('userInfo', data)
