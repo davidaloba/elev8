@@ -7,6 +7,7 @@ export { Header } from './library/header'
 export { Avatar } from './library/avatar'
 export { Container } from './library/container'
 export { Footer } from './library/footer'
+export { FileUploader } from './library/fileuploader'
 
 export { Home } from './views/userhome'
 export { Profile } from './views/userprofile'

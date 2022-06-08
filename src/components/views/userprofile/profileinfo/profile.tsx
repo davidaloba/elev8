@@ -16,8 +16,8 @@ export const Profile = () => {
   return (<div className=''>
     <div className=' bg-white border rounded-3xl py-6 px-10 '>
       <div className="flex flex-col items-center justify-center  my-10">
-        <div className='rounded-full bg-green-500 p-4 my-6'>
-          <Avatar src='/avatar.png' type={user.userInfo.userName} width='60' height='60' />
+        <div className=' my-6'>
+          <Avatar src={user.userInfo.profile.avatar || '/avatar.png' } alt={user.userInfo.userName} width='120' height='120' />
         </div>
         <div className='font-bold'> {user.userInfo.userName}</div>
       </div>

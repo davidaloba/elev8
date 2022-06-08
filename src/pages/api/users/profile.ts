@@ -3,17 +3,29 @@ import bcrypt from 'bcryptjs'
 import User from '../../../db/models/User'
 import db from '../../../db'
 import { signToken, isAuth } from '../../../utils/auth'
+// import upload from '../../../utils/upload'
+import multer from 'multer'
+
+const upload = multer({
+  storage: multer.diskStorage({
+    destination: './public/uploads',
+    filename: (req, file, callback) => {
+      callback(null, req.body.userName + '_' + file.fieldname + '-' + Date.now())
+    }
+  })
+})
 
 const handler = nc()
-handler.use(isAuth)
+handler.use(isAuth, upload.single('avatar'))
 
 handler.put(async (req, res) => {
   await db.connect()
-
+  console.log(req.file)
   const user = await User.findOne({ email: req.body.email })
+
   user.profile.firstName = req.body.firstName
   user.profile.lastName = req.body.lastName
-  user.profile.avatar = req.body.avatar
+  user.profile.avatar = `/uploads/${req.file.filename}`
   user.profile.phone = req.body.phone
   user.profile.dob = req.body.dob
   user.profile.facebook = req.body.facebook
@@ -23,10 +35,11 @@ handler.put(async (req, res) => {
   user.password = req.body.password
     ? bcrypt.hashSync(req.body.password)
     : user.password
+
   await user.save()
   await db.disconnect()
-  const token = signToken(user)
 
+  const token = signToken(user)
   res.send({
     token,
     email: user.email,
@@ -37,3 +50,9 @@ handler.put(async (req, res) => {
 })
 
 export default handler
+
+export const config = {
+  api: {
+    bodyParser: false // Disallow body parsing, consume as stream
+  }
+}

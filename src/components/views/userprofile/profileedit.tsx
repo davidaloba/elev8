@@ -13,20 +13,20 @@ export const EditProfile = () => {
   const dispatch = useAppDispatch()
   const { user } = useAppSelector((state: RootState) => state)
 
-  const [email, setEmail] = useState(user.userInfo.email)
-  const [firstName, setFirstName] = useState(user.userInfo.profile.firstName)
-  const [lastName, setLastName] = useState(user.userInfo.profile.lastName)
-  // TODO: ADD EDIT/UPLOAD AVATAR
-  // const [avatar, setAvatar] = useState(user.userInfo.profile.phone)
-  const [phone, setPhone] = useState(user.userInfo.profile.phone)
-  const [dob, setDob] = useState(user.userInfo.profile.dob)
-  const [facebook, setFacebook] = useState(user.userInfo.profile.facebook)
-  const [instagram, setInstagram] = useState(user.userInfo.profile.instagram)
-  const [twitter, setTwitter] = useState(user.userInfo.profile.twitter)
-
   const [editPassword, setEditPassword] = useState(false)
-  const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+  const [previewAvatar, setPreviewAvatar] = useState('/avatar.png')
+
+  const [avatar, setAvatar] = useState(null)
+  const [email, setEmail] = useState(user.userInfo.email || '')
+  const [firstName, setFirstName] = useState(user.userInfo.profile.firstName || '')
+  const [lastName, setLastName] = useState(user.userInfo.profile.lastName || '')
+  const [phone, setPhone] = useState(user.userInfo.profile.phone || '')
+  const [dob, setDob] = useState(user.userInfo.profile.dob || '')
+  const [facebook, setFacebook] = useState(user.userInfo.profile.facebook || '')
+  const [instagram, setInstagram] = useState(user.userInfo.profile.instagram || '')
+  const [twitter, setTwitter] = useState(user.userInfo.profile.twitter || '')
+  const [password, setPassword] = useState('')
 
   const changePassword = useRef()
   const pwInput = changePassword.current
@@ -42,21 +42,33 @@ export const EditProfile = () => {
       alert('Passwords don\'t match')
       return
     }
+
+    const formData = new FormData()
+    formData.append('avatar', avatar)
+    formData.append('userName', user.userInfo.userName)
+    formData.append('email', email)
+    formData.append('firstName', firstName)
+    formData.append('lastName', lastName)
+    formData.append('phone', phone)
+    formData.append('dob', dob)
+    formData.append('facebook', facebook)
+    formData.append('instagram', instagram)
+    formData.append('twitter', twitter)
+    formData.append('password', password)
+
     try {
       const { data } = await axios.put(
         '/api/users/profile',
+        formData,
         {
-          firstName,
-          lastName,
-          phone,
-          dob,
-          facebook,
-          instagram,
-          twitter,
-          email,
-          password
-        },
-        { headers: { authorization: `Bearer ${user.userInfo.token}` } }
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            authorization: `Bearer ${user.userInfo.token}`
+          },
+          onUploadProgress: (event) => {
+            console.log('Current progress:', Math.round((event.loaded * 100) / event.total))
+          }
+        }
       )
       dispatch(login(data))
       Cookies.set('userInfo', data)
@@ -69,11 +81,23 @@ export const EditProfile = () => {
 
   return (
     <div className='bg-white border rounded-3xl mb-8 py-6 px-10 '>
-      <div className="flex items-center my-10 justify-center">
-        <Avatar src='/avatar.png' type={user.userInfo.userName} width='92' height='92' />
-      </div>
+
       <div className='flex flex-wrap justify-between py-4  mb-8 '>
         <Container>
+          <div className="flex flex-col items-center my-10 ">
+            <Avatar src={previewAvatar || '/avatar.png' } alt={user.userInfo.userName} width='100' height='100' />
+            <label htmlFor="email">Avatar</label>
+            <input
+              type='file'
+              name="avatar"
+              id="avatar"
+              onChange={(e) => {
+                setAvatar(e.target.files[0])
+                setPreviewAvatar(URL.createObjectURL(e.target.files[0]))
+              }}
+              className='outlined fullWidth'
+            ></input>
+          </div>
           <form action="">
             <div className='my-4'>
               <label htmlFor="email">First Name</label>

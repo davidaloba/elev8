@@ -39,8 +39,8 @@ export const AppBar = () => {
           </div>
           <p className='text-base'> {user.userInfo.profile.points ? user.userInfo.profile.points : 0}  Pts</p>
         </div>
-        <div onClick={openMenu} className="rounded-full bg-green-700 pt-2 pb-1 px-2 cursor-pointer">
-          <Avatar src='/avatar.png' alt={user.userInfo.userName} width='50' height='50' />
+        <div onClick={openMenu} className="pt-2 pb-1 px-2 cursor-pointer">
+          <Avatar src={user.userInfo.profile.avatar || '/avatar.png'} alt={user.userInfo.userName} width='72' height='72' />
         </div>
       </form>
     </section>
