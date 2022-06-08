@@ -20,7 +20,6 @@ handler.use(isAuth, upload.single('avatar'))
 
 handler.put(async (req, res) => {
   await db.connect()
-  console.log(req.file)
   const user = await User.findOne({ email: req.body.email })
 
   user.profile.firstName = req.body.firstName
