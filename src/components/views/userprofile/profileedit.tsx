@@ -7,6 +7,7 @@ import { getError } from '@db/error'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 
+import Image from 'next/image'
 import { Avatar, Container } from '@components'
 
 export const EditProfile = () => {
@@ -85,7 +86,20 @@ export const EditProfile = () => {
       <div className='flex flex-wrap justify-between py-4  mb-8 '>
         <Container>
           <div className="flex flex-col items-center my-10 ">
-            <Avatar src={previewAvatar || '/avatar.png' } alt={user.userInfo.userName} width='100' height='100' />
+            <div className=" " >
+              <div className='absolute '>
+              <Image src='/close.png' width='20' height='20' alt='[CLOSE]'
+                className='cursor-pointer bg-white z-10 p-6 rounded-full right-1'
+                onClick={() => {
+                  setAvatar(null)
+                  setPreviewAvatar(user.userInfo.profile.avatar || '/avatar.png')
+                  document.getElementById('avatar').value = ''
+                }}
+               />
+
+              </div>
+            <Avatar src={previewAvatar || user.userInfo.profile.avatar } alt={user.userInfo.userName} width='100' height='100' />
+            </div>
             <label htmlFor="email">Avatar</label>
             <input
               type='file'
@@ -97,6 +111,7 @@ export const EditProfile = () => {
               }}
               className='outlined fullWidth'
             ></input>
+
           </div>
           <form action="">
             <div className='my-4'>
