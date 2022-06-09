@@ -3,58 +3,53 @@ import { initPosts, fetchPosts } from '@store/actions'
 import { RootState, useAppSelector } from '@store'
 import { PostPreview } from './post'
 import { Container } from '@components'
+import InfiniteScroll from 'react-infinite-scroll-component'
 
 export const Posts = () => {
   const { posts } = useAppSelector((state: RootState) => state)
   const filteredPosts = posts.filtered.posts
-  const loader = useRef(null)
   const [scrollPosition, getScrollPosition] = useState(0)
 
   useEffect(() => {
-    (posts.page === 0) && initPosts()
+    (posts.page === 0) && fetchPosts(0)
 
-    document.documentElement.scrollTop = document.body.scrollTop = posts.scrollPosition
+    if (posts.scrollPosition > 0) document.documentElement.scrollTop = document.body.scrollTop = posts.scrollPosition
 
+    console.log(posts.scrollPosition)
     const handleScroll = () => {
       const position = window.pageYOffset
       getScrollPosition(position)
     }
     window.addEventListener('scroll', handleScroll)
-
+    console.log(posts.scrollPosition)
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [posts.page, posts.scrollPosition])
-
-  useEffect(() => {
-    const handleObserver = (entities) => {
-      const target = entities[0]
-      target.isIntersecting && fetchPosts(posts.nextPage)
-    }
-    const options = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 1.0
-    }
-
-    const observer = new IntersectionObserver(handleObserver, options)
-    loader.current && observer.observe(loader.current)
-  }, [posts, loader])
+  }, [posts.nextPage, posts.page, posts.scrollPosition])
 
   return (<>
     {!posts.loading
       ? <>
-        {filteredPosts.map((post) => (
-          <PostPreview
-            post={post}
-            key={post.slug}
-            scrollPosition={scrollPosition}
-          />
-        ))}
-        {(posts.page < posts.pages) &&
-          <div className="loading" ref={loader}>
-            <h2>Load More</h2>
-          </div>}
+        <InfiniteScroll
+          dataLength={filteredPosts.length}
+          next={() => fetchPosts(posts.nextPage)}
+          hasMore={posts.pages !== posts.page}
+          loader={<h4>Loading...</h4>}
+          scrollThreshold={1}
+          endMessage={
+            <p style={{ textAlign: 'center' }}>
+              <b>No more posts</b>
+            </p>
+          }
+        >
+          {filteredPosts.map((post) => (
+            <PostPreview
+              post={post}
+              key={post.slug}
+              scrollPosition={scrollPosition}
+            />
+          ))}
+        </InfiniteScroll>
       </>
       : <Container>
         <div>Loading...</div>

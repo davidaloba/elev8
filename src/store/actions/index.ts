@@ -63,6 +63,7 @@ const fetchPosts = async (page) => {
     const { data } = await axios.get(`/api/posts?page=${page}&limit=10`)
     dispatch(loadPosts(data.posts))
     dispatch(setPages(data.pages))
+    dispatch(setLoading(false))
   } catch (err) {
     alert(getError(err))
   }
