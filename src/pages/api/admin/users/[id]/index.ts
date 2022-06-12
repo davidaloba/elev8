@@ -18,8 +18,12 @@ handler.put(async (req, res) => {
   await db.connect()
   const user = await User.findOne({ email: req.query.id })
   if (user) {
-    user.name = req.body.name
-    user.password = bcrypt.hashSync(req.body.password)
+    user.password = req.body.password
+      ? bcrypt.hashSync(req.body.password)
+      : user.password
+    user.profile.points += req.body.points
+      ? parseInt(req.body.points)
+      : 0
     await user.save()
     await db.disconnect()
     res.send({ message: 'Password Updated Successfully' })

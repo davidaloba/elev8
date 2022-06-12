@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 import axios from 'axios'
 
 import { getError } from '@db/error'
-import { RootState, useAppDispatch, useAppSelector } from '@store'
-import { fetchAdminWithdrawals, fetchAdminSummary, fetchData, setAdminLoading } from '@store/actions'
+import { RootState, useAppSelector } from '@store'
+import { fetchAdminWithdrawals, fetchAdminSummary, fetchData } from '@store/actions'
 
 import {
   Button, Container
@@ -16,18 +16,6 @@ export const AdminReferrals = () => {
   useEffect(() => {
     fetchData('/api/admin/users/withdrawals', user.userInfo.token, fetchAdminWithdrawals)
   }, [])
-
-  const [isCreateUser, setIsCreateUser] = useState(false)
-  const [isResetPassword, setIsResetPassword] = useState(false)
-
-  const [userName, setUserName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
-
-  const [editUser, setEditUser] = useState('')
-  const [newPassword, setNewPassword] = useState('')
-  const [confirmNewPassword, setConfirmNewPassword] = useState('')
 
   const statusHandler = async (status, userName, withdrawalId, amount) => {
     if (!window.confirm(`Are you sure you want to ${status} this withrawal request?`)) {
@@ -50,32 +38,6 @@ export const AdminReferrals = () => {
       alert(getError(err))
     }
   }
-  const rejectHandler = async () => {
-    if (!window.confirm('Are you sure?')) {
-      return
-    }
-    if (newPassword !== confirmNewPassword) {
-      alert('Password and confirm password do not match')
-    }
-    try {
-      const { data } = await axios.put(`/api/admin/withdrawals/${editUser}`, {
-        email: editUser,
-        password: newPassword
-      },
-      {
-        headers: { authorization: `Bearer ${user.userInfo.token}` }
-      }
-      )
-      alert('Password updated successfully')
-      setIsResetPassword(false)
-      setNewPassword('')
-      setConfirmNewPassword('')
-    } catch (err) {
-      setNewPassword('')
-      setConfirmNewPassword('')
-      alert(getError(err))
-    }
-  }
 
   return (
     <section className="mt-24 mb-12">
@@ -86,18 +48,6 @@ export const AdminReferrals = () => {
               Withdrawals
             </div>
           </div>
-          {(!isCreateUser && !isResetPassword) && <div >
-            <Button
-              onClick={() => {
-                setIsCreateUser(true)
-                setIsResetPassword(false)
-              }}
-              color="primary"
-              variant="contained"
-            >
-              Create
-            </Button>
-          </div>}
         </div>
       </div>
       <Container>
