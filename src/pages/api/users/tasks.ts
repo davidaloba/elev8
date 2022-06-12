@@ -24,7 +24,8 @@ handler.put(async (req, res) => {
       email: user.email,
       isAdmin: user.isAdmin,
       userName: user.userName,
-      profile: user.profile
+      profile: user.profile,
+      referralCode: user.referral.referralCode
     })
   } else {
     await db.disconnect()

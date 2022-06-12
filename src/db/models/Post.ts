@@ -14,7 +14,8 @@ const dataSchema = new mongoose.Schema(
   {
     link: { type: String, default: null },
     points: { type: Number, default: null },
-    cost: { type: Number, default: null }
+    cost: { type: Number, default: null },
+    giveawayEntries: { type: Array, default: [] }
   },
   {
     timestamps: false

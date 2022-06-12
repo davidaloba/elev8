@@ -25,6 +25,7 @@ const userSchema = new mongoose.Schema(
       saves: { type: Array, default: [] },
       tasks: { type: Array, default: [] },
       paid: { type: Array, default: [] },
+      giveaway: { type: Array, default: [] },
       phone: String,
       firstName: String,
       lastName: String,

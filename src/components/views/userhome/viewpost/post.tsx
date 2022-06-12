@@ -87,7 +87,7 @@ export const Post = ({ post }) => {
             <p className='text-lg'> {body} </p>
             {data.link && <div className='mt-4  hover:cursor-pointer text-center text-lg border rounded  text-blue-700 font-bold bg-white border-blue-600  py-2 w-11/12'>
               <a href={data.link} target='_blank' className=' text-base mt-1 p-1' rel="noreferrer">
-                [{data.link} ]
+                {data.link}
               </a>
             </div>}
           </div>
@@ -143,7 +143,7 @@ export const Post = ({ post }) => {
                   Click the link below to complete the task.
                     <div className='mt-4  hover:cursor-pointer text-center text-lg border rounded  text-blue-700 font-bold bg-white border-blue-600  py-2 w-11/12'>
                       <a href={data.link} target='_blank' onClick={() => setIsLinkClicked(true)} className='text-base mt-1 p-1' rel="noreferrer">
-                        [{data.link} ]
+                        {data.link}
                       </a>
                     </div>
                 </div>
@@ -197,11 +197,18 @@ export const Post = ({ post }) => {
           <div>
             <div className=''>
               <p className='text-lg'> {body} </p>
-              {data.link && <div className='mt-4  hover:cursor-pointer text-center text-lg border rounded  text-blue-700 font-bold bg-white border-blue-600  py-2 w-11/12'>
-                <a href={data.link} target='_blank' className=' text-base mt-1 p-1' rel="noreferrer">
-                  [{data.link} ]
+              {data.link === 'giveaway'
+                ? <div className='mt-4  hover:cursor-pointer text-center text-lg border rounded  text-blue-700 font-bold bg-white border-blue-600  py-2 w-11/12'>
+                <a href={`/giveaway/${slug}?title=${title}` }target='_blank' className=' text-base mt-1 p-1' rel="noreferrer">
+                  {title}
                 </a>
-              </div>}
+              </div>
+                : <div className='mt-4  hover:cursor-pointer text-center text-lg border rounded  text-blue-700 font-bold bg-white border-blue-600  py-2 w-11/12'>
+                <a href={data.link} target='_blank' className=' text-base mt-1 p-1' rel="noreferrer">
+                  {data.link}
+                </a>
+              </div>
+              }
             </div>
           </div>
           <div className=" flex items-center justify-between  mt-5">

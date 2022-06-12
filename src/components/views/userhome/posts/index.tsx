@@ -15,13 +15,11 @@ export const Posts = () => {
 
     if (posts.scrollPosition > 0) document.documentElement.scrollTop = document.body.scrollTop = posts.scrollPosition
 
-    console.log(posts.scrollPosition)
     const handleScroll = () => {
       const position = window.pageYOffset
       getScrollPosition(position)
     }
     window.addEventListener('scroll', handleScroll)
-    console.log(posts.scrollPosition)
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
