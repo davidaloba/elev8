@@ -21,12 +21,10 @@ handler.put(async (req, res) => {
   }
   giveaway.data.giveawayEntries = [...giveaway.data.giveawayEntries, entry]
   await giveaway.save()
-  console.log(giveaway)
 
   const user = await User.findOne({ email: req.body.email })
   user.profile.giveaway = [...user.profile.giveaway, req.body.slug]
   await user.save()
-  console.log(user.profile.giveaway)
 
   await db.disconnect()
 

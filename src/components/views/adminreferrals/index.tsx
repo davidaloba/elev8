@@ -41,7 +41,7 @@ export const AdminReferrals = () => {
 
   return (
     <section className="mt-24 mb-12">
-      <div>
+      <Container>
         <div className=" flex justify-between items-center mb-8">
           <div className=''>
             <div className='text-6xl font-bold '>
@@ -49,7 +49,7 @@ export const AdminReferrals = () => {
             </div>
           </div>
         </div>
-      </div>
+      </Container>
       <Container>
         <table>
           <thead>

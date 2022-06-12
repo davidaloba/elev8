@@ -21,12 +21,9 @@ const Giveaway = () => {
   const [loading, setLoading] = useState(true)
   const [notpaid, setNotPaid] = useState(true)
 
-  console.log()
-
   useEffect(() => {
     const isPremiumPaid = userInfo.profile && userInfo.profile.paid.includes(slug)
     const isGiveawayDone = userInfo.profile && userInfo.profile.giveaway.includes(slug)
-    console.log(userInfo, isGiveawayDone, isPremiumPaid)
 
     if (isGiveawayDone === true) {
       setLoading(true)

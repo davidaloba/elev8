@@ -13,6 +13,7 @@ handler.use(isAuth, isAdmin)
 handler.get(async (req, res) => {
   await db.connect()
   const postsCount = await Post.countDocuments()
+  const giveawayCount = await Post.countDocuments({ 'data.link': 'giveaway' })
   const usersCount = await User.countDocuments({ isAdmin: false })
   const withdrawalRequests = await User.aggregate([
     { $match: { isAdmin: false } },
@@ -34,7 +35,7 @@ handler.get(async (req, res) => {
   const withdrawalRequestsCount = withdrawalRequests.length
   await db.disconnect()
 
-  res.send({ postsCount, usersCount, withdrawalRequestsCount })
+  res.send({ postsCount, usersCount, withdrawalRequestsCount, giveawayCount })
 })
 
 export default handler

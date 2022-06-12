@@ -5,14 +5,14 @@ import { RootState, useAppSelector } from '@store'
 import { fetchAdminSummary, fetchData, logoutHandler } from '@store/actions'
 
 import Image from 'next/image'
-import { AdminPosts, AdminUsers, AdminReferrals, Container, Intro } from '@components'
+import { AdminPosts, AdminUsers, AdminReferrals, AdminGiveaway, Container, Intro } from '@components'
 
 const AdminDashboard = () => {
   const [isLoading, setIsLoading] = useState(true)
   const router = useRouter()
   const { user, admin } = useAppSelector((state: RootState) => state)
   const userInfo = user.userInfo
-  const [tab, setTab] = useState('referrals')
+  const [tab, setTab] = useState('posts')
 
   const [loading, setLoading] = useState(true)
   useEffect(() => {
@@ -61,20 +61,28 @@ const AdminDashboard = () => {
                     : <div className=' text-3xl font-bold'>Loading...</div>}
                   <div className=" ">Users</div>
                 </div>
-                <div onClick={() => setTab('referrals')} className="cursor-pointer flex flex-col items-center justify-center rounded-3xl border p-4  w-1/3 " >
+                <div onClick={() => setTab('referrals')} className="cursor-pointer flex flex-col items-center justify-center rounded-3xl border p-4  w-1/3 mr-4 " >
                   <div className=""><Image src='/avatar.png' width='32' height='32' className="rounded-full" alt='name' /></div>
                   {!loading
                     ? !admin.summary.withdrawalRequestsCount ? <div className=' text-3xl font-bold'>0</div> : <div className=' text-3xl font-bold'>{admin.summary.withdrawalRequestsCount}</div>
                     : <div className=' text-3xl font-bold'>Loading...</div>}
                   <div className=" ">Withdrawal requests</div>
                 </div>
+                <div onClick={() => setTab('giveaway')} className="cursor-pointer flex flex-col items-center justify-center rounded-3xl border p-4  w-1/3 " >
+                  <div className=""><Image src='/avatar.png' width='32' height='32' className="rounded-full" alt='name' /></div>
+                  {!loading
+                    ? !admin.summary.giveawayCount ? <div className=' text-3xl font-bold'>0</div> : <div className=' text-3xl font-bold'>{admin.summary.giveawayCount}</div>
+                    : <div className=' text-3xl font-bold'>Loading...</div>}
+                  <div className=" ">Giveaway contests</div>
+                </div>
             </div>
           </Container>
         </section>
 
-        {tab === 'posts' && <AdminPosts />}
-        {tab === 'users' && <AdminUsers />}
-        {tab === 'referrals' && <AdminReferrals />}
+          {tab === 'posts' && <AdminPosts />}
+          {tab === 'users' && <AdminUsers />}
+          {tab === 'referrals' && <AdminReferrals />}
+          {tab === 'giveaway' && <AdminGiveaway />}
 
       </main>
 

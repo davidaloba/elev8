@@ -7,6 +7,7 @@ import {
   fetchAdminPosts,
   fetchAdminUsers,
   fetchAdminWithdrawals,
+  fetchAdminGiveaway,
   setAdminLoading
 } from '@store/slices/admin'
 import {
@@ -132,6 +133,7 @@ export {
   setReferralData,
   setRequestWithdrawal,
   fetchAdminWithdrawals,
+  fetchAdminGiveaway,
   setAdminLoading
 }
 export { fetchPosts, getPeriod, fetchData, logoutHandler, fetchReferralData, numberWithCommas }

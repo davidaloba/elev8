@@ -9,6 +9,7 @@ const initialState = {
   },
   posts: null,
   users: null,
+  giveaway: null,
   withdrawalRequests: null
 }
 
@@ -31,6 +32,9 @@ const userSlice: any = createSlice({
       const data = Object.values(action.payload)
       admin.withdrawalRequests = data
     },
+    fetchAdminGiveaway: (admin, action) => {
+      admin.giveaway = action.payload
+    },
     setAdminLoading: (admin, action) => {
       admin.loading = false
     }
@@ -52,6 +56,7 @@ export const {
   fetchAdminPosts,
   fetchAdminUsers,
   fetchAdminWithdrawals,
+  fetchAdminGiveaway,
   setAdminLoading
 } = userSlice.actions
 
