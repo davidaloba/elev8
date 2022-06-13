@@ -14,7 +14,7 @@ export const Profile = () => {
   const { user } = useAppSelector((state: RootState) => state)
 
   const closeMenu = () => {
-    dispatch(toggleMenu())
+    dispatch(toggleMenu('home'))
   }
 
   const [bankName, setBankName] = useState('')

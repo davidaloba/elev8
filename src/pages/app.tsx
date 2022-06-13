@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import { RootState, useAppSelector } from '@store'
 
-import { Container, Home, Intro, Profile } from '@components'
+import { Container, Home, Intro, Profile, Notifications } from '@components'
 import router from 'next/router'
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true)
-  const { userInfo, profile } = useAppSelector((state: RootState) => state.user)
+  const { userInfo, menu } = useAppSelector((state: RootState) => state.user)
 
   useEffect(() => {
     if (!userInfo) {
@@ -23,10 +23,9 @@ const App = () => {
         </Container>
       </header>
       : <div className=' bg-stone-100'>
-      {profile.menu
-        ? <Profile />
-        : <Home title='Home' url='' />
-      }
+        {menu === 'home' && <Home title='Home' url='' />}
+        {menu === 'profile' && <Profile />}
+        {menu === 'notifications' && <Notifications />}
     </div>
     }
   </>)

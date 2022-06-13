@@ -20,6 +20,7 @@ import {
   switchTab,
   loadingReferral,
   setReferralData,
+  fetchNotifications,
   setRequestWithdrawal
 } from '@store/slices/user'
 import {
@@ -136,6 +137,7 @@ export {
   fetchAdminWithdrawals,
   fetchAdminGiveaway,
   fetchAdminNotifications,
-  setAdminLoading
+  setAdminLoading,
+  fetchNotifications
 }
 export { fetchPosts, getPeriod, fetchData, logoutHandler, fetchReferralData, numberWithCommas }

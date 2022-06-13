@@ -3,7 +3,7 @@ import { RootState, useAppDispatch, useAppSelector } from '@store'
 
 import { Intro, Container } from '@components'
 import { AppBar } from './appbar'
-import { Posts } from './posts/'
+import { Posts } from './posts'
 import { ViewPost } from './viewpost'
 
 export const Home = () => {

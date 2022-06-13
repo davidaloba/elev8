@@ -4,8 +4,8 @@ import Cookies from 'js-cookie'
 
 const initialState = {
   userInfo: Cookies.get('userInfo') ? JSON.parse(Cookies.get('userInfo')) : null,
+  menu: 'home',
   profile: {
-    menu: false,
     edit: false,
     tab: 'profile'
   },
@@ -13,7 +13,8 @@ const initialState = {
     loading: true,
     requestWithdrawal: false,
     data: {}
-  }
+  },
+  notifications: []
 }
 
 const userSlice: any = createSlice({
@@ -32,7 +33,7 @@ const userSlice: any = createSlice({
       user.userInfo.saves = action.payload
     },
     toggleMenu: (user, action) => {
-      user.profile.menu = !user.profile.menu
+      user.menu = action.payload
     },
     toggleEdit: (user, action) => {
       user.profile.edit = !user.profile.edit
@@ -48,6 +49,9 @@ const userSlice: any = createSlice({
     },
     setReferralData: (user, action) => {
       user.referral.data = action.payload
+    },
+    fetchNotifications: (user, action) => {
+      user.notifications = action.payload
     }
   }
 
@@ -62,7 +66,7 @@ const userSlice: any = createSlice({
 
 })
 
-export const { login, signout, savePost, toggleMenu, toggleEdit, switchTab, loadingReferral, setReferralData, setRequestWithdrawal } = userSlice.actions
+export const { login, signout, savePost, toggleMenu, toggleEdit, switchTab, loadingReferral, setReferralData, setRequestWithdrawal, fetchNotifications } = userSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectCount = (state: RootState) => state.user

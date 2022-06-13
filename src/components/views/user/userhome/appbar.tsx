@@ -15,12 +15,12 @@ export const AppBar = () => {
   // }
 
   const openMenu = () => {
-    dispatch(toggleMenu())
+    dispatch(toggleMenu('profile'))
   }
 
   return (
     <section className=' p-4'>
-      <form className='flex items-center justify-between'>
+      <form className='flex items-start justify-between'>
         <div className='w-full h-0'></div> {/* Place holder for search bar */}
         {/* <input
           type="text"
@@ -33,13 +33,18 @@ export const AppBar = () => {
           // onChange={(e) => setReply(e.target.value)}
           className='text-lg h-auto mr-8 w-full border-[1px] border-slate-200'
         ></input> */}
+        <div className='rounded-full mr-4 '>
+          <div onClick={() => dispatch(toggleMenu('notifications')) } className='rounded-full cursor-pointer bg-orange-700 pt-2 pb-1 px-2'>
+            <Image src='/email.png' width='32' height='32' alt='notifications' />
+          </div>
+        </div>
         <div className='flex flex-wrap rounded-full mr-2 '>
           <div onClick={openMenu} className='rounded-full cursor-pointer bg-indigo-700 p-1 '>
             <Image src='/diamond.png' width='16' height='16' alt='points' />
           </div>
           <p className='text-base'> {user.userInfo.profile.points ? user.userInfo.profile.points : 0}  Pts</p>
         </div>
-        <div onClick={openMenu} className="pt-2 pb-1 px-2 cursor-pointer">
+        <div onClick={() => dispatch(toggleMenu('profile')) } className="pt-2 pb-1 px-2 cursor-pointer">
           <Avatar src={user.userInfo.profile.avatar || '/avatar.png'} alt={user.userInfo.userName} width='72' height='72' />
         </div>
       </form>
