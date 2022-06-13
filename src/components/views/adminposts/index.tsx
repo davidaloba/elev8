@@ -38,8 +38,7 @@ export const AdminPosts = () => {
       return
     }
     try {
-      const { data } = await axios.post(
-        '/api/admin/posts',
+      const { data } = await axios.post('/api/admin/posts',
         {
           slug: slug,
           title: title,
@@ -155,15 +154,15 @@ export const AdminPosts = () => {
               </div>
               <div>
                 <label htmlFor="body">Body</label>
-                <input
+                <textarea
                   type='text'
                   name="body"
                   id="body"
                   value={body}
                   onChange={(e) => setBody(e.target.value)}
-                  className='outlined fullWidth'
+                  className='block outlined fullWidth'
                   required
-                ></input>
+                ></textarea>
               </div>
 
                 <div>
@@ -204,11 +203,11 @@ export const AdminPosts = () => {
                   required
                 ></input>
               </div>}
-              <div className=' mt-6 ' >
-                <button onClick={createHandler} type="button" color="primary">Create</button>
-                <div onClick={() => setIsCreatePost(false)} className='mt-2 cursor-pointer'>[X]</div>
-              </div>
             </form>
+            <div>
+              <button onClick={createHandler} className='py-2 mt-3 px-6 rounded-2xl border-none bg-green-700 hover:bg-green-600 focus:outline-none ring-opacity-75 ring-green-400 focus:ring text-white text-xl font-semibold  mr-3'>Create User</button>
+              <button onClick={() => setIsCreatePost(false)} className='py-2 mt-3 px-6 rounded-2xl border-none bg-red-700 hover:bg-red-500 focus:outline-none ring-opacity-75 ring-green-400 focus:ring text-white text-xl font-semibold'>Cancel</button>
+            </div>
           </Container>
         </div>
         }

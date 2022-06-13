@@ -35,6 +35,9 @@ const userSlice: any = createSlice({
     fetchAdminGiveaway: (admin, action) => {
       admin.giveaway = action.payload
     },
+    fetchAdminNotifications: (admin, action) => {
+      admin.notifications = action.payload
+    },
     setAdminLoading: (admin, action) => {
       admin.loading = false
     }
@@ -57,6 +60,7 @@ export const {
   fetchAdminUsers,
   fetchAdminWithdrawals,
   fetchAdminGiveaway,
+  fetchAdminNotifications,
   setAdminLoading
 } = userSlice.actions
 
