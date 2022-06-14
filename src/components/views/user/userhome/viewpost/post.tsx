@@ -50,26 +50,6 @@ export const Post = ({ post }) => {
     }
   }
 
-  // const saveHandler = async () => {
-  //   try {
-  //     const { saves } = await axios.put(
-  //       '/api/users/save',
-  //       {
-  //         user: user.userInfo.userName,
-  //         slug: slug
-  //       },
-  //       { headers: { authorization: `Bearer ${user.userInfo.token}` } }
-  //     )
-  //     dispatch(savePost(saves))
-  //   } catch (err) {
-  //     alert(getError(err))
-  //   }
-  // }
-
-  // const shareHandler = async () => {
-  //   dispatch(expandPost(post))
-  // }
-
   return (
     <>
       {type === 'freebies' && (<div className='flex justify-between  bg-white border rounded-3xl mb-8 p-4'>
