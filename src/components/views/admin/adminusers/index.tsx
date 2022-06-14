@@ -307,7 +307,7 @@ export const AdminUsers = () => {
               <th className='p-4 border-x'>EMAIL</th>
               <th className='p-4 border-x'>PHONE NO.</th>
               <th className='p-4 border-x'>USERNAME</th>
-              <th className='p-4 border-x'>USERNAME</th>
+              <th className='p-4 border-x'>REFERRER</th>
               <th className='p-4 border-x'>POINTS</th>
             </tr>
           </thead>
