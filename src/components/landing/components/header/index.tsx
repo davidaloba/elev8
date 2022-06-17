@@ -1,14 +1,30 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [scroll, setScroll] = useState(false)
+
+  const changeBackground = () => {
+    console.log(window.scrollY)
+    if (window.scrollY >= 66) {
+      setScroll(true)
+    } else {
+      setScroll(false)
+    }
+  }
+
+  useEffect(() => {
+    changeBackground()
+    // adding the event when scroll change background
+    window.addEventListener('scroll', changeBackground)
+  })
 
   // TODO Put all Link related styling in sub div
   return (
-    <div className="sticky top-0 z-50  px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-[1366px] md:px-24 lg:px-8">
-      <div className="relative flex items-center justify-between">
+    <div className={`${scroll ? 'bg-white' : ''} sticky top-0 z-50 `}>
+      <div className="relative flex items-center justify-between  px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-[1366px] md:px-24 lg:px-8">
         <div className="inline-flex items-center mr-8 cursor-pointer">
           <Link
             href="/"
