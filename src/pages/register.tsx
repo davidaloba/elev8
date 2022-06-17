@@ -15,8 +15,7 @@ const Login = () => {
   const { userInfo } = useAppSelector((state: RootState) => state.user)
   const dispatch = useAppDispatch()
   const router = useRouter()
-  const { login, ref } = router.query
-  const [isLogin, setIsLogin] = useState(login)
+  const { ref } = router.query
 
   useEffect(() => {
     if (userInfo) {
@@ -25,33 +24,12 @@ const Login = () => {
         : router.push('/app')
     }
     console.log(login)
-    setIsLogin(login)
-  }, [login, router, userInfo])
+  }, [router, userInfo])
 
   const [userName, setUserName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
-
-  const loginForm = useRef()
-  const loginHandler = async () => {
-    const form = loginForm.current
-    if (!form.checkValidity()) {
-      return
-    }
-    try {
-      const { data } = await axios.post('/api/users/login', {
-        email: email,
-        password: password
-      })
-      dispatch(login(data))
-      Cookies.set('userInfo', data)
-      if (data.isAdmin) router.push('/admin')
-      else router.push('/app')
-    } catch (err) {
-      alert(getError(err))
-    }
-  }
 
   const config = {
     public_key: 'FLWPUBK-336e1502b66347f21711416b1f2b7c66-X',
@@ -107,7 +85,6 @@ const Login = () => {
   const pwInput = passwordInput.current
   const emInput = emailInput.current
   const unInput = emailInput.current
-
   const registerHandler = async () => {
     if (emInput.validity.patternMismatch) {
       emInput.setCustomValidity('You have entered an invalid email aaddress')
@@ -134,9 +111,10 @@ const Login = () => {
     }
     paymenthandler()
   }
+
   return (
   <Layout>
-      <Container>
+      <Container id='register'>
       <div className=" md:mx-auto mb-10 mt-16 px-8 md:mb-12 sm:text-center ">
         <h2 className=" max-w-7xl mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-5xl md:mx-auto">
            <span className="relative inline-block">
@@ -168,7 +146,6 @@ const Login = () => {
             Enjoy all of these benefits and more by signing up to join the Elev8 community today.
         </p> */}
       </div>
-
               <form ref={regiserForm} className='mb-8' >
                 <div className='mb-6'>
                   <label htmlFor="email">Email</label>
