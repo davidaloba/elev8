@@ -48,11 +48,38 @@ const Login = () => {
   return (
   <Layout>
       <Container>
-       <div className='mb-20'>
-              <hr className="border-accent-2 mt-28 mb-24" />
-              <div className='mt-6 mb-10'>
-                <h1>Login</h1>
-              </div>
+
+      <div className=" md:mx-auto mb-10 mt-16 px-8 md:mb-12 sm:text-center ">
+        <h2 className=" max-w-7xl mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-5xl md:mx-auto">
+           <span className="relative inline-block">
+       <svg
+        viewBox="0 0 52 24"
+        fill="currentColor"
+        className="absolute top-0 left-0 z-0 hidden w-32 -mt-8 -ml-20 text-orange-600 lg:w-32 lg:-ml-28 lg:-mt-10 sm:block"
+       >
+        <defs>
+         <pattern
+          id="232db96b-4aa2-422f-9086-5a77996d1df1"
+          x="0"
+          y="0"
+          width=".135"
+          height=".30"
+         >
+          <circle cx="1" cy="1" r=".7" />
+         </pattern>
+        </defs>
+        <rect
+         fill="url(#232db96b-4aa2-422f-9086-5a77996d1df1)"
+         width="52"
+         height="24"
+        />
+       </svg>
+       <span className="relative">Login</span> </span>
+        </h2>
+        {/* <p className=" max-w-7xl">
+            Enjoy all of these benefits and more by signing up to join the Elev8 community today.
+        </p> */}
+      </div>
               <form ref={loginForm} className='mb-8'>
                 <div className='mb-6'>
                   <label htmlFor="email">Email</label>
@@ -90,7 +117,6 @@ const Login = () => {
                   to register.
                 </p>
               </div>
-            </div>
 
       </Container>
   </Layout>

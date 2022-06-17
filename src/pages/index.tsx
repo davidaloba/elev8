@@ -5,6 +5,7 @@ import Signals from '@components/landing/sections/signals'
 import Features from '@components/landing/sections/features'
 import Testimonials from '@components/landing/sections/testimonials'
 import Faqs from '@components/landing/sections/faqs'
+import Pricing from '@components/landing/sections/pricing'
 
 const Index = () => {
   // We are providing acces to information that will help you make money instantly and teacjing skills that will make you compete with counterparts all around the world
@@ -16,6 +17,7 @@ const Index = () => {
         <Signals />
         <Features />
         <Testimonials />
+        <Pricing />
         <Faqs />
   </Layout>
   )
