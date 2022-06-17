@@ -8,7 +8,7 @@
   #root { @apply h-full }
   html { @apply text-[65%] box-border }
   body { @apply text-2xl text-gray-800 m-0 h-[100vh] font-sans antialiased }
-  main { @apply p-6     }
+  /* main { @apply p-6     } */
 
   /* Header */
   /* header a { @apply text-white p-4 } */

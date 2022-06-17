@@ -12,6 +12,7 @@
     "test": "jest -c test/jest.config.js"
   },
   "dependencies": {
+    "@bakunya/react-masonry": "^0.0.5",
     "@reduxjs/toolkit": "^1.6.0",
     "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
@@ -31,7 +32,9 @@
     "react-hook-form": "^7.29.0",
     "react-icons": "^4.3.1",
     "react-infinite-scroll-component": "^6.1.0",
+    "react-masonry-component": "^6.3.0",
     "react-redux": "^7.2.6",
+    "react-responsive-masonry": "^2.1.4",
     "shortid": "^2.2.16",
     "streamifier": "^0.1.1",
     "swr": "^0.4.0"
