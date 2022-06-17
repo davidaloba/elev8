@@ -2,7 +2,7 @@ import Container from '@components/landing/components/container'
 
 const Signals = () => {
   return (
-    <Container>
+    <Container id='signals'>
         <div className="flex flex-col lg:flex-row px-8">
           <div className="mb-6 lg:mb-0 lg:w-1/2 lg:pr-5">
             <h2 className="max-w-4/5 mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-5xl md:mx-auto">

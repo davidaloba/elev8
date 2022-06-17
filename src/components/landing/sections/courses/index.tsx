@@ -2,7 +2,8 @@ import Container from '@components/landing/components/container'
 
 const Courses = () => {
   return (
-    <Container>
+    <Container
+    id='courses'>
       <div className=" md:mx-auto mb-10 mt-16 px-8 md:mb-12 sm:text-center ">
         <h2 className=" max-w-7xl mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-5xl md:mx-auto">
            <span className="relative inline-block">

@@ -56,7 +56,7 @@ const testimonies = [
 
 const Testimonials = () => {
   return (
-        <Container>
+        <Container id='testimonials'>
 
       <div className=" md:mx-auto mb-10 px-8 md:mb-12 sm:text-center ">
         <h2 className=" max-w-7xl mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-5xl md:mx-auto"><span className="relative inline-block">
@@ -89,22 +89,23 @@ const Testimonials = () => {
             Hear wghat our members have to say.
         </p>
       </div>
-            <div className="container mx-auto px-4 flex flex-col lg:items-center justify-between lg:flex-row">
-                <div role="list" aria-label="Testimonials" className=" grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 flex-wrap justify-between items-start ">
-                   {testimonies.map((testimony, index) => (<div key={index} role="listitem" className="bg-gray-50 shadow rounded p-4 xl:p-8">
-                        <svg viewBox="0 0 24 24" className="w-12 h-12 text-green-700">
-                          <path fill="currentColor" d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z"/>
-                        </svg>
 
-                        <div className="pl-4 pt-4 flex items-start justify-between">
-                            <div className="mr-6">
-                                <p className="xl:text-2xl xl:leading-loose text-gray-600">{testimony.body}</p>
-                                <p className="mt-4 text-xl font-semibold leading-none text-gray-800">{testimony.name}</p>
-                            </div>
-                        </div>
-                    </div>)) }
-                </div>
-            </div>
+      <div className="container mx-auto px-4 flex flex-col lg:items-center justify-between lg:flex-row">
+          <div role="list" aria-label="Testimonials" className=" grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 flex-wrap justify-between items-start ">
+              {testimonies.map((testimony, index) => (<div key={index} role="listitem" className="bg-gray-50 shadow rounded p-4 xl:p-8">
+                  <svg viewBox="0 0 24 24" className="w-12 h-12 text-green-700">
+                    <path fill="currentColor" d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z"/>
+                  </svg>
+
+                  <div className="pl-4 pt-4 flex items-start justify-between">
+                      <div className="mr-6">
+                          <p className="xl:text-2xl xl:leading-loose text-gray-600">{testimony.body}</p>
+                          <p className="mt-4 text-xl font-semibold leading-none text-gray-800">{testimony.name}</p>
+                      </div>
+                  </div>
+              </div>)) }
+          </div>
+      </div>
         </Container>
 
   )

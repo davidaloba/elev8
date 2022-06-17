@@ -24,52 +24,58 @@ const Header = () => {
 
         <div className="flex items-center">
           <ul className="flex items-center hidden space-x-8 lg:flex mr-16">
-           <li className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-green-700" >
+           <li className="font-medium tracking-wide  transition-colors duration-200 hover:text-green-700" >
               <Link
-                href="/"
-                aria-label="Our product"
-                title="Our product"
+                href="/#courses"
               >
-                Product
+                Courses
               </Link>
             </li>
-            <li className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-green-700">
+            <li className="font-medium tracking-wide  transition-colors duration-200 hover:text-green-700">
               <Link
-                href="/"
-                aria-label="Our product"
-                title="Our product"
+                href="/#signals"
+
+              >
+                Signals
+              </Link>
+            </li>
+            <li className="font-medium tracking-wide  transition-colors duration-200 hover:text-green-700">
+              <Link
+                href="/#features"
 
               >
                 Features
               </Link>
             </li>
-            <li className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-green-700">
+            <li className="font-medium tracking-wide  transition-colors duration-200 hover:text-green-700">
               <Link
-                href="/"
-                aria-label="Product pricing"
-                title="Product pricing"
+                href="/#testimonials"
+
+              >
+                Testimonials
+              </Link>
+            </li>
+            <li className="font-medium tracking-wide  transition-colors duration-200 hover:text-green-700">
+              <Link
+                href="/#pricing"
 
               >
                 Pricing
               </Link>
             </li>
-            <li className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-green-700">
+            <li className="font-medium tracking-wide  transition-colors duration-200 hover:text-green-700">
               <Link
-                href="/"
-                aria-label="About us"
-                title="About us"
+                href="/#faqs"
 
               >
-                About us
+                FAQs
               </Link>
             </li>
           </ul>
           <ul className="flex items-center hidden space-x-8 lg:flex">
-          <li className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-green-700">
+          <li className="font-medium tracking-wide  transition-colors duration-200 hover:text-green-700">
             <Link
               href="/login"
-              aria-label="Sign in"
-              title="Sign in"
             >
               Sign in
             </Link>
@@ -77,8 +83,6 @@ const Header = () => {
           <li >
             <Link
               href="/register"
-              aria-label="Sign up"
-              title="Sign up"
               passHref
             >
               <div className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-green-700 hover:bg-green-900  focus:shadow-outline focus:outline-none cursor-pointer">
@@ -118,12 +122,9 @@ const Header = () => {
                   <div>
                    <Link
             href="/"
-            aria-label="Company"
-            title="Company"
             passHref
           >
                 <Image src="/logo.png" alt="nextjs" width="100" height="50" />
-
           </Link>
                   </div>
                   <div>
@@ -144,45 +145,54 @@ const Header = () => {
                 </div>
                 <nav>
                   <ul className="space-y-4">
-                    <li className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-green-700">
-                      <Link
-                        href="/"
-                        aria-label="Our product"
-                        title="Our product"
+           <li className="font-medium tracking-wide  transition-colors duration-200 hover:text-green-700" >
+              <Link
+                href="/#courses"
+              >
+                Courses
+              </Link>
+            </li>
+            <li className="font-medium tracking-wide  transition-colors duration-200 hover:text-green-700">
+              <Link
+                href="/#signals"
 
-                      >
-                        Product
-                      </Link>
-                    </li>
-                    <li className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-green-700">
-                      <Link
-                        href="/"
-                        aria-label="Our product"
-                        title="Our product"
+              >
+                Signals
+              </Link>
+            </li>
+            <li className="font-medium tracking-wide  transition-colors duration-200 hover:text-green-700">
+              <Link
+                href="/#features"
 
-                      >
-                        Features
-                      </Link>
-                    </li>
-                    <li className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-green-700">
-                      <Link
-                        href="/"
-                        aria-label="Product pricing"
-                        title="Product pricing"
-                      >
-                        Pricing
-                      </Link>
-                    </li>
-                    <li className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-green-700">
-                      <Link
-                        href="/"
-                        aria-label="About us"
-                        title="About us"
-                      >
-                        About us
-                      </Link>
-                    </li>
-                    <li className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-green-700">
+              >
+                Features
+              </Link>
+            </li>
+            <li className="font-medium tracking-wide  transition-colors duration-200 hover:text-green-700">
+              <Link
+                href="/#testimonials"
+
+              >
+                Testimonials
+              </Link>
+            </li>
+            <li className="font-medium tracking-wide  transition-colors duration-200 hover:text-green-700">
+              <Link
+                href="/#pricing"
+
+              >
+                Pricing
+              </Link>
+            </li>
+            <li className="font-medium tracking-wide  transition-colors duration-200 hover:text-green-700">
+              <Link
+                href="/#faqs"
+
+              >
+                FAQs
+              </Link>
+            </li>
+                    <li className="font-medium tracking-wide  transition-colors duration-200 hover:text-green-700">
                       <Link
                         href="/login"
                         aria-label="Sign in"

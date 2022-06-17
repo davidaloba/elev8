@@ -142,7 +142,7 @@ const Item = ({ title, children }) => {
 
 const Faqs = () => {
   return (
-  <Container>
+  <Container id='faqs'>
    <div className=" sm:mx-auto px-8">
     <div className="lg:max-w-7xl md:mx-auto mb-10 md:mb-12 sm:text-center">
      <h2 className="max-w-7xlmd:mx-auto mb-6 font-sans text-5xl font-bold leading-none tracking-tight text-gray-900 sm:text-6xl ">

@@ -2,7 +2,7 @@ import Container from '@components/landing/components/container'
 
 const Features = () => {
   return (
-    <Container>
+    <Container id='features'>
       <div className="flex flex-col lg:flex-row-reverse  px-8 mb-6 md:mb-10">
         <div className="lg:w-1/2">
            <h2 className="max-w-4/5 mb-6 font-sans  text-3xl lg:text-right font-bold leading-none tracking-tight text-gray-900 sm:text-5xl md:mx-auto">
