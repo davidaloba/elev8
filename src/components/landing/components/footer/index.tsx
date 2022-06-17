@@ -43,7 +43,7 @@ const Footer = () => {
               aria-label="Our phone"
               title="Our phone"
               target='_blank'
-                            target='_blank' rel="noreferrer"
+               rel="noreferrer"
 
             >
               <div className="mr-4 cursor-pointer transition-colors duration-300  hover:text-green-900">
