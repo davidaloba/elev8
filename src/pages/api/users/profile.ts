@@ -24,8 +24,9 @@ handler.put(async (req, res) => {
 
   user.profile.firstName = req.body.firstName
   user.profile.lastName = req.body.lastName
-  user.profile.avatar = `/uploads/${req.file.filename}`
-  user.profile.phone = req.body.phone
+  user.profile.avatar = req.file.filename
+    ? `/uploads/${req.file.filename}`
+    : user.profile.avatar
   user.profile.dob = req.body.dob
   user.profile.facebook = req.body.facebook
   user.profile.instagram = req.body.instagram

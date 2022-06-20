@@ -7,7 +7,6 @@ const Header = () => {
   const [scroll, setScroll] = useState(false)
 
   const changeBackground = () => {
-    console.log(window.scrollY)
     if (window.scrollY >= 66) {
       setScroll(true)
     } else {

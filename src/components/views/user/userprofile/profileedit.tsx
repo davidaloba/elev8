@@ -67,7 +67,7 @@ export const EditProfile = () => {
             authorization: `Bearer ${user.userInfo.token}`
           },
           onUploadProgress: (event) => {
-            console.log('Current progress:', Math.round((event.loaded * 100) / event.total))
+            // console.log('Current progress:', Math.round((event.loaded * 100) / event.total))
           }
         }
       )

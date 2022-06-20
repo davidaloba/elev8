@@ -10,6 +10,8 @@ import Pricing from '@components/landing/sections/pricing'
 const Index = () => {
   // We are providing acces to information that will help you make money instantly and teacjing skills that will make you compete with counterparts all around the world
 
+  console.log(checkPassStrength(pass))
+
   return (
   <Layout>
         <Hero />
