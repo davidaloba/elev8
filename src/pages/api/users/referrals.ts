@@ -1,21 +1,22 @@
 import nc from 'next-connect'
 import User from '@db/models/User'
 import db from '@db'
+import { isAuth } from '@utils/auth'
 
-const handler = nc()
+const handler = nc(isAuth)
 
 handler.get(async (req, res) => {
   await db.connect()
-  const referralCode = req.query.referralCode
   const user = await User.findOne({ email: req.query.email })
+
+  // const referralCode = req.query.referralCode
+  // const referrals = await User.find({ admin: false, 'referral.referrer': referralCode })
+  // const referralsNo = await User.find({ admin: false, 'referral.referrer': referralCode }).countDocuments()
+  // const totalEarnings = referralsNo * 1500
 
   const withdrawals = user.referral.withdrawals.sort((a, b) => b.createdAt - a.createdAt)
   const totalWithdrawals = user.referral.totalWithdrawals
-
-  const referrals = await User.find({ admin: false, 'referral.referrer': referralCode })
-  const referralsNo = await User.find({ admin: false, 'referral.referrer': referralCode }).countDocuments()
-  const totalEarnings = referralsNo * 1500
-
+  const totalEarnings = user.referral.referralBonus
   const balance = totalEarnings - totalWithdrawals
 
   await db.disconnect()

@@ -77,10 +77,10 @@ export const Referral = () => {
         </div>
         <div className='font-bold text-3xl mb-10'>Withdrawal History</div>
         <div className=' flex flex-col items-start bg-white border rounded-3xl mb-8 p-6 '>
-          {user.referral.data.withdrawals.map((withdrawal) => <>
-            <div key='' className='flex justify-between items-start w-full p-4 text-lg'>
+          {user.referral.data.withdrawals.map((withdrawal, index) => <div key={index}>
+            <div className='flex justify-between items-start w-full p-4 text-lg'>
               <div className="rounded-full w-auto mr-6">
-                {withdrawal.status === 'pending' && <div className="rounded-full bg-yellow-500 h-min py-1 px-2 mr-4">
+                {withdrawal.status === 'pending' && <div className="rounded-full bg-yellow-500 h-min   py-1 px-2 mr-4">
                   <Image src='/avatar.png' width='24' height='24' alt='' />
                 </div>}
                 {withdrawal.status === 'rejected' && <div className="rounded-full bg-red-500 h-min py-1 px-2 mr-4">
@@ -104,7 +104,7 @@ export const Referral = () => {
               </div>
             </div>
             <hr className="border-accent-2 mt-28 mb-6" />
-          </>)}
+          </div>)}
         </div>
       </div>
 

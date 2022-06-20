@@ -24,6 +24,10 @@ handler.post(async (req, res) => {
   })
   const user = await newUser.save()
 
+  const referrer = await User.findOne({ 'referral.referralCode': req.body.referrer })
+  referrer.referral.referralBonus += 1000
+  referrer.save()
+
   await db.disconnect()
   const token = signToken(user)
   res.send({

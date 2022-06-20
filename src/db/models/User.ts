@@ -36,8 +36,9 @@ const userSchema = new mongoose.Schema(
       twitter: String
     },
     referral: {
-      referralCode: { type: String, required: true, unique: true },
       referrer: { type: String, default: 'elev8Admin' },
+      referralCode: { type: String, required: true, unique: true },
+      referralBonus: { type: Number, default: 0 },
       withdrawals: { type: [withdrawalRequestSchema], default: [] },
       totalWithdrawals: { type: Number, default: 0 }
     }

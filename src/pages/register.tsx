@@ -23,7 +23,6 @@ const Login = () => {
         ? router.push('/admin')
         : router.push('/app')
     }
-    console.log(login)
   }, [router, userInfo])
 
   const [userName, setUserName] = useState('')
@@ -34,7 +33,7 @@ const Login = () => {
   const config = {
     public_key: 'FLWPUBK-336e1502b66347f21711416b1f2b7c66-X',
     tx_ref: Date.now(),
-    amount: 5000,
+    amount: 3000,
     currency: 'NGN',
     payment_options: 'card,mobilemonesy,ussd',
     customer: {
@@ -146,101 +145,101 @@ const Login = () => {
             Enjoy all of these benefits and more by signing up to join the Elev8 community today.
         </p> */}
       </div>
-              <form ref={regiserForm} className='mb-8' >
-                <div className='mb-6'>
-                  <label htmlFor="email">Email</label>
-                  <input
-                    ref={emailInput}
-                    type='email'
-                    name="email"
-                    id="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className=' invalid:border-red-800 invalid:border-2'
-                    required
-                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                    title='Enter a valid email address'
-                  ></input>
-                </div>
-                <div className='mb-6'>
-                  <label htmlFor="email">Password </label>
-                  <input
-                    ref={passwordInput}
-                    type='password'
-                    minLength={6}
-                    name="password"
-                    id="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value) }
-                    className='invalid:border-red-800 invalid:border-2'
-                    required
-                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                    title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
-
-                  ></input>
-                </div>
-                <div className='mb-6'>
-                  <label htmlFor="email">Confirm Password</label>
-                  <input
-                    type='password'
-                    minLength={6}
-                    name="confirmPassword"
-                    id="confirmPassword"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    className=''
-                    required
-                  ></input>
-                </div>
-                <div className='mb-6'>
-                  <label htmlFor="email">Username</label>
-                  <input
-                    ref={userNameInput}
-                    type='text'
-                    name="userName"
-                    id="userName"
-                    value={userName}
-                    onChange={(e) => setUserName(e.target.value)}
-                    className=' invalid:border-red-800 invalid:border-2'
-                    minLength={3}
-                    required
-                  ></input>
-                </div>
-                <div className='mb-6'>
-                  <label htmlFor="email">Referral Code</label>
-                  <input
-                    type='text'
-                    name="referrer"
-                    id="referrer"
-                    value={ref}
-                    className=''
-                    disabled
-                  // rules={{
-                  //   required: true,
-                  //   pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/
-                  // }}
-                  // error={Boolean(errors.email)}
-                  // helperText={
-                  //   errors.email
-                  //     ? errors.email.type === 'pattern'
-                  //       ? 'Email is not valid'
-                  //       : 'Email is required'
-                  //     : ''
-                  // }
-                  ></input>
-                </div>
-                <div>
-                </div>
-              </form>
-              <button onClick={registerHandler} className='mt-4 py-2 rounded-2xl border-none bg-green-700  text-white font-semibold' >Register</button>
-              <div className='text-xl'>
-                <p>Already have an account? Click
-                  <Link href='/login' passHref>
-                  <span className='cursor-pointer text-green-900'> here </span>
-                  </Link>
-                  to login.
-                </p>
-              </div>
+      <form ref={regiserForm} className='mb-8' >
+        <div className='mb-6'>
+          <label htmlFor="email">Email</label>
+          <input
+            ref={emailInput}
+            type='email'
+            name="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className=' invalid:border-red-800 invalid:border-2'
+            required
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+            title='Enter a valid email address'
+          ></input>
+        </div>
+        <div className='mb-6'>
+          <label htmlFor="email">Password </label>
+          <input
+            ref={passwordInput}
+            type='password'
+            minLength={6}
+            name="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value) }
+            className='invalid:border-red-800 invalid:border-2'
+            required
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+            title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
+          ></input>
+          <p className='text-base '><em>Your password must  at least 8 or more characters <br/>and contain at least one  number, one uppercase letter, <br/>lowercase letter, and one special character.</em></p>
+        </div>
+        <div className='mb-6'>
+          <label htmlFor="email">Confirm Password</label>
+          <input
+            type='password'
+            minLength={6}
+            name="confirmPassword"
+            id="confirmPassword"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            className=''
+            required
+          ></input>
+        </div>
+        <div className='mb-6'>
+          <label htmlFor="email">Username</label>
+          <input
+            ref={userNameInput}
+            type='text'
+            name="userName"
+            id="userName"
+            value={userName}
+            onChange={(e) => setUserName(e.target.value)}
+            className=' invalid:border-red-800 invalid:border-2'
+            minLength={3}
+            required
+          ></input>
+        </div>
+        <div className='mb-6'>
+          <label htmlFor="email">Referral Code</label>
+          <input
+            type='text'
+            name="referrer"
+            id="referrer"
+            value={ref}
+            className=''
+            disabled
+          // rules={{
+          //   required: true,
+          //   pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/
+          // }}
+          // error={Boolean(errors.email)}
+          // helperText={
+          //   errors.email
+          //     ? errors.email.type === 'pattern'
+          //       ? 'Email is not valid'
+          //       : 'Email is required'
+          //     : ''
+          // }
+          ></input>
+        </div>
+        <div>
+        </div>
+      </form>
+      <button onClick={registerHandler} className='mt-4 py-2 rounded-2xl border-none bg-green-700  text-white font-semibold' >Register</button>
+      <div className='text-xl'>
+        <p>Already have an account? Click
+          <Link href='/login' passHref>
+          <span className='cursor-pointer text-green-900'> here </span>
+          </Link>
+          to login.
+        </p>
+      </div>
       </Container>
   </Layout>
   )
