@@ -27,12 +27,10 @@ export const EditProfile = () => {
   const [instagram, setInstagram] = useState(user.userInfo.profile.instagram || '')
   const [twitter, setTwitter] = useState(user.userInfo.profile.twitter || '')
   const [password, setPassword] = useState('')
-  console.log(avatar)
 
   const [loadingThumbUpload, setLoadingThumbUpload] = useState(false)
   const [thumbUploadError, setThumbUploadError] = useState('')
   const uploadHandler = async (e) => {
-    console.log('aaaaaaaaaaaarrrrrrggghhh')
     const file = e.target.files[0]
     const avatar = new FormData()
     avatar.append('avatar', file)

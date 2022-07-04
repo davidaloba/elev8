@@ -23,7 +23,6 @@ handler.use(isAuth, upload)
 handler.post(async (req, res) => {
   await db.connect()
   res.send(`/${req.file.path}`)
-  console.log(req.file)
 })
 
 export default handler

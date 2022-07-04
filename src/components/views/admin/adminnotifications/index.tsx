@@ -54,8 +54,6 @@ export const AdminNotifications = () => {
   }
 
   const deleteNotification = async (notificationId) => {
-    console.log('delete mouff!!!!!!!!!!!!!!!!!!')
-
     // if (!window.confirm('Are you sure you want to delete this notifications?')) {
     //   return
     // }

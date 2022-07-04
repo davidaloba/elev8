@@ -9,7 +9,6 @@ handler.get(async (req, res) => {
   const page = parseInt(req.query.page)
   const limit = parseInt(req.query.limit)
   const startIndex = page !== 0 ? (page - 1) * limit : 0
-  console.log(startIndex)
 
   const posts = await Post.find()
   const pages = Math.ceil(posts.length / limit)

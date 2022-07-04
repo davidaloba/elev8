@@ -9,12 +9,12 @@ handler.use(isAuth)
 
 handler.put(async (req, res) => {
   await db.connect()
-  console.log(req)
   const user = await User.findOne({ email: req.body.email })
 
   user.profile.firstName = req.body.firstName
   user.profile.lastName = req.body.lastName
   user.profile.avatar = req.body.avatar || user.profile.avatar
+  user.profile.phone = req.body.phone
   user.profile.dob = req.body.dob
   user.profile.facebook = req.body.facebook
   user.profile.instagram = req.body.instagram

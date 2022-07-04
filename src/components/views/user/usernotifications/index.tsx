@@ -16,7 +16,6 @@ export const Notifications = () => {
     fetchData('/api/users/notifications', user.userInfo.token, fetchNotifications)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-  console.log(user.notifications)
 
   const closeMenu = () => {
     dispatch(toggleMenu('home'))

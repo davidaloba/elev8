@@ -9,4 +9,4 @@ node_modules
 *seed.ts
 seed.ts
 
-./public/uploads
+public/uploads
