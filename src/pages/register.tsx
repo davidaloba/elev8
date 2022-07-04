@@ -33,14 +33,6 @@ const Register = () => {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
 
-  console.log(
-    firstName,
-    lastName,
-    phone,
-    userName,
-    email,
-    password)
-
   const config = {
     public_key: 'FLWPUBK-336e1502b66347f21711416b1f2b7c66-X',
     tx_ref: Date.now(),

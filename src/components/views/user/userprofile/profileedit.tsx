@@ -16,9 +16,8 @@ export const EditProfile = () => {
 
   const [editPassword, setEditPassword] = useState(false)
   const [confirmPassword, setConfirmPassword] = useState('')
-  const [previewAvatar, setPreviewAvatar] = useState(user.userInfo.profile.avatar)
 
-  const [avatar, setAvatar] = useState(null)
+  const [avatar, setAvatar] = useState(user.userInfo.profile.avatar || '')
   const [email, setEmail] = useState(user.userInfo.email || '')
   const [firstName, setFirstName] = useState(user.userInfo.profile.firstName || '')
   const [lastName, setLastName] = useState(user.userInfo.profile.lastName || '')
@@ -28,6 +27,33 @@ export const EditProfile = () => {
   const [instagram, setInstagram] = useState(user.userInfo.profile.instagram || '')
   const [twitter, setTwitter] = useState(user.userInfo.profile.twitter || '')
   const [password, setPassword] = useState('')
+  console.log(avatar)
+
+  const [loadingThumbUpload, setLoadingThumbUpload] = useState(false)
+  const [thumbUploadError, setThumbUploadError] = useState('')
+  const uploadHandler = async (e) => {
+    console.log('aaaaaaaaaaaarrrrrrggghhh')
+    const file = e.target.files[0]
+    const avatar = new FormData()
+    avatar.append('avatar', file)
+    setLoadingThumbUpload(true)
+    try {
+      const { data } = await axios.post(`/api/users/avatar?userName=${user.userInfo.userName}`,
+        avatar,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${user.userInfo.token}`
+          }
+        })
+      const url = data.replace('/public', '')
+      setAvatar(url)
+      setLoadingThumbUpload(false)
+    } catch (err) {
+      setThumbUploadError(err.response.data.message)
+      setLoadingThumbUpload(false)
+    }
+  }
 
   const changePassword = useRef()
   const pwInput = changePassword.current
@@ -44,30 +70,39 @@ export const EditProfile = () => {
       return
     }
 
-    const formData = new FormData()
-    formData.append('avatar', avatar)
-    formData.append('userName', user.userInfo.userName)
-    formData.append('email', email)
-    formData.append('firstName', firstName)
-    formData.append('lastName', lastName)
-    formData.append('phone', phone)
-    formData.append('dob', dob)
-    formData.append('facebook', facebook)
-    formData.append('instagram', instagram)
-    formData.append('twitter', twitter)
-    formData.append('password', password)
+    const profile = {
+      avatar,
+      userName: user.userInfo.userName,
+      email,
+      firstName,
+      lastName,
+      phone,
+      dob,
+      facebook,
+      instagram,
+      twitter,
+      password
+    }
 
     try {
       const { data } = await axios.put(
         '/api/users/profile',
-        formData,
+        {
+          avatar: avatar,
+          userName: user.userInfo.userName,
+          email: email,
+          firstName: firstName,
+          lastName: lastName,
+          phone: phone,
+          dob: dob,
+          facebook: facebook,
+          instagram: instagram,
+          twitter: twitter,
+          password: password
+        },
         {
           headers: {
-            'Content-Type': 'multipart/form-data',
             authorization: `Bearer ${user.userInfo.token}`
-          },
-          onUploadProgress: (event) => {
-            // console.log('Current progress:', Math.round((event.loaded * 100) / event.total))
           }
         }
       )
@@ -91,26 +126,25 @@ export const EditProfile = () => {
               <Image src='/close.png' width='20' height='20' alt='[CLOSE]'
                 className='cursor-pointer bg-white z-10 p-6 rounded-full right-1'
                 onClick={() => {
-                  setAvatar(null)
-                  setPreviewAvatar(user.userInfo.profile.avatar || '/avatar.png')
                   document.getElementById('avatar').value = ''
+                  setAvatar('')
                 }}
                />
 
               </div>
-            <Avatar src={previewAvatar || user.userInfo.profile.avatar } alt={user.userInfo.userName} width='100' height='100' />
+            <Avatar src={avatar } alt={user.userInfo.userName} width='100' height='100' />
             </div>
             <label htmlFor="email">Avatar</label>
             <input
+              className='outlined fullWidth'
               type='file'
               name="avatar"
               id="avatar"
-              onChange={(e) => {
-                setAvatar(e.target.files[0])
-                setPreviewAvatar(URL.createObjectURL(e.target.files[0]))
-              }}
-              className='outlined fullWidth'
+              onChange={uploadHandler}
+              accept=".png, .jpg, .jpeg"
             ></input>
+            {loadingThumbUpload && <div>Uploading...</div>}
+            {thumbUploadError && (<div className="danger">{thumbUploadError}</div>)}
 
           </div>
           <form action="">
