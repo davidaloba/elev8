@@ -11,7 +11,7 @@ import Layout from '@components/landing/layout'
 import Container from '@components/landing/components/container'
 import Link from 'next/link'
 
-const Login = () => {
+const Register = () => {
   const { userInfo } = useAppSelector((state: RootState) => state.user)
   const dispatch = useAppDispatch()
   const router = useRouter()
@@ -25,20 +25,34 @@ const Login = () => {
     }
   }, [router, userInfo])
 
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [phone, setPhone] = useState('')
   const [userName, setUserName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
 
+  console.log(
+    firstName,
+    lastName,
+    phone,
+    userName,
+    email,
+    password)
+
   const config = {
     public_key: 'FLWPUBK-336e1502b66347f21711416b1f2b7c66-X',
     tx_ref: Date.now(),
-    amount: 3000,
+    amount: 10000,
     currency: 'NGN',
     payment_options: 'card,mobilemonesy,ussd',
     customer: {
-      email: email,
-      name: userName
+      email,
+      userName,
+      firstName,
+      lastName,
+      phone
     },
     customizations: {
       title: 'Elev8 Registration',
@@ -58,6 +72,9 @@ const Login = () => {
         try {
           const { data } = await axios.post('/api/users/register', {
             transaction_id: response.transaction_id,
+            firstName,
+            lastName,
+            phone,
             userName,
             email,
             password,
@@ -146,6 +163,48 @@ const Login = () => {
         </p> */}
       </div>
       <form ref={regiserForm} className='mb-8' >
+        <div className='mb-6'>
+          <label htmlFor="firstName">First Name</label>
+          <input
+            type='text'
+            name="firstName"
+            id="firstName"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            className=' invalid:border-red-800 invalid:border-2'
+            required
+            title='Enter your first name'
+          ></input>
+        </div>
+        <div className='mb-6'>
+          <label htmlFor="lastName">Last Name</label>
+          <input
+            type='text'
+            name="lastName"
+            id="lastName"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            className=' invalid:border-red-800 invalid:border-2'
+            required
+            title='Enter your last name'
+          ></input>
+        </div>
+        <div className='mb-6'>
+          <label htmlFor="lastName">Phone Number</label>
+          <input
+            type='tel'
+            name="phone"
+            id="phone"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            className=' invalid:border-red-800 invalid:border-2'
+            // pattern="[0-9]{4}-[0-9]{3}-[0-9]{4}"
+            minLength={9}
+            maxLength={13}
+            required
+            title='Enter your phone number'
+          ></input>
+        </div>
         <div className='mb-6'>
           <label htmlFor="email">Email</label>
           <input
@@ -245,4 +304,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Register

@@ -19,7 +19,7 @@ export const Profile = () => {
 
   const [bankName, setBankName] = useState('')
   const [accountName, setAccountName] = useState('')
-  const [amount, setAmount] = useState(3000)
+  const [amount, setAmount] = useState(5000)
   const [accountNo, setAccountNo] = useState('')
 
   const withdrawalForm = useRef()
@@ -109,7 +109,7 @@ export const Profile = () => {
               type='number'
               name="amount"
               id="amount"
-              min="3000"
+              min="5000"
               max={user.referral.data.balance}
               step="1000"
               value={amount}

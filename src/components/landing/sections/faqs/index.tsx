@@ -37,15 +37,15 @@ const faqs = [
   },
   {
     Q: 'IS THERE AFFILIATE MARKETING OPPORTUNITY IN ELEV8 ?',
-    A: 'Yes, Direct Earnings are based on the 30% Referral commission you earn when you refer new members to our Website. This is equivalent to 1500 naira per referrals.'
+    A: 'Yes, Direct Earnings are based on the 30% Referral commission you earn when you refer new members to our Website. This is equivalent to 3000 naira per referrals.'
   },
   {
     Q: 'CAN I REFER MY FRIENDS AND FAMILIES TO ELEV8 ?',
-    A: 'Yes you can and You\'d get 1500 naira per person you bring into the community.'
+    A: 'Yes you can and You\'d get 3000 naira per person you bring into the community.'
   },
   {
     Q: 'WHAT\'S THE MINIMUM WITHDRAWAL ?',
-    A: 'The minimum withdrawal is 3,000 naira and it can be withdrawn anytime and gotten Into your account within 5 Mins of withdrawal.'
+    A: 'The minimum withdrawal is 5,000 naira and it can be withdrawn anytime and gotten Into your account within 5 Mins of withdrawal.'
   },
   {
     Q: 'IS REFERRALS COMPULSORY ?',
@@ -78,11 +78,11 @@ const faqs = [
 
   {
     Q: 'HOW MUCH IS THE MEMBERSHIP REGISTRATION/SIGNUP FEES ?',
-    A: 'The Membership Registration/Signup Fees is 5,000 Naira only'
+    A: 'The Membership Registration/Signup Fees is 10,000 Naira only'
   },
   {
     Q: 'IS IT A ONE TIME PAYMENT? OR MORE PAYMENTS WILL BE MADE IN FUTURE ?',
-    A: 'It is a One time Payment, You\'re not making any more payments after the 5000 naira Signup fees to become a Member. Every other benefits as a member is Free.'
+    A: 'It is a One time Payment, You\'re not making any more payments after the 10,000 naira Signup fees to become a Member. Every other benefits as a member is Free.'
   },
   {
     Q: 'HOW DOES THE FREE ADVERTISEMENTS FOR MEMBERS WORK ?',

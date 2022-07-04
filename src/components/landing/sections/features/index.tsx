@@ -38,7 +38,7 @@ const Features = () => {
         </div>
         <div className="lg:w-1/2">
           <p className=" ">
-            All of these means that there is numerous opportunities to grow, make money and improve your life with ELEV8 all with just a signup of fee of 5,000 naira which is the only payment you will be making for life for all these free services.
+            All of these means that there is numerous opportunities to grow, make money and improve your life with ELEV8 all with just a signup of fee of 10,000 naira which is the only payment you will be making for life for all these free services.
           </p>
         </div>
       </div>
@@ -103,7 +103,7 @@ const Features = () => {
           </div>
           <h6 className="mb-2 font-semibold leading-5">Referral commissions</h6>
           <p className="mb-3 text-xl text-gray-900">
-            As a Member, You will get massive 30% Affiliate Bonus which is 1500 Naira each on every individual you bring into the ELEV8 Community.
+            As a Member, You will get massive 30% Affiliate Bonus which is 3000 Naira each on every individual you bring into the ELEV8 Community.
           </p>
         </div>
         <div className="max-w-md">

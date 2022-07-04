@@ -86,7 +86,7 @@ const Testimonials = () => {
       </span>
         </h2>
         <p className=" max-w-7xl">
-            Hear wghat our members have to say.
+            Hear what our members have to say.
         </p>
       </div>
 

@@ -46,7 +46,7 @@ const Pricing = () => {
           <div className="text-center">
             <div className="text-lg font-semibold"></div>
             <div className="flex items-center justify-center mt-2">
-              <div className="mr-1 text-5xl font-bold">₦5,000</div>
+              <div className="mr-1 text-5xl font-bold">₦10,000</div>
             </div>
             <div className="mt-2 space-y-3">
               <div className="text-gray-700">Free Courses</div>

@@ -11,9 +11,12 @@ handler.post(async (req, res) => {
   await db.connect()
 
   const newUser = new User({
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    phone: req.body.phone,
     email: req.body.email,
-    password: bcrypt.hashSync(req.body.password),
     userName: req.body.userName,
+    password: bcrypt.hashSync(req.body.password),
     isAdmin: false,
     referral: {
       referralCode: shortid.generate(),
@@ -25,7 +28,7 @@ handler.post(async (req, res) => {
   const user = await newUser.save()
 
   const referrer = await User.findOne({ 'referral.referralCode': req.body.referrer })
-  referrer.referral.referralBonus += 1000
+  referrer.referral.referralBonus += 3000
   referrer.save()
 
   await db.disconnect()
