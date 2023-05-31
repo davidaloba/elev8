@@ -8,5 +8,5 @@ node_modules
 !.env.example
 *seed.ts
 seed.ts
-
+db
 public/uploads

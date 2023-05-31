@@ -18,6 +18,7 @@ export const EditProfile = () => {
   const [confirmPassword, setConfirmPassword] = useState('')
 
   const [avatar, setAvatar] = useState(user.userInfo.profile.avatar || '')
+  console.log(avatar)
   const [email, setEmail] = useState(user.userInfo.email || '')
   const [firstName, setFirstName] = useState(user.userInfo.profile.firstName || '')
   const [lastName, setLastName] = useState(user.userInfo.profile.lastName || '')
